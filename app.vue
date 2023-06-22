@@ -3,8 +3,10 @@
 </script>
 
 <template>
-  <div>
-    <Header/>
+  <Body class="bg-zinc-50 dark:bg-black">
+    <Container>
+      <DesktopNavigation />
+    </Container>
     <NuxtPage />
-  </div>
+  </Body>
 </template>
