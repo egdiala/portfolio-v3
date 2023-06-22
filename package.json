@@ -13,6 +13,7 @@
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18",
-    "nuxt": "^3.5.3"
+    "nuxt": "^3.5.3",
+    "nuxt-headlessui": "^1.1.4"
   }
 }
