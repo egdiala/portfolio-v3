@@ -9,5 +9,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-icon"
   ],
-  colorMode: { classSuffix: '' }
+  colorMode: { classSuffix: '' },
+  ssr: true
 })
