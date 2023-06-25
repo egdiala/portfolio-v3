@@ -1,20 +1,176 @@
 <script setup lang="ts">
+const route = useRoute()
+const headerRef = ref()
+const avatarRef = ref()
+const isInitial = ref(true)
 
+const isHomePage = computed(() => {
+    return route.path === '/'
+})
+
+const clamp = (number: any, a: any, b: any) => {
+  let min = Math.min(a, b)
+  let max = Math.max(a, b)
+  return Math.min(Math.max(number, min), max)
+}
+
+onMounted(() => {
+    let downDelay = avatarRef.value?.offsetTop ?? 0
+    let upDelay = 64
+
+    function setProperty(property: any, value: any) {
+      document.documentElement.style.setProperty(property, value)
+    }
+
+    function removeProperty(property: any) {
+      document.documentElement.style.removeProperty(property)
+    }
+
+    function updateHeaderStyles() {
+      let { top, height } = headerRef.value?.getBoundingClientRect()
+      let scrollY = clamp(
+        window.scrollY,
+        0,
+        document.body.scrollHeight - window.innerHeight
+      )
+
+      if (isInitial.value) {
+        setProperty('--header-position', 'sticky')
+      }
+
+      setProperty('--content-offset', `${downDelay}px`)
+
+      if (isInitial.value || scrollY < downDelay) {
+        setProperty('--header-height', `${downDelay + height}px`)
+        setProperty('--header-mb', `${-downDelay}px`)
+      } else if (top + height < -upDelay) {
+        let offset = Math.max(height, scrollY - upDelay)
+        setProperty('--header-height', `${offset}px`)
+        setProperty('--header-mb', `${height - offset}px`)
+      } else if (top === 0) {
+        setProperty('--header-height', `${scrollY + height}px`)
+        setProperty('--header-mb', `${-scrollY}px`)
+      }
+
+      if (top === 0 && scrollY > 0 && scrollY >= downDelay) {
+        setProperty('--header-inner-position', 'fixed')
+        removeProperty('--header-top')
+        removeProperty('--avatar-top')
+      } else {
+        removeProperty('--header-inner-position')
+        setProperty('--header-top', '0px')
+        setProperty('--avatar-top', '0px')
+      }
+    }
+
+    function updateAvatarStyles() {
+      if (!isHomePage) {
+        return
+      }
+
+      let fromScale = 1
+      let toScale = 36 / 64
+      let fromX = 0
+      let toX = 2 / 16
+
+      let scrollY = downDelay - window.scrollY
+
+      let scale = (scrollY * (fromScale - toScale)) / downDelay + toScale
+      scale = clamp(scale, fromScale, toScale)
+
+      let x = (scrollY * (fromX - toX)) / downDelay + toX
+      x = clamp(x, fromX, toX)
+
+      setProperty(
+        '--avatar-image-transform',
+        `translate3d(${x}rem, 0, 0) scale(${scale})`
+      )
+
+      let borderScale = 1 / (toScale / scale)
+      let borderX = (-toX + x) * borderScale
+      let borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`
+
+      setProperty('--avatar-border-transform', borderTransform)
+      setProperty('--avatar-border-opacity', scale === toScale ? 1 : 0)
+    }
+
+    function updateStyles() {
+      updateHeaderStyles()
+      updateAvatarStyles()
+      isInitial.value = false
+    }
+
+    updateStyles()
+    window.addEventListener('scroll', updateStyles, { passive: true })
+    window.addEventListener('resize', updateStyles)
+
+    return () => {
+      window.removeEventListener('scroll', updateStyles)
+      window.removeEventListener('resize', updateStyles)
+    }
+})
 </script>
 
 <template>
-    <div class="absolute inset-x-0 pt-2.5">
-        <div class="rounded-full p-4 bg-purple-300 w-fit mx-auto">
-            <NuxtLink to="/">Home</NuxtLink>
+    <header class="pointer-events-none relative z-50 flex flex-col"
+        :style="{
+          height: 'var(--header-height)',
+          marginBottom: 'var(--header-mb)',
+        }">
+        <template v-if="isHomePage">
+            <div
+              ref="avatarRef"
+              class="order-last mt-[calc(4rem-0.75rem)]"
+            />
+            <Container
+              outer-class="top-0 order-last -mb-3 pt-3"
+              :style="{ position: 'var(--header-position)' }"
+            >
+              <div
+                class="top-[var(--avatar-top,0.75rem)] w-full"
+                :style="{ position: 'var(--header-inner-position)' } as any"
+              >
+                <div class="relative">
+                  <AvatarContainer
+                    outer-class="absolute left-0 top-3 origin-left transition-opacity"
+                    :style="{
+                      opacity: 'var(--avatar-border-opacity, 0)',
+                      transform: 'var(--avatar-border-transform)',
+                    }"
+                  />
+                  <Avatar
+                    :large="true"
+                    outer-class="block h-16 w-16 origin-left" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala"
+                    :style="{ transform: 'var(--avatar-image-transform)', marginLeft: '-0.5px' }"
+                  />
+                </div>
+              </div>
+            </Container>
+        </template>
+        <div ref="headerRef" class="top-0 z-10 h-16 pt-6" :style="{ position: 'var(--header-position)' } as any">
+            <Container outer-class="top-[var(--header-top,1.5rem)] w-full">
+                <div class="relative flex gap-4">
+                    <div class="flex flex-1 items-center gap-3">
+                        <AvatarContainer v-if="!isHomePage">
+                            <Avatar :large="false" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala" />
+                        </AvatarContainer>
+                    </div>
+                    <div class="flex flex-1 justify-end md:justify-center">
+                        <MobileNavigation class="pointer-events-auto md:hidden" />
+                        <DesktopNavigation class="pointer-events-auto hidden md:block" />
+                    </div>
+                    <div class="flex justify-end md:flex-1">
+                        <div class="pointer-events-auto">
+                            <ModeToggle />
+                        </div>
+                    </div>
+                </div>
+            </Container>
         </div>
-    </div>
+    </header>
+    <div v-if="isHomePage" :style="{ 'height': 'var(--content-offset)' }" />
 </template>
 
 <style scoped>
-.header {
-    width: 100%;
-    padding: 12px;
-    background-color: #000;
-    color: #fff;
-}
+
 </style>
