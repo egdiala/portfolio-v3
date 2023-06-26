@@ -50,6 +50,7 @@ const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
             </div>
         </div>
     </div>
+    <Container outer-class="mt-9" />
 </template>
 
 <style>
