@@ -42,14 +42,15 @@ const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
           </div>
         </div>
     </Container>
-    <div class="mt-16 sm:mt-20">
-        <div class="-my-4 flex justify-center gap-5 overflow-hidden lg:overflow-visible py-4 sm:gap-8">
+    <div class="mt-4 sm:mt-20">
+        <div class="-my-4 flex justify-center gap-5 overflow-hidden py-11 sm:gap-8">
             <div v-for="(image, imageIndex) in images" :key="imageIndex"
             :class="`relative aspect-[9/10] transform hover:sm:-translate-y-10 hover:-translate-y-3 transition-all ease duration-300 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl ${rotations[imageIndex % rotations.length]}`">
                 <NuxtImg :src="image" sizes="sm:640px" class="absolute inset-0 h-full w-full object-cover" />
             </div>
         </div>
     </div>
+    <Container outer-class="mt-9" />
 </template>
 
 <style>
