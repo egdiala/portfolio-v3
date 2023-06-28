@@ -27,6 +27,7 @@ onMounted(() => {
     }
 
     function updateHeaderStyles() {
+      if (headerRef.value == undefined) return;
       let { top, height } = headerRef.value?.getBoundingClientRect()
       let scrollY = clamp(
         window.scrollY,
@@ -148,24 +149,24 @@ onMounted(() => {
             </Container>
         </template>
         <div ref="headerRef" class="top-0 z-10 h-16 pt-6" :style="{ position: 'var(--header-position)' } as any">
-            <Container outer-class="top-[var(--header-top,1.5rem)] w-full">
-                <div class="relative flex gap-4">
-                    <div class="flex flex-1 items-center gap-3">
-                        <AvatarContainer v-if="!isHomePage">
-                            <Avatar :large="false" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala" />
-                        </AvatarContainer>
-                    </div>
-                    <div class="flex flex-1 justify-end md:justify-center">
-                        <MobileNavigation class="pointer-events-auto md:hidden" />
-                        <DesktopNavigation class="pointer-events-auto hidden md:block" />
-                    </div>
-                    <div class="flex justify-end md:flex-1">
-                        <div class="pointer-events-auto">
-                            <ModeToggle />
-                        </div>
-                    </div>
-                </div>
-            </Container>
+          <Container outer-class="top-[var(--header-top,1.5rem)] w-full">
+            <div class="relative flex gap-4">
+              <div class="flex flex-1 items-center gap-3">
+                  <AvatarContainer v-if="!isHomePage">
+                      <Avatar :large="false" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala" />
+                  </AvatarContainer>
+              </div>
+              <div class="flex flex-1 justify-end md:justify-center">
+                  <MobileNavigation class="pointer-events-auto md:hidden" />
+                  <DesktopNavigation class="pointer-events-auto hidden md:block" />
+              </div>
+              <div class="flex justify-end md:flex-1">
+                  <div class="pointer-events-auto">
+                      <ModeToggle />
+                  </div>
+              </div>
+            </div>
+          </Container>
         </div>
     </header>
     <div v-if="isHomePage" :style="{ 'height': 'var(--content-offset)' }" />
