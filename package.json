@@ -16,6 +16,7 @@
     "@types/node": "^18",
     "nuxt": "^3.6.1",
     "nuxt-headlessui": "^1.1.4",
-    "nuxt-icon": "^0.4.1"
+    "nuxt-icon": "^0.4.1",
+    "nuxt-swiper": "^1.1.1"
   }
 }
