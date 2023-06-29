@@ -62,7 +62,7 @@ const slides = ref([
                 :key="idx"
             >
                 <div class="grid gap-8">
-                    <h5 class="text-center font-medium text-xl text-gray-900 dark:text-gray-200 before:content-['“'] after:content-['”']">{{ slide.quote }}</h5>
+                    <h5 class="text-center font-medium text-lg lg:text-xl text-gray-900 dark:text-gray-200 before:content-['“'] after:content-['”']">{{ slide.quote }}</h5>
                     <div class="grid gap-4 justify-items-center">
                         <NuxtImg :src="slide.avatar" class="w-14 h-14 rounded-full" />
                         <div class="grid gap-1 justify-items-center">
@@ -86,7 +86,7 @@ const slides = ref([
 .swiper-wrapper {
   min-width: 100vh;
   width: 100vh;
-  @apply h-80;
+  @apply h-96 lg:h-80;
 }
 .swiper-cards {
   width: 240px;
