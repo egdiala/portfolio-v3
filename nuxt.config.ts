@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "nuxt-headlessui",
     "@nuxt/image",
-    "nuxt-icon"
+    "nuxt-icon",
+    "nuxt-swiper"
   ],
   colorMode: { classSuffix: '' },
   ssr: true
