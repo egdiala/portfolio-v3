@@ -1,6 +1,20 @@
 <script setup lang="ts">
 const mouse = ref<HTMLDivElement | null>()
 
+useHead({
+  title: 'Egwuchukwu S. Diala - Frontend engineer, designer and music lover',
+  meta: [
+    { charset: 'utf-8' },
+    { name: 'description', content: 'I’m Egwuchukwu, a design-focused frontend engineer and designer based in Lagos, Nigeria. I combine my expertise in all levels of development and my understanding of UI design to create meaningful experiences.' },
+  ],
+  bodyAttrs: {
+    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
+  },
+  htmlAttrs: {
+    lang: 'en'
+  }
+})
+
 onMounted(() => {
   if (process.client) {
     window.addEventListener('mousemove', cursor)
@@ -26,21 +40,19 @@ function cursor(e: MouseEvent) {
 </script>
 
 <template>
-  <Body class="flex h-full flex-col bg-zinc-50 dark:bg-black">
-    <div ref="mouse" class="absolute w-[2rem] hidden lg:flex h-[2rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border-2 dark:border-white border-gray-600"/>
-    <div class="fixed inset-0 flex justify-center sm:px-8">
-      <div class="flex w-full max-w-7xl lg:px-8">
-        <div class="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
-      </div>
+  <div ref="mouse" class="absolute w-[2rem] hidden lg:flex h-[2rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border-2 dark:border-white border-gray-600"/>
+  <div class="fixed inset-0 flex justify-center sm:px-8">
+    <div class="flex w-full max-w-7xl lg:px-8">
+      <div class="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
     </div>
-    <div class="relative">
-      <Header />
-      <main>
-        <NuxtPage />
-      </main>
-      <Footer />
-    </div>
-  </Body>
+  </div>
+  <div class="relative">
+    <Header />
+    <main>
+      <NuxtPage />
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <style>
