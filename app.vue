@@ -2,17 +2,19 @@
 const mouse = ref<HTMLDivElement | null>()
 
 onMounted(() => {
-  window.addEventListener('mousemove', cursor)
-  const images = document.querySelectorAll('img')
+  if (process.client) {
+    window.addEventListener('mousemove', cursor)
+    const images = document.querySelectorAll('img')
 
-  images.forEach((image) => {
-    image.addEventListener('mouseover', () => {
-      mouse.value?.classList.add('blur-me')
+    images.forEach((image) => {
+      image.addEventListener('mouseover', () => {
+        mouse.value?.classList.add('blur-me')
+      })
+      image.addEventListener('mouseleave', () => {
+        mouse.value?.classList.remove('blur-me')
+      })
     })
-    image.addEventListener('mouseleave', () => {
-      mouse.value?.classList.remove('blur-me')
-    })
-  })
+  }
 });
 
 function cursor(e: MouseEvent) {

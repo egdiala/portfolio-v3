@@ -11,7 +11,7 @@ const resume = ref<Resume[]>([
     {
         company: 'Enyata',
         title: 'Software Engineer',
-        logo: 'https://media.licdn.com/dms/image/C4E0BAQHiTyXJWwbgfw/company-logo_100_100/0/1615975251861?e=1695859200&v=beta&t=grjfapp49IfiJ1uFJvnPhc7lgfp8RJT5q0fqLUugzVU',
+        logo: '/work/enyata.jpeg',
         start: '2023',
         end: {
             label: 'Present',
@@ -21,7 +21,7 @@ const resume = ref<Resume[]>([
     {
         company: 'BLK Labs',
         title: 'Frontend Engineer',
-        logo: 'https://media.licdn.com/dms/image/C4E0BAQFz12TYSVSulQ/company-logo_100_100/0/1603981998464?e=1695859200&v=beta&t=u0C80MZU70iIR8KONFb6If75B29yTx97PS3EnEc1mvs',
+        logo: '/work/blk.jpeg',
         start: 'Apr, 2022',
         end: {
             label: 'Present',
@@ -31,14 +31,14 @@ const resume = ref<Resume[]>([
     {
         company: 'Melli',
         title: 'Frontend Engineer',
-        logo: 'https://media.licdn.com/dms/image/C4E0BAQE8rU3KsgDDTg/company-logo_100_100/0/1660209967326?e=1695859200&v=beta&t=OxNHpRWjkmpVQpde9bHojVmv1EJ_2q_kwoQBO4Q8dCc',
+        logo: '/work/melli.jpeg',
         start: 'May, 2022',
         end: 'Dec, 2022',
     },
     {
         company: 'Trail Group',
         title: 'Frontend Developer',
-        logo: 'https://media.licdn.com/dms/image/C4E0BAQE7HQrc42_Elg/company-logo_100_100/0/1618438168679?e=1695859200&v=beta&t=ogzYHqzR_88vog5a0z62eBcCsBXgX52NNXGt6mx_bP4',
+        logo: '/work/trail.jpeg',
         start: 'Aug, 2021',
         end: 'Jan, 2022',
     },
