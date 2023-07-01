@@ -34,7 +34,7 @@ const slides = ref([
 </script>
 
 <template>
-    <div class="flex items-center gap-4 bg-white dark:bg-zinc-900 rounded-xl">
+    <div class="bg-white dark:bg-zinc-900 rounded-xl">
         <Swiper
         :modules="[SwiperAutoplay, SwiperEffectCreative]"
         :slides-per-view="1"
@@ -59,10 +59,10 @@ const slides = ref([
                 :key="idx"
             >
                 <div class="grid gap-8">
-                    <h5 class="text-center font-medium text-lg lg:text-xl text-gray-900 dark:text-gray-200 before:content-['“'] after:content-['”']">{{ slide.quote }}</h5>
+                    <h3 class="text-center font-medium text-lg lg:text-xl text-gray-900 dark:text-gray-200 before:content-['“'] after:content-['”']">{{ slide.quote }}</h3>
                     <div class="grid gap-4 justify-items-center">
                         <div class="grid content-center justify-items-center h-14 w-14 rounded-full shadow-md shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-                            <NuxtImg :src="slide.avatar" class="w-10 h-10 rounded-full" />
+                            <NuxtImg :src="slide.avatar" :alt="slide.name" class="w-10 h-10 rounded-full" />
                         </div>
                         <div class="grid gap-1 justify-items-center">
                             <p class="font-medium text-base dark:text-slate-100 text-slate-900">{{ slide.name }}</p>
