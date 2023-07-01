@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 const slides = ref([
     {
         quote: 'I had the pleasure of mentoring Egwu during his internship at a company I worked at. Egwu was a great guy to work with as he possesses a very sharp mind and is always willing to contribute his quota to the success of a project. Egwu is the right guy for the job when you are looking to "get it done by yesterday"!',
@@ -35,11 +35,8 @@ const slides = ref([
 
 <template>
     <div class="flex items-center gap-4 bg-white dark:bg-zinc-900 rounded-xl">
-        <!-- <button class="p-2" @click="swiper.slideNext()">
-            <Icon name="heroicons:chevron-left-solid" class="w-6 h-6 text-zinc-400 transition group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50"/>
-        </button> -->
         <Swiper
-        :modules="[SwiperAutoplay, SwiperPagination, SwiperEffectCreative]"
+        :modules="[SwiperAutoplay, SwiperEffectCreative]"
         :slides-per-view="1"
         :loop="true"
         :effect="'creative'"
@@ -64,7 +61,9 @@ const slides = ref([
                 <div class="grid gap-8">
                     <h5 class="text-center font-medium text-lg lg:text-xl text-gray-900 dark:text-gray-200 before:content-['“'] after:content-['”']">{{ slide.quote }}</h5>
                     <div class="grid gap-4 justify-items-center">
-                        <NuxtImg :src="slide.avatar" class="w-14 h-14 rounded-full" />
+                        <div class="grid content-center justify-items-center h-14 w-14 rounded-full shadow-md shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+                            <NuxtImg :src="slide.avatar" class="w-10 h-10 rounded-full" />
+                        </div>
                         <div class="grid gap-1 justify-items-center">
                             <p class="font-medium text-base dark:text-slate-100 text-slate-900">{{ slide.name }}</p>
                             <span class="text-sm text-gray-600 dark:text-gray-200">{{ slide.role }}</span>
@@ -72,10 +71,8 @@ const slides = ref([
                     </div>
                 </div>
             </SwiperSlide>
+            <SwiperControls />
         </Swiper>
-        <!-- <button typ="button" class="p-2" @click="swiper.slidePrev()">
-            <Icon name="heroicons:chevron-right-solid" class="w-6 h-6 text-zinc-400 transition group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50"/>
-        </button> -->
     </div>
 </template>
 
