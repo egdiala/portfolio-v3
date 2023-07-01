@@ -1,6 +1,7 @@
 <script setup lang="ts">
 interface ButtonProps {
     to?: string
+    link?: string
     variant: string
     extraClass?: string
 }
@@ -13,13 +14,14 @@ const classes = computed(() => ({
 </script>
 
 <template>
-    <button v-if="!to" v-bind="$attrs" type="button" :class="classes"><slot/></button>
-    <NuxtLink v-else v-bind="$attrs" :class="classes"><slot/></NuxtLink>
+    <a v-if="link" :href="link" :class="classes" v-bind="$attrs"><slot/></a>
+    <button v-if="!to && !link" v-bind="$attrs" type="button" :class="classes"><slot/></button>
+    <NuxtLink v-if="to" v-bind="$attrs" :class="classes"><slot/></NuxtLink>
 </template>
 
 <style scoped>
 .button {
-    @apply inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none;
+    @apply flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none;
 }
 .primary {
     @apply bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70;
