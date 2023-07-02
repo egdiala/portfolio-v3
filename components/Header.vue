@@ -15,7 +15,7 @@ const clamp = (number: any, a: any, b: any) => {
 }
 
 onMounted(() => {
-    let downDelay = avatarRef.value?.offsetTop ?? 0
+    let downDelay = avatarRef.value?.offsetTop ?? 116
     let upDelay = 64
 
     function setProperty(property: any, value: any) {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 interface SocialLinkProps {
+    outerClass?: string
     href: string
     icon: string
 }
@@ -8,9 +9,15 @@ defineProps<SocialLinkProps>()
 </script>
 
 <template>
-    <a :href="href" target="_blank" class="group -m-1 p-1" v-bind="$attrs">
-        <Icon :name="icon" class="h-6 w-6 text-zinc-500 transition group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300" />
-    </a>
+    <li :class="`${outerClass} flex`">
+      <NuxtLink
+        :to="href" target="_blank"
+        class="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+      >
+        <Icon :name="icon" class="h-6 w-6 flex-none text-zinc-500 transition group-hover:text-teal-500" />
+        <span class="ml-4"><slot/></span>
+      </NuxtLink>
+    </li>
 </template>
 
 <style scoped>
