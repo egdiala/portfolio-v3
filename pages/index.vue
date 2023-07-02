@@ -1,4 +1,18 @@
 <script setup lang="ts">
+useHead({
+  title: 'Egwuchukwu S. Diala - Frontend engineer, designer and music lover',
+  meta: [
+    { charset: 'utf-8' },
+    { name: 'description', content: 'I’m Egwuchukwu, a design-focused frontend engineer and designer based in Lagos, Nigeria. I combine my expertise in all levels of development and my understanding of UI design to create meaningful experiences.' },
+  ],
+  bodyAttrs: {
+    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
+  },
+  htmlAttrs: {
+    lang: 'en'
+  }
+})
+
 const images = [
     '/photos/image-1.jpg',
     '/photos/image-2.jpg',
@@ -19,22 +33,22 @@ const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
             I’m Egwuchukwu, a <span class="text-zinc-900 dark:text-zinc-50">design-focused</span> frontend engineer and designer based in Lagos, Nigeria. <span class="text-zinc-900 dark:text-zinc-50">I combine my expertise</span> in all levels of development and my <span class="text-zinc-900 dark:text-zinc-50">understanding of UI design</span> to <span class="text-zinc-900 dark:text-zinc-50">create meaningful experiences</span>.
           </p>
           <div class="mt-6 flex gap-6">
-            <SocialLink
+            <SocialIcon
               href="https://twitter.com"
               aria-label="Follow on Twitter"
               icon="bxl:twitter"
             />
-            <SocialLink
+            <SocialIcon
               href="https://instagram.com"
               aria-label="Follow on Instagram"
               icon="bxl:instagram"
             />
-            <SocialLink
+            <SocialIcon
               href="https://github.com"
               aria-label="Follow on GitHub"
               icon="bxl:github"
             />
-            <SocialLink
+            <SocialIcon
               href="https://linkedin.com"
               aria-label="Follow on LinkedIn"
               icon="bxl:linkedin-square"
