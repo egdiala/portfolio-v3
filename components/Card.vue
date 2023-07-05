@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const slot = useSlots()
-
 interface Card {
     as: string | Component
     titleTag: string | Component

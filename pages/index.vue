@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useMouse } from '~/composables/useMouse';
+
 useHead({
   title: 'Egwuchukwu S. Diala - Frontend engineer, designer and music lover',
   meta: [
@@ -21,6 +23,10 @@ const images = [
     '/photos/image-5.jpg',
 ]
 const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
+
+onMounted(() => {
+  useMouse();
+});
 </script>
 
 <template>

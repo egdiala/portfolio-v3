@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useMouse } from '~/composables/useMouse';
+
 useHead({
   title: 'About - Egwuchukwu S. Diala',
   meta: [
@@ -20,6 +22,10 @@ const skills = [
     { icon: "carbon:code", title: "Development", description: "Expertise in Vue allows me to build out designs I will create for you." },
     { icon: "bi:bezier", title: "Motion", description: "Motion adds life to products. Using Figma, I will show how I can bring your products to life." },
 ]
+
+onMounted(() => {
+    useMouse();
+});
 </script>
 
 <template>
