@@ -12,7 +12,7 @@ defineProps<AvatarProps>()
     <NuxtLink
       to="/"
       aria-label="Home"
-      :class="`pointer-events-auto ${outerClass}`"
+      :class="`pointer-events-auto ${outerClass ?? ''}`"
         v-bind="$attrs"
     >
       <nuxt-img

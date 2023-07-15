@@ -7,7 +7,7 @@ defineProps<NavLinkProps>()
 </script>
 
 <template>
-    <NuxtLink :to="href" class="transition hover:text-teal-500 dark:hover:text-teal-400">
+    <NuxtLink :to="href" class="transition hover:text-emerald-500 dark:hover:text-emerald-400">
       <slot/>
     </NuxtLink>
 </template>

@@ -23,10 +23,7 @@ const resume = ref<Resume[]>([
         title: 'Frontend Engineer',
         logo: '/work/blk.jpeg',
         start: 'Apr, 2022',
-        end: {
-            label: 'Present',
-            dateTime: new Date().getFullYear(),
-        },
+        end: 'Jul, 2023',
     },
     {
         company: 'Melli',
