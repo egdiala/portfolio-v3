@@ -74,11 +74,11 @@ onMounted(() => {
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
             <div class="flex flex-col gap-4">
               <span class="text-gray-500 dark:text-gray-100 text-base md:text-lg">About me</span>
-              <h2 class="text-2xl leading-10 font-bold tracking-tight text-gray-600 dark:text-gray-500 sm:text-3xl">
-              “My understanding of <span class="text-gray-900 dark:text-gray-50">design principles</span> and <span class="text-gray-900 dark:text-gray-50">performant code</span> allows me to create usable digital products.”
+              <h2 class="text-2xl leading-10 font-bold tracking-tight text-gray-600 dark:text-neutral-400 sm:text-3xl">
+              “My understanding of <span class="text-gray-900 dark:text-white">design principles</span> and <span class="text-gray-900 dark:text-gray-50">performant code</span> allows me to create usable digital products.”
               </h2>
-              <p class="text-base text-zinc-600 dark:text-zinc-400 leading-7">With over 4 years of experience in frontend development and product design, I have worked with startups to create useful solutions.</p>
-              <p class="text-base text-zinc-600 dark:text-zinc-400 leading-7">With a passion for accessibility, I ensure that products I work on are simple. Most importantly, they solve user problems and keep business goals in mind.</p>
+              <p class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With over 4 years of experience in frontend development and product design, I have worked with startups to create useful solutions.</p>
+              <p class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With a passion for accessibility, I ensure that products I work on are simple. Most importantly, they solve user problems and keep business goals in mind.</p>
             </div>
             <div class="space-y-10 lg:pl-16 xl:pl-24">
                 <Resume />
