@@ -48,6 +48,10 @@ function cursor(e: MouseEvent) {
 <style>
 * {
   @apply lg:cursor-none !important;
+   
+  >body {
+    @apply transition-colors duration-500;
+  }
 }
 
 .blur-me {
