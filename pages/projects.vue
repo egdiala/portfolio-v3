@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useHead({
-  title: 'Projects - Egwuchukwu S. Diala',
+  title: 'Things I’ve made trying to put my dent in the universe',
   meta: [
     { charset: 'utf-8' },
-    { name: 'description', content: 'I’m Egwuchukwu Diala. I live in Lagos, where I create memorable experiences for brands around the world.' },
+    { name: 'description', content: 'I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of.' },
   ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'

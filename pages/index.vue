@@ -2,10 +2,10 @@
 import { useMouse } from '~/composables/useMouse';
 
 useHead({
-  title: 'Egwuchukwu S. Diala - Frontend engineer, designer and music lover',
+  title: 'Frontend engineer, designer and music lover',
   meta: [
     { charset: 'utf-8' },
-    { name: 'description', content: 'I’m Egwuchukwu, a design-focused frontend engineer and designer based in Lagos, Nigeria. I combine my expertise in all levels of development and my understanding of UI design to create meaningful experiences.' },
+    { name: 'description', content: 'I’m Egwuchukwu, a design-focused frontend engineer and designer based in Lagos, Nigeria. I combine my expertise to create meaningful experiences.' },
   ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'

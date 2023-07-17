@@ -1,6 +1,19 @@
 <script setup lang="ts">
 const mouse = ref<HTMLDivElement | null>()
 
+useSchemaOrg([
+  definePerson({
+    name: 'Egwuchukwu Stephen Diala',
+    image: '/images/egdiala-mini.jpg',
+    sameAs: [
+      'https://github.com/egdiala', 'https://www.linkedin.com/in/egwuchukwu-diala/'
+    ]
+  }),
+  defineWebSite({/* ... */}),
+  defineWebPage(),
+])
+
+
 onMounted(() => {
   if (process.client) {
     window.addEventListener('mousemove', cursor)
@@ -16,6 +29,7 @@ function cursor(e: MouseEvent) {
 </script>
 
 <template>
+  <SeoKit/>
   <div ref="mouse" id="mouse" class="absolute w-[2rem] hidden lg:flex h-[2rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border-2 dark:border-white border-gray-600"/>
   <div class="fixed inset-0 flex justify-center sm:px-8">
     <div class="flex w-full max-w-7xl lg:px-8">

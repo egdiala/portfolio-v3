@@ -2,10 +2,10 @@
 import { useMouse } from '~/composables/useMouse';
 
 useHead({
-  title: 'About - Egwuchukwu S. Diala',
+  title: 'I create memorable experiences for brands around the world',
   meta: [
     { charset: 'utf-8' },
-    { name: 'description', content: 'I’m Egwuchukwu Diala. I live in Lagos, where I create memorable experiences for brands around the world.' },
+    { name: 'description', content: 'As a frontend engineer with over 3 years of experience, I have helped various brands to stand out among their competition by providing them with various solutions.' },
   ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
