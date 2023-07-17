@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   extends: ["nuxt-seo-kit"],
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://deesnutz.netlify.app',
       siteName: 'Egwuchukwu S. Diala',
       siteDescription: 'Egwuchukwu Diala\'s Portfolio Website',
       language: 'en',

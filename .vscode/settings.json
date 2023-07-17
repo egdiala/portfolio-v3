@@ -1,5 +1,5 @@
 {
-    "tailwindCSS.experimental.configFile": ".nuxt/tailwind.config.cjs",
+    "tailwindCSS.experimental.configFile": "tailwind.config.ts",
     "editor.quickSuggestions": {
         "strings": true
     }
