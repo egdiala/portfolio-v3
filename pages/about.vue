@@ -5,7 +5,7 @@ useHead({
   title: 'I create memorable experiences for brands around the world',
   meta: [
     { charset: 'utf-8' },
-    { name: 'description', content: 'As a frontend engineer with over 3 years of experience, I have helped various brands to stand out among their competition by providing them with various solutions.' },
+    { name: 'description', content: 'As a frontend engineer with over 3 years of experience, he has helped various brands to stand out among their competition by providing them with various solutions.' },
   ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'

@@ -5,7 +5,7 @@ useHead({
   title: 'Frontend engineer, designer, music lover',
   meta: [
     { charset: 'utf-8' },
-    { name: 'description', content: 'I’m Egwuchukwu, a design-focused frontend engineer and designer based in Lagos, Nigeria. I combine my expertise to create meaningful experiences.' },
+    { name: 'description', content: 'Egwuchukwu is a design-focused frontend engineer and designer based in Lagos, Nigeria. He combines his expertise to create meaningful experiences.' },
   ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
@@ -13,6 +13,15 @@ useHead({
   htmlAttrs: {
     lang: 'en'
   }
+})
+
+useSeoMeta({
+  title: 'Frontend engineer, designer, music lover',
+  ogTitle: 'Egwuchukwu S. Diala - Frontend Engineer',
+  description: 'Egwuchukwu is a design-focused frontend engineer.',
+  ogDescription: 'Egwuchukwu is a design-focused frontend engineer.',
+  ogImage: 'https://deesnutz.netlify.app/images/egdiala-mini.jpg',
+  twitterCard: 'summary',
 })
 
 const images = [
