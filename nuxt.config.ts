@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       siteName: 'Egwuchukwu S. Diala',
       siteDescription: 'Egwuchukwu Diala\'s Portfolio Website',
       language: 'en',
-      titleSeparator: '-'
+      titleSeparator: '-',
     }
   },
   modules: [
@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-icon",
     "nuxt-swiper",
+    "@vueuse/motion/nuxt"
   ],
   colorMode: { classSuffix: '' },
   ssr: true
