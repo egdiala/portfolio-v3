@@ -8,7 +8,7 @@ useHead({
     { name: 'description', content: 'Egwuchukwu is a design-focused frontend engineer and designer based in Lagos, Nigeria. He combines his expertise to create meaningful experiences.' },
   ],
   bodyAttrs: {
-    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
+    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
   },
   htmlAttrs: {
     lang: 'en'

@@ -6,7 +6,7 @@ useHead({
     { name: 'description', content: 'He has worked on tons of little projects over the years but these are the ones that he\'s most proud of.' },
   ],
   bodyAttrs: {
-    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
+    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
   },
   htmlAttrs: {
     lang: 'en'

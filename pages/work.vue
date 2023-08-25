@@ -6,7 +6,7 @@ useHead({
     { name: 'description', content: 'Egwuchukwu Diala lives in Lagos where he creates memorable experiences for brands around the world.' },
   ],
   bodyAttrs: {
-    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
+    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
   },
   htmlAttrs: {
     lang: 'en'

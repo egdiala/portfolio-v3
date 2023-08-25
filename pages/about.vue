@@ -8,14 +8,14 @@ useHead({
     { name: 'description', content: 'As a frontend engineer with over 3 years of experience, he has helped various brands to stand out among their competition by providing them with various solutions.' },
   ],
   bodyAttrs: {
-    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black'
+    class: 'flex h-full flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
   },
   htmlAttrs: {
     lang: 'en'
   }
 })
 
-const portraitImage = "https://spotlight.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fportrait.79754e9e.jpg&w=640&q=75"
+const portraitImage = "/images/egdiala.png"
 
 const skills = [
     { icon: "carbon:pen-fountain", title: "Design", description: "I use industry standard software such as Figma to create aesthetic designs." },
@@ -37,7 +37,7 @@ onMounted(() => {
                     :src="portraitImage"
                     alt=""
                     sizes="lg:512px 320px"
-                    class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+                    class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover object-top dark:bg-zinc-800"
                     />
                 </div>
             </div>
@@ -62,20 +62,20 @@ onMounted(() => {
             </div>
             <div class="lg:pl-20">
                 <ul role="list">
-                    <SocialLink href="#" icon="bxl:twitter">
+                    <SocialLink href="https://twitter.com/e_diala" icon="bxl:twitter">
                         Follow on Twitter
                     </SocialLink>
-                    <SocialLink href="#" icon="bxl:instagram" outer-class="mt-4">
+                    <!-- <SocialLink href="#" icon="bxl:instagram" outer-class="mt-4">
                         Follow on Instagram
-                    </SocialLink>
-                    <SocialLink href="#" icon="bxl:github" outer-class="mt-4">
+                    </SocialLink> -->
+                    <SocialLink href="https://github.com/egdiala" icon="bxl:github" outer-class="mt-4">
                         Follow on GitHub
                     </SocialLink>
-                    <SocialLink href="#" icon="bxl:linkedin-square" outer-class="mt-4">
+                    <SocialLink href="https://www.linkedin.com/in/egwuchukwu-diala/" icon="bxl:linkedin-square" outer-class="mt-4">
                         Follow on LinkedIn
                     </SocialLink>
-                    <SocialLink href="mailto:spencer@planetaria.tech" icon="heroicons:envelope-solid" outer-class="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
-                        spencer@planetaria.tech
+                    <SocialLink href="mailto:dialaegwuchukwu@gmail.com" icon="heroicons:envelope-solid" outer-class="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
+                        dialaegwuchukwu@gmail.com
                     </SocialLink>
                 </ul>
             </div>
