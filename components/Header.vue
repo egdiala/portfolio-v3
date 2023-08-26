@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { MotionVariants } from '@vueuse/motion';
 const route = useRoute()
 const headerRef = ref()
 const avatarRef = ref()
@@ -7,6 +8,40 @@ const isInitial = ref(true)
 const isHomePage = computed(() => {
     return route.path === '/'
 })
+
+const variants: MotionVariants = {
+  initial: {
+    opacity: 0,
+    y: -24
+  },
+  enter: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'tween',
+      delay: 200,
+      duration: 800,
+      velocity: 690
+    }
+  }
+}
+
+const imageVariant: MotionVariants = {
+  initial: {
+    opacity: 0,
+    scale: 0,
+  },
+  enter: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'tween',
+      ease: 'easeOut',
+      delay: 200,
+      duration: 800
+    }
+  }
+}
 
 const clamp = (number: any, a: any, b: any) => {
   let min = Math.min(a, b)
@@ -139,7 +174,7 @@ onMounted(() => {
                       transform: 'var(--avatar-border-transform)',
                     }"
                   />
-                  <Avatar
+                  <Avatar v-motion :initial="imageVariant.initial" :enter="imageVariant.enter"
                     :large="true"
                     outer-class="block h-16 w-16 origin-left" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala"
                     :style="{ transform: 'var(--avatar-image-transform)', marginLeft: '-0.5px' }"
@@ -148,7 +183,7 @@ onMounted(() => {
               </div>
             </Container>
         </template>
-        <div ref="headerRef" class="top-0 z-10 h-16 pt-6" :style="{ position: 'var(--header-position)' } as any">
+        <div v-motion :initial="variants.initial" :enter="variants.enter" ref="headerRef" class="top-0 z-10 h-16 pt-6" :style="{ position: 'var(--header-position)' } as any">
           <Container outer-class="top-[var(--header-top,1.5rem)] w-full">
             <div class="relative flex gap-4">
               <div class="flex flex-1 items-center gap-3">
