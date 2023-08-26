@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { MotionVariants } from '@vueuse/motion';
 import { useMouse } from '~/composables/useMouse';
 
 useHead({
@@ -23,6 +24,49 @@ const skills = [
     { icon: "bi:bezier", title: "Motion", description: "Motion adds life to products. Using Figma, I will show how I can bring your products to life." },
 ]
 
+const socialLinks = [
+    {
+        link: 'https://twitter.com/e_diala',
+        icon: 'bxl:twitter',
+        name: 'Follow on Twitter'
+    },
+    {
+        link: 'https://github.com/egdiala',
+        icon: 'bxl:github',
+        name: 'Follow on GitHub',
+        class: 'mt-4'
+    },
+    {
+        link: 'https://www.linkedin.com/in/egwuchukwu-diala/',
+        icon: 'bxl:linkedin-square',
+        name: 'Follow on LinkedIn',
+        class: 'mt-4'
+    },
+    {
+        link: 'mailto:dialaegwuchukwu@gmail.com',
+        icon: 'heroicons:envelope-solid',
+        name: 'dialaegwuchukwu@gmail.com',
+        class: 'mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40'
+    },
+]
+
+const variants: MotionVariants = {
+  initial: {
+    y: 24,
+    opacity: 0
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      delay: 200,
+      duration: 800,
+      velocity: 690
+    }
+  }
+}
+
 onMounted(() => {
     useMouse();
 });
@@ -33,15 +77,15 @@ onMounted(() => {
         <div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
             <div class="lg:pl-20">
                 <div class="max-w-xs px-2.5 lg:max-w-none">
-                    <NuxtImg
+                    <NuxtImg v-motion :initial="{ opacity: 0, y: -24, rotate: 0 }" :enter="{ opacity: 1, y: 0, rotate: 3, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (200 * (index+1)) } }"
                     :src="portraitImage"
                     alt=""
                     sizes="lg:512px 320px"
-                    class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover object-top dark:bg-zinc-800"
+                    class="aspect-square rounded-2xl bg-zinc-100 object-cover object-top dark:bg-zinc-800"
                     />
                 </div>
             </div>
-            <div class="lg:order-first lg:row-span-2">
+            <div v-motion :initial="variants.initial" :enter="variants.enter" class="lg:order-first lg:row-span-2">
                 <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl leading-10  sm:leading-[3.5rem]">
                     I create memorable experiences for brands around the world.
                 </h1>
@@ -62,20 +106,8 @@ onMounted(() => {
             </div>
             <div class="lg:pl-20">
                 <ul role="list">
-                    <SocialLink href="https://twitter.com/e_diala" icon="bxl:twitter">
-                        Follow on Twitter
-                    </SocialLink>
-                    <!-- <SocialLink href="#" icon="bxl:instagram" outer-class="mt-4">
-                        Follow on Instagram
-                    </SocialLink> -->
-                    <SocialLink href="https://github.com/egdiala" icon="bxl:github" outer-class="mt-4">
-                        Follow on GitHub
-                    </SocialLink>
-                    <SocialLink href="https://www.linkedin.com/in/egwuchukwu-diala/" icon="bxl:linkedin-square" outer-class="mt-4">
-                        Follow on LinkedIn
-                    </SocialLink>
-                    <SocialLink href="mailto:dialaegwuchukwu@gmail.com" icon="heroicons:envelope-solid" outer-class="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40">
-                        dialaegwuchukwu@gmail.com
+                    <SocialLink v-for="(link, index) in socialLinks" :key="index" v-motion :initial="{ opacity: 0, y: -24 }" :enter="{ opacity: 1, y: 0, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (200 * (index+1)) } }" :href="link.link" :icon="link.icon" :outer-class="link?.class">
+                        {{ link.name }}
                     </SocialLink>
                 </ul>
             </div>
