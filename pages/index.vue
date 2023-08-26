@@ -26,11 +26,11 @@ useSeoMeta({
 })
 
 const images = [
-    '/photos/image-1.jpg',
-    '/photos/image-2.jpg',
-    '/photos/image-3.jpg',
-    '/photos/image-4.jpg',
-    '/photos/image-5.jpg',
+    '/_ipx/w_640/photos/image-1.jpg',
+    '/_ipx/w_640/photos/image-2.jpg',
+    '/_ipx/w_640/photos/image-3.jpg',
+    '/_ipx/w_640/photos/image-4.jpg',
+    '/_ipx/w_640/photos/image-5.jpg',
 ]
 const rotations = [2, -2, 2, -2, 2]
 
@@ -93,7 +93,7 @@ onMounted(() => {
         <div class="-my-4 flex justify-center gap-5 overflow-hidden py-11 sm:gap-8">
             <div v-for="(image, imageIndex) in images" :key="imageIndex" v-motion :initial="{ opacity: 0, scale: 0, rotate: 0 }" :enter="{ opacity: 1, scale: 1, rotate: rotations[imageIndex % rotations.length], transition:{ type: 'tween', ease: 'easeOut', duration: 30, delay: (200 * (imageIndex+1)) } }"
             class="relative aspect-[9/10] transform hover:sm:-translate-y-10 hover:-translate-y-3 transition-all ease duration-300 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
-                <NuxtImg :src="image.replace('/_ipx/w_640', '')" :alt="`image_${imageIndex}`" sizes="sm:640px" class="absolute inset-0 h-full w-full object-cover" />
+                <NuxtImg :src="image" :alt="`image_${imageIndex}`" sizes="sm:640px" class="absolute inset-0 h-full w-full object-cover" />
             </div>
           </div>
     </div>
