@@ -27,5 +27,5 @@ export default defineNuxtConfig({
     "@vueuse/motion/nuxt"
   ],
   colorMode: { classSuffix: '' },
-  ssr: true
+  ssr: false
 })
