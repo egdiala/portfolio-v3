@@ -45,9 +45,42 @@ const variants: MotionVariants = {
     opacity: 1,
     transition: {
       type: 'tween',
-      delay: 200,
+      delay: 500,
       duration: 800,
       velocity: 690
+    }
+  }
+}
+
+const paragraph: MotionVariants = {
+  initial: {
+    y: 24,
+    opacity: 0
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      delay: 600,
+      duration: 800,
+      velocity: 690
+    }
+  }
+}
+
+const icons: MotionVariants = {
+  initial: {
+    y: 0,
+    opacity: 0
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      ease: 'easeOut',
+      delay: 600,
+      duration: 800
     }
   }
 }
@@ -59,23 +92,18 @@ onMounted(() => {
 
 <template>
     <Container outer-class="mt-9">
-        <div v-motion :initial="variants.initial" :enter="variants.enter" class="max-w-2xl">
-          <h1 class="text-4xl leading-10 font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl sm:leading-[3.5rem]">
+        <div class="max-w-2xl">
+          <h1 v-motion :initial="variants.initial" :enter="variants.enter" class="text-4xl leading-10 font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl sm:leading-[3.5rem]">
             Frontend engineer, designer, and music lover.
           </h1>
-          <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
+          <p v-motion :initial="paragraph.initial" :enter="paragraph.enter" class="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
             I’m Egwuchukwu, a <span class="text-zinc-900 dark:text-zinc-50">design-focused</span> frontend engineer and designer based in Lagos, Nigeria. <span class="text-zinc-900 dark:text-zinc-50">I combine my expertise</span> in all levels of development and my <span class="text-zinc-900 dark:text-zinc-50">understanding of UI design</span> to <span class="text-zinc-900 dark:text-zinc-50">create meaningful experiences</span>.
           </p>
-          <div class="mt-6 flex gap-6">
+          <div v-motion :initial="icons.initial" :enter="icons.enter" class="mt-6 flex gap-6">
             <SocialIcon
               href="https://twitter.com"
               aria-label="Follow on Twitter"
               icon="bxl:twitter"
-            />
-            <SocialIcon
-              href="https://instagram.com"
-              aria-label="Follow on Instagram"
-              icon="bxl:instagram"
             />
             <SocialIcon
               href="https://github.com"
@@ -92,8 +120,8 @@ onMounted(() => {
     </Container>
     <div class="mt-4 sm:mt-20">
         <div class="-my-4 flex justify-center gap-5 overflow-hidden py-11 sm:gap-8">
-            <div v-for="(image, imageIndex) in images" :key="imageIndex" v-motion :initial="{ opacity: 0, scale: 0, rotate: 0 }" :enter="{ opacity: 1, scale: 1, rotate: rotations[imageIndex % rotations.length], transition:{ type: 'tween', ease: 'easeOut', duration: 30, delay: (200 * (imageIndex+1)) } }"
-            :class="`relative aspect-[9/10] transform hover:sm:-translate-y-10 hover:-translate-y-3 transition-all ease duration-300 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl ${rotationClasses[imageIndex % rotationClasses.length]}`">
+            <div v-for="(image, imageIndex) in images" :key="imageIndex" v-motion :initial="{ opacity: 0, y: 500, rotate: 0 }" :enter="{ opacity: 1, y: 0, rotate: rotations[imageIndex % rotations.length], transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (250 * (imageIndex+1)) } }"
+            :class="`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl`">
                 <NuxtImg :src="image" :alt="`image_${imageIndex}`" sizes="sm:640px" class="absolute inset-0 h-full w-full object-cover" />
             </div>
           </div>

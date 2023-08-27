@@ -1,9 +1,26 @@
 <script setup lang="ts">
+import { MotionVariants } from '@vueuse/motion';
 
+const variants: MotionVariants = {
+  initial: {
+    opacity: 0,
+    y: -24
+  },
+  enter: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'tween',
+      delay: 500,
+      duration: 800,
+      velocity: 690
+    }
+  }
+}
 </script>
 
 <template>
-    <footer class="mt-32">
+    <footer v-motion :initial="variants.initial" :enter="variants.enter" class="mt-32">
       <Container inner-class="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40">
         <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
