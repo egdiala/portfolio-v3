@@ -1,5 +1,15 @@
 <script setup lang="ts">
 const mouse = ref<HTMLDivElement | null>()
+const splash = ref(true)
+
+useHead({
+  bodyAttrs: {
+    class: 'flex h-screen flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
+  },
+  htmlAttrs: {
+    lang: 'en'
+  }
+})
 
 useSchemaOrg([
   definePerson({
@@ -18,6 +28,9 @@ onMounted(() => {
   if (process.client) {
     window.addEventListener('mousemove', cursor)
   }
+  setTimeout(() => {
+    splash.value = false
+  }, 4000);
 });
 
 function cursor(e: MouseEvent) {
@@ -30,13 +43,14 @@ function cursor(e: MouseEvent) {
 
 <template>
   <SeoKit/>
-  <div ref="mouse" id="mouse" class="absolute w-[2rem] hidden lg:flex h-[2rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border-2 dark:border-white border-gray-600"/>
-  <div class="fixed inset-0 flex justify-center sm:px-8">
+  <div v-if="!splash" ref="mouse" id="mouse" class="absolute w-[2rem] hidden lg:flex h-[2rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border-2 dark:border-white border-gray-600"/>
+  <div v-if="!splash" v-motion-fade-visible-once class="fixed inset-0 flex justify-center sm:px-8">
     <div class="flex w-full max-w-7xl lg:px-8">
       <div class="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
     </div>
   </div>
-  <div class="relative">
+  <Splash v-if="splash" />
+  <div v-if="!splash" class="relative">
     <Header />
     <main>
       <NuxtPage />

@@ -19,26 +19,9 @@ const variants: MotionVariants = {
     y: 0,
     transition: {
       type: 'tween',
-      delay: 200,
+      delay: 500,
       duration: 800,
       velocity: 690
-    }
-  }
-}
-
-const imageVariant: MotionVariants = {
-  initial: {
-    opacity: 0,
-    scale: 0,
-  },
-  enter: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'tween',
-      ease: 'easeOut',
-      delay: 200,
-      duration: 800
     }
   }
 }
@@ -174,7 +157,7 @@ onMounted(() => {
                       transform: 'var(--avatar-border-transform)',
                     }"
                   />
-                  <Avatar v-motion :initial="imageVariant.initial" :enter="imageVariant.enter"
+                  <Avatar
                     :large="true"
                     outer-class="block h-16 w-16 origin-left" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala"
                     :style="{ transform: 'var(--avatar-image-transform)', marginLeft: '-0.5px' }"
