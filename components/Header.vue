@@ -157,9 +157,9 @@ onMounted(() => {
                       transform: 'var(--avatar-border-transform)',
                     }"
                   />
-                  <Avatar
+                  <Avatar provider="cloudinary"
                     :large="true"
-                    outer-class="block h-16 w-16 origin-left" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala"
+                    outer-class="block h-16 w-16 origin-left" src="v1693016247/portfolio-v3/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala"
                     :style="{ transform: 'var(--avatar-image-transform)', marginLeft: '-0.5px' }"
                   />
                 </div>
@@ -171,7 +171,7 @@ onMounted(() => {
             <div class="relative flex gap-4">
               <div class="flex flex-1 items-center gap-3">
                   <AvatarContainer v-if="!isHomePage">
-                      <Avatar :large="false" src="/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala" />
+                      <Avatar provider="cloudinary" :large="false" src="v1693016247/portfolio-v3/images/egdiala-mini.jpg" alt="Egwuchukwu Stephen Diala" />
                   </AvatarContainer>
               </div>
               <div class="flex flex-1 justify-end md:justify-center">

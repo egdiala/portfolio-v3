@@ -16,7 +16,7 @@ useHead({
   }
 })
 
-const portraitImage = "/images/egdiala.png"
+const portraitImage = "v1693016247/portfolio-v3/images/egdiala_n6s2o9.png"
 
 const skills = [
     { icon: "carbon:pen-fountain", title: "Design", description: "I use industry standard software such as Figma to create aesthetic designs." },
@@ -77,9 +77,9 @@ onMounted(() => {
         <div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
             <div class="lg:pl-20">
                 <div class="max-w-xs px-2.5 lg:max-w-none">
-                    <NuxtImg v-motion :initial="{ opacity: 0, y: -24, rotate: 0 }" :enter="{ opacity: 1, y: 0, rotate: 3, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (200 * (index+1)) } }"
+                    <NuxtImg provider="cloudinary" v-motion :initial="{ opacity: 0, y: -24, rotate: 0 }" :enter="{ opacity: 1, y: 0, rotate: 3, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (200 * (index+1)) } }"
                     :src="portraitImage"
-                    alt=""
+                    alt="Egwuchukwu_Stephen_Diala"
                     sizes="lg:512px 320px"
                     class="aspect-square rounded-2xl bg-zinc-100 object-cover object-top dark:bg-zinc-800"
                     />

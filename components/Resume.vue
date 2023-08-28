@@ -11,7 +11,7 @@ const resume = ref<Resume[]>([
     {
         company: 'Enyata',
         title: 'Software Engineer',
-        logo: '/work/enyata.jpeg',
+        logo: 'v1693016273/portfolio-v3/work/enyata_luugvs.jpg',
         start: '2023',
         end: {
             label: 'Present',
@@ -21,21 +21,21 @@ const resume = ref<Resume[]>([
     {
         company: 'BLK Labs',
         title: 'Frontend Engineer',
-        logo: '/work/blk.jpeg',
+        logo: 'v1693016273/portfolio-v3/work/blk_fsz6pr.jpg',
         start: 'Apr, 2022',
         end: 'Jul, 2023',
     },
     {
         company: 'Melli',
         title: 'Frontend Engineer',
-        logo: '/work/melli.jpeg',
+        logo: 'v1693016274/portfolio-v3/work/melli_ur6fmt.jpg',
         start: 'May, 2022',
         end: 'Dec, 2022',
     },
     {
         company: 'Trail Group',
         title: 'Frontend Developer',
-        logo: '/work/trail.jpeg',
+        logo: 'v1693016273/portfolio-v3/work/trail_jyediy.jpg',
         start: 'Aug, 2021',
         end: 'Jan, 2022',
     },
@@ -51,7 +51,7 @@ const resume = ref<Resume[]>([
       <ol class="mt-6 space-y-4">
           <li v-for="(role, roleIndex) in resume" :key="roleIndex" class="flex gap-4">
             <div class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <NuxtImg :src="role.logo" alt="" class="rounded-full h-7 w-7" />
+              <NuxtImg provider="cloudinary" :src="role.logo" loading="lazy" :alt="role.company" class="rounded-full h-7 w-7" />
             </div>
             <dl class="flex flex-auto flex-wrap gap-x-2">
               <dt class="sr-only">Company</dt>

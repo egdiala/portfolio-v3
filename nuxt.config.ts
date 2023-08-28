@@ -5,6 +5,11 @@ export default defineNuxtConfig({
       titleTemplate: '%siteName %titleSeparator %pageTitle'
     }
   },
+  image: {
+    cloudinary: {
+      baseURL: 'https://res.cloudinary.com/egdiala/image/upload/'
+    }
+  },
   devtools: { enabled: true },
   pages: true,
   extends: ["nuxt-seo-kit"],
