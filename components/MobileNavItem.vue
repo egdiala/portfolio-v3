@@ -7,9 +7,9 @@ defineProps<MobileNavItemProps>()
 
 <template>
     <li>
-      <HeadlessPopoverButton as="a" :href="href" class="block py-2">
+      <NuxtLink :to="href" class="block py-2">
         <slot />
-      </HeadlessPopoverButton>
+      </NuxtLink>
     </li>
 </template>
 
