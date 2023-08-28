@@ -26,11 +26,11 @@ useSeoMeta({
 })
 
 const images = [
-    '/photos/image-1.jpg',
-    '/photos/image-2.jpg',
-    '/photos/image-3.jpg',
-    '/photos/image-4.jpg',
-    '/photos/image-5.jpg',
+    'v1693016225/portfolio-v3/photos/image-1_rcovwe.jpg',
+    'v1693016225/portfolio-v3/photos/image-2_hhocvh.jpg',
+    'v1693016224/portfolio-v3/photos/image-3_gsw5dw.jpg',
+    'v1693016224/portfolio-v3/photos/image-4_m8wufc.jpg',
+    'v1693016224/portfolio-v3/photos/image-5_ufufqb.jpg',
 ]
 const rotations = [2, -2, 2, -2, 2]
 const rotationClasses = ['rotate-2', '-rotate-2', 'rotate-2', '-rotate-2', 'rotate-2']
@@ -93,13 +93,13 @@ onMounted(() => {
 <template>
     <Container outer-class="mt-9">
         <div class="max-w-2xl">
-          <h1 v-motion :initial="variants.initial" :enter="variants.enter" class="text-4xl leading-10 font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl sm:leading-[3.5rem]">
+          <h1 v-motion="{ initial: variants.initial, enter: variants.enter }" class="text-4xl leading-10 font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl sm:leading-[3.5rem]">
             Frontend engineer, designer, and music lover.
           </h1>
-          <p v-motion :initial="paragraph.initial" :enter="paragraph.enter" class="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
+          <p v-motion="{ initial: paragraph.initial, enter: paragraph.enter }" class="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
             I’m Egwuchukwu, a <span class="text-zinc-900 dark:text-zinc-50">design-focused</span> frontend engineer and designer based in Lagos, Nigeria. <span class="text-zinc-900 dark:text-zinc-50">I combine my expertise</span> in all levels of development and my <span class="text-zinc-900 dark:text-zinc-50">understanding of UI design</span> to <span class="text-zinc-900 dark:text-zinc-50">create meaningful experiences</span>.
           </p>
-          <div v-motion :initial="icons.initial" :enter="icons.enter" class="mt-6 flex gap-6">
+          <div v-motion="{ initial: icons.initial, enter: icons.enter }" class="mt-6 flex gap-6">
             <SocialIcon
               href="https://twitter.com"
               aria-label="Follow on Twitter"
@@ -122,7 +122,7 @@ onMounted(() => {
         <div class="-my-4 flex justify-center gap-5 overflow-hidden py-11 sm:gap-8">
             <div v-for="(image, imageIndex) in images" :key="imageIndex" v-motion :initial="{ opacity: 0, y: 500, rotate: 0 }" :enter="{ opacity: 1, y: 0, rotate: rotations[imageIndex % rotations.length], transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (250 * (imageIndex+1)) } }"
             :class="`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl`">
-                <NuxtImg :src="image" :alt="`image_${imageIndex}`" sizes="sm:640px" class="absolute inset-0 h-full w-full object-cover" />
+                <NuxtImg provider="cloudinary" :src="image" :alt="`image_${imageIndex}`" loading="lazy" sizes="sm:640px" class="absolute inset-0 h-full w-full object-cover" />
             </div>
           </div>
     </div>
