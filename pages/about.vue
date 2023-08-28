@@ -77,7 +77,7 @@ onMounted(() => {
         <div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
             <div class="lg:pl-20">
                 <div class="max-w-xs px-2.5 lg:max-w-none">
-                    <NuxtImg provider="cloudinary" v-motion :initial="{ opacity: 0, y: -24, rotate: 0 }" :enter="{ opacity: 1, y: 0, rotate: 3, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: 200 } }"
+                    <NuxtImg provider="cloudinary" v-motion="{ initial: { opacity: 0, y: -24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 3, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: 200 } } }"
                     :src="portraitImage"
                     alt="Egwuchukwu_Stephen_Diala"
                     sizes="lg:512px 320px"
@@ -85,7 +85,7 @@ onMounted(() => {
                     />
                 </div>
             </div>
-            <div v-motion :initial="variants.initial" :enter="variants.enter" class="lg:order-first lg:row-span-2">
+            <div v-motion="{ initial: variants.initial, enter: variants.enter }" class="lg:order-first lg:row-span-2">
                 <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl leading-10  sm:leading-[3.5rem]">
                     I create memorable experiences for brands around the world.
                 </h1>
@@ -106,7 +106,7 @@ onMounted(() => {
             </div>
             <div class="lg:pl-20">
                 <ul role="list">
-                    <SocialLink v-for="(link, index) in socialLinks" :key="index" v-motion :initial="{ opacity: 0, y: -24 }" :enter="{ opacity: 1, y: 0, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (200 * (index+1)) } }" :href="link.link" :icon="link.icon" :outer-class="link?.class">
+                    <SocialLink v-for="(link, index) in socialLinks" :key="index" v-motion="{ initial: { opacity: 0, y: -24 }, enter: { opacity: 1, y: 0, transition:{ type: 'tween', ease: 'easeOut', duration: 500, delay: (200 * (index+1)) } } }" :href="link.link" :icon="link.icon" :outer-class="link?.class">
                         {{ link.name }}
                     </SocialLink>
                 </ul>
