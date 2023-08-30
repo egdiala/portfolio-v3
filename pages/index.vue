@@ -21,7 +21,7 @@ useSeoMeta({
   ogTitle: 'Egwuchukwu S. Diala - Frontend Engineer',
   description: 'Egwuchukwu is a design-focused frontend engineer.',
   ogDescription: 'Egwuchukwu is a design-focused frontend engineer.',
-  ogImage: 'https://deesnutz.netlify.app/images/egdiala-mini.jpg',
+  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
   twitterCard: 'summary',
 })
 
@@ -101,17 +101,17 @@ onMounted(() => {
           </p>
           <div v-motion="{ initial: icons.initial, enter: icons.enter }" class="mt-6 flex gap-6">
             <SocialIcon
-              href="https://twitter.com"
+              href="https://twitter.com/e_diala"
               aria-label="Follow on Twitter"
               icon="bxl:twitter"
             />
             <SocialIcon
-              href="https://github.com"
+              href="https://github.com/egdiala"
               aria-label="Follow on GitHub"
               icon="bxl:github"
             />
             <SocialIcon
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/egwuchukwu-diala/"
               aria-label="Follow on LinkedIn"
               icon="bxl:linkedin-square"
             />
@@ -130,11 +130,11 @@ onMounted(() => {
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
             <div class="flex flex-col gap-4">
               <span class="text-gray-500 dark:text-gray-100 text-base md:text-lg">About me</span>
-              <h2 class="text-2xl leading-10 font-bold tracking-tight text-gray-600 dark:text-neutral-400 sm:text-3xl">
+              <h2 v-motion="{ initial: variants.initial, visible: variants.enter }" class="text-2xl leading-10 font-bold tracking-tight text-gray-600 dark:text-neutral-400 sm:text-3xl">
               “My understanding of <span class="text-gray-900 dark:text-white">design principles</span> and <span class="text-gray-900 dark:text-gray-50">performant code</span> allows me to create usable digital products.”
               </h2>
-              <p class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With over 4 years of experience in frontend development and product design, I have worked with startups to create useful solutions.</p>
-              <p class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With a passion for accessibility, I ensure that products I work on are simple. Most importantly, they solve user problems and keep business goals in mind.</p>
+              <p v-motion="{ initial: paragraph.initial, visible: paragraph.enter }" class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With over 4 years of experience in frontend development and product design, I have worked with startups to create useful solutions.</p>
+              <p v-motion="{ initial: paragraph.initial, visible: paragraph.enter }" class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With a passion for accessibility, I ensure that products I work on are simple. Most importantly, they solve user problems and keep business goals in mind.</p>
             </div>
             <div class="space-y-10 lg:pl-16 xl:pl-24">
                 <Resume />

@@ -18,7 +18,7 @@
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <HeadlessPopoverOverlay class="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-sm dark:bg-black/80" />
+          <HeadlessPopoverOverlay class="fixed min-h-screen top-0 bottom-0 left-0 right-0 inset-0 z-50 bg-zinc-800/40 backdrop-blur-sm dark:bg-black/80" />
         </HeadlessTransitionChild>
         <HeadlessTransitionChild
           as="template"
