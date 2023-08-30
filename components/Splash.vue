@@ -39,10 +39,12 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div v-motion-slide-visible-once-bottom class="title grid h-full justify-items-center content-center">
-        <h1 ref="target" class="font-semibold text-3xl dark:text-white text-zinc-800 overflow-hidden">
-            Hello!
-        </h1>
+    <div class="h-screen">
+        <div v-motion-slide-visible-once-bottom class="title grid h-full justify-items-center content-center">
+            <h1 ref="target" class="font-semibold text-3xl dark:text-white text-zinc-800 overflow-hidden">
+                Hello!
+            </h1>
+        </div>
     </div>
 </template>
 
