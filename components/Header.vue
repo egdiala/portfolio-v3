@@ -147,7 +147,7 @@ onMounted(() => {
             >
               <div
                 class="top-[var(--avatar-top,0.75rem)] w-full"
-                :style="{ position: 'var(--header-inner-position)' } as any"
+                :style="{ position: 'var(--header-inner-position)' as any }"
               >
                 <div class="relative">
                   <AvatarContainer
@@ -166,7 +166,7 @@ onMounted(() => {
               </div>
             </Container>
         </template>
-        <div v-motion :initial="variants.initial" :enter="variants.enter" ref="headerRef" class="top-0 z-10 h-16 pt-6" :style="{ position: 'var(--header-position)' } as any">
+        <div v-motion="{ initial: variants.initial, enter: variants.enter }" ref="headerRef" class="top-0 z-10 h-16 pt-6" :style="{ position: 'var(--header-position)' as any }">
           <Container outer-class="top-[var(--header-top,1.5rem)] w-full">
             <div class="relative flex gap-4">
               <div class="flex flex-1 items-center gap-3">

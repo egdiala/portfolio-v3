@@ -1,10 +1,26 @@
 <script setup lang="ts">
+import { MotionVariants } from '@vueuse/motion';
+
 interface Resume {
     company: string
     title: string
     logo: string
     start: string
     end: any
+}
+
+const variants: MotionVariants = {
+  initial: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      delay: 200,
+      duration: 800
+    }
+  }
 }
 
 const resume = ref<Resume[]>([
@@ -49,7 +65,7 @@ const resume = ref<Resume[]>([
         <span class="ml-3">Work</span>
       </h2>
       <ol class="mt-6 space-y-4">
-          <li v-motion-fade-visible v-for="(role, roleIndex) in resume" :key="roleIndex" class="flex gap-4">
+          <li v-for="(role, roleIndex) in resume" v-motion="{ initial: {opacity: 0}, visible: { opacity: 1,transition: { type: 'tween',delay: (200*roleIndex),duration: 800 } } }" :key="roleIndex" class="flex gap-4">
             <div class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
               <NuxtImg provider="cloudinary" :src="role.logo" loading="lazy" :alt="role.company" class="rounded-full h-7 w-7" />
             </div>
@@ -78,10 +94,12 @@ const resume = ref<Resume[]>([
             </dl>
           </li>
       </ol>
-      <Button variant="secondary" class="group mt-6 w-full">
-        Download CV
-        <Icon name="heroicons:arrow-down-20-solid" class="h-4 w-4 text-zinc-400 transition group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50" />
-      </Button>
+      <div v-motion="{ initial: { opacity: 0 }, visible: { opacity: 1,transition: { type: 'tween',delay: 800,duration: 800 } } }">
+        <Button variant="secondary" class="group mt-6 w-full">
+          Download CV
+          <Icon name="heroicons:arrow-down-20-solid" class="h-4 w-4 text-zinc-400 transition group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50" />
+        </Button>
+      </div>
     </div>
 </template>
 
