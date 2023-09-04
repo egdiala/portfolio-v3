@@ -58,9 +58,9 @@ const slides = ref([
                 v-for="(slide, idx) in slides"
                 :key="idx"
             >
-                <div class="grid gap-8">
+                <div class="grid gap-4 md:gap-8">
                     <h3 class="text-center font-medium text-lg lg:text-xl text-gray-900 dark:text-gray-200 before:content-['“'] after:content-['”']">{{ slide.quote }}</h3>
-                    <div class="grid gap-4 justify-items-center">
+                    <div class="grid gap-2 md:gap-4 justify-items-center">
                         <div class="grid content-center justify-items-center h-14 w-14 rounded-full shadow-md shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
                             <NuxtImg provider="cloudinary" :src="slide.avatar" :alt="slide.name" loading="lazy" class="w-12 h-12 rounded-full" />
                         </div>
