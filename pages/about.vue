@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MotionVariants } from '@vueuse/motion';
+import { useMotion } from '@vueuse/motion';
 import { useMouse } from '~/composables/useMouse';
 
 useHead({
@@ -50,12 +50,12 @@ const socialLinks = [
     },
 ]
 
-const variants: MotionVariants = {
+const aboutAnimation = () => ({
   initial: {
     y: 24,
     opacity: 0
   },
-  enter: {
+  visible: {
     y: 0,
     opacity: 1,
     transition: {
@@ -65,10 +65,15 @@ const variants: MotionVariants = {
       velocity: 690
     }
   }
-}
+})
 
 onMounted(() => {
     useMouse();
+    const aboutTags = document.querySelectorAll('.aboutText')
+
+    aboutTags.forEach((aboutTag: any, i: number) => {
+        useMotion(aboutTag, aboutAnimation())
+    })
 });
 </script>
 
@@ -85,7 +90,7 @@ onMounted(() => {
                     />
                 </div>
             </div>
-            <div v-motion="{ initial: variants.initial, enter: variants.enter }" class="lg:order-first lg:row-span-2">
+            <div class="aboutText lg:order-first lg:row-span-2">
                 <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl leading-10  sm:leading-[3.5rem]">
                     I create memorable experiences for brands around the world.
                 </h1>

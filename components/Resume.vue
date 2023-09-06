@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MotionVariants } from '@vueuse/motion';
+import { useMotion } from '@vueuse/motion';
 
 interface Resume {
     company: string
@@ -9,19 +9,33 @@ interface Resume {
     end: any
 }
 
-const variants: MotionVariants = {
+const downloadAnimation = () => ({
   initial: {
-    opacity: 0,
+    opacity: 0
   },
   visible: {
     opacity: 1,
     transition: {
       type: 'tween',
-      delay: 200,
+      delay: 800,
       duration: 800
     }
   }
-}
+})
+
+const resumeAnimation = (i: number) => ({
+  initial: {
+    opacity: 0
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      delay: 200 * i,
+      duration: 800
+    }
+  }
+})
 
 const resume = ref<Resume[]>([
     {
@@ -56,6 +70,17 @@ const resume = ref<Resume[]>([
         end: 'Jan, 2022',
     },
 ])
+
+onMounted(() => {
+  const resumeItems = document.querySelectorAll('.resume-item')
+  const downloadDiv = document.querySelector('.download') as any
+
+  resumeItems.forEach((resumeItem: any, i) => {
+    useMotion(resumeItem, resumeAnimation(i))
+  })
+
+  useMotion(downloadDiv, downloadAnimation())
+})
 </script>
 
 <template>
@@ -65,7 +90,7 @@ const resume = ref<Resume[]>([
         <span class="ml-3">Work</span>
       </h2>
       <ol class="mt-6 space-y-4">
-          <li v-for="(role, roleIndex) in resume" v-motion="{ initial: {opacity: 0}, visible: { opacity: 1,transition: { type: 'tween',delay: (200*roleIndex),duration: 800 } } }" :key="roleIndex" class="flex gap-4">
+          <li v-for="(role, roleIndex) in resume" :key="roleIndex" class="resume-item flex gap-4">
             <div class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
               <NuxtImg provider="cloudinary" :src="role.logo" loading="lazy" :alt="role.company" class="rounded-full h-7 w-7" />
             </div>
@@ -94,7 +119,7 @@ const resume = ref<Resume[]>([
             </dl>
           </li>
       </ol>
-      <div v-motion="{ initial: { opacity: 0 }, visible: { opacity: 1,transition: { type: 'tween',delay: 800,duration: 800 } } }">
+      <div class="download">
         <Button variant="secondary" class="group mt-6 w-full">
           Download CV
           <Icon name="heroicons:arrow-down-20-solid" class="h-4 w-4 text-zinc-400 transition group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50" />
