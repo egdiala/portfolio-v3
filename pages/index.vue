@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MotionVariants } from '@vueuse/motion';
+import { MotionVariants, useMotion } from '@vueuse/motion';
 import { useMouse } from '~/composables/useMouse';
 
 useHead({
@@ -25,12 +25,12 @@ useSeoMeta({
   twitterCard: 'summary',
 })
 
-const variants: MotionVariants = {
+const titleAnimation = () => ({
   initial: {
     y: 24,
     opacity: 0
   },
-  enter: {
+  visible: {
     y: 0,
     opacity: 1,
     transition: {
@@ -40,14 +40,14 @@ const variants: MotionVariants = {
       velocity: 690
     }
   }
-}
+})
 
-const paragraph: MotionVariants = {
+const paragraphAnimation = () => ({
   initial: {
     y: 24,
     opacity: 0
   },
-  enter: {
+  visible: {
     y: 0,
     opacity: 1,
     transition: {
@@ -57,7 +57,7 @@ const paragraph: MotionVariants = {
       velocity: 690
     }
   }
-}
+})
 
 const icons: MotionVariants = {
   initial: {
@@ -77,16 +77,26 @@ const icons: MotionVariants = {
 
 onMounted(() => {
   useMouse();
+  const paragraphTags = document.querySelectorAll('.paragraph')
+  const titleTags = document.querySelectorAll('.title')
+
+  paragraphTags.forEach((paragraphTag: any, i: number) => {
+    useMotion(paragraphTag, paragraphAnimation())
+  })
+
+  titleTags.forEach((titleTag: any, i: number) => {
+    useMotion(titleTag, titleAnimation())
+  })
 });
 </script>
 
 <template>
     <Container outer-class="mt-9">
         <div class="max-w-2xl">
-          <h1 v-motion="{ initial: variants.initial, enter: variants.enter }" class="text-4xl leading-10 font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl sm:leading-[3.5rem]">
+          <h1 class="title text-4xl leading-10 font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl sm:leading-[3.5rem]">
             Frontend engineer, designer, and music lover.
           </h1>
-          <p v-motion="{ initial: paragraph.initial, enter: paragraph.enter }" class="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
+          <p class="paragraph mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
             I’m Egwuchukwu, a <span class="text-zinc-900 dark:text-zinc-50">design-focused</span> frontend engineer and designer based in Lagos, Nigeria. <span class="text-zinc-900 dark:text-zinc-50">I combine my expertise</span> in all levels of development and my <span class="text-zinc-900 dark:text-zinc-50">understanding of UI design</span> to <span class="text-zinc-900 dark:text-zinc-50">create meaningful experiences</span>.
           </p>
           <div v-motion="{ initial: icons.initial, enter: icons.enter }" class="mt-6 flex gap-6">
@@ -136,11 +146,11 @@ onMounted(() => {
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
             <div class="flex flex-col gap-4">
               <span class="text-gray-500 dark:text-gray-100 text-base md:text-lg">About me</span>
-              <h2 v-motion="{ initial: variants.initial, visible: variants.enter }" class="text-2xl leading-10 font-bold tracking-tight text-gray-600 dark:text-neutral-400 sm:text-3xl">
+              <h2 class="title text-2xl leading-10 font-bold tracking-tight text-gray-600 dark:text-neutral-400 sm:text-3xl">
               “My understanding of <span class="text-gray-900 dark:text-white">design principles</span> and <span class="text-gray-900 dark:text-gray-50">performant code</span> allows me to create usable digital products.”
               </h2>
-              <p v-motion="{ initial: paragraph.initial, visible: paragraph.enter }" class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With over 4 years of experience in frontend development and product design, I have worked with startups to create useful solutions.</p>
-              <p v-motion="{ initial: paragraph.initial, visible: paragraph.enter }" class="text-base text-zinc-600 dark:text-neutral-300 leading-7">With a passion for accessibility, I ensure that products I work on are simple. Most importantly, they solve user problems and keep business goals in mind.</p>
+              <p class="paragraph text-base text-zinc-600 dark:text-neutral-300 leading-7">With over 4 years of experience in frontend development and product design, I have worked with startups to create useful solutions.</p>
+              <p class="paragraph text-base text-zinc-600 dark:text-neutral-300 leading-7">With a passion for accessibility, I ensure that products I work on are simple. Most importantly, they solve user problems and keep business goals in mind.</p>
             </div>
             <div class="space-y-10 lg:pl-16 xl:pl-24">
                 <Resume />
