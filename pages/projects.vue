@@ -21,7 +21,7 @@ const projects = [
     name: 'Nen UI',
     description:
       'An unstyled component set library that provides functionalities and can be styled with TailwindCSS classes.',
-    link: { href: 'https://github.com/NenLabs/nen-ui', label: 'nen-ui' },
+    link: { href: 'https://ui.nenlabs.org', label: 'nen-ui' },
     logo: 'https://avatars.githubusercontent.com/u/114816453?s=200&v=4',
   },
 ]
