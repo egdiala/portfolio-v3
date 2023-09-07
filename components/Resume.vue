@@ -13,7 +13,7 @@ const downloadAnimation = () => ({
   initial: {
     opacity: 0
   },
-  visible: {
+  visibleOnce: {
     opacity: 1,
     transition: {
       type: 'tween',
@@ -27,7 +27,7 @@ const resumeAnimation = (i: number) => ({
   initial: {
     opacity: 0
   },
-  visible: {
+  visibleOnce: {
     opacity: 1,
     transition: {
       type: 'tween',

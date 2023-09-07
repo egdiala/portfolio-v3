@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div v-motion-slide-visible-bottom class="grid gap-1 content-center justify-items-center text-center lg:py-20 lg:w-2/3 mx-auto">
+    <div v-motion-slide-visible-once-bottom class="grid gap-1 content-center justify-items-center text-center lg:py-20 lg:w-2/3 mx-auto">
         <h4 class="dark:text-zinc-50 text-[#1B1C1E] font-medium text-xl">Do you have an idea? Let’s make magic together <span class="md:hidden">🪄</span></h4>
         <p class="text-[#878787] text-base">I am highly excited to meet with you and discuss the plans you have for your project.</p>
         <Button variant="secondary" link="mailto:dialaegwuchukwu@gmail.com" target="_blank" class="group relative mt-6 md:w-fit text-center overflow-hidden">
