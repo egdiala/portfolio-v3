@@ -30,7 +30,7 @@ const titleAnimation = () => ({
     y: 24,
     opacity: 0
   },
-  visible: {
+  visibleOnce: {
     y: 0,
     opacity: 1,
     transition: {
@@ -47,7 +47,7 @@ const paragraphAnimation = () => ({
     y: 24,
     opacity: 0
   },
-  visible: {
+  visibleOnce: {
     y: 0,
     opacity: 1,
     transition: {
@@ -64,7 +64,7 @@ const icons: MotionVariants = {
     y: 0,
     opacity: 0
   },
-  enter: {
+  visibleOnce: {
     y: 0,
     opacity: 1,
     transition: {
@@ -99,7 +99,7 @@ onMounted(() => {
           <p class="paragraph mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
             I’m Egwuchukwu, a <span class="text-zinc-900 dark:text-zinc-50">design-focused</span> frontend engineer and designer based in Lagos, Nigeria. <span class="text-zinc-900 dark:text-zinc-50">I combine my expertise</span> in all levels of development and my <span class="text-zinc-900 dark:text-zinc-50">understanding of UI design</span> to <span class="text-zinc-900 dark:text-zinc-50">create meaningful experiences</span>.
           </p>
-          <div v-motion="{ initial: icons.initial, enter: icons.enter }" class="mt-6 flex gap-6">
+          <div v-motion="{ initial: icons.initial, visibleOnce: icons.enter }" class="mt-6 flex gap-6">
             <SocialIcon
               href="https://twitter.com/e_diala"
               aria-label="Follow on Twitter"
