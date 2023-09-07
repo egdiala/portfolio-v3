@@ -25,12 +25,12 @@
           enter="duration-300 ease-out"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
-          leave="duration-300 ease-in"
+          leave="duration-200 ease-in"
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
           <HeadlessPopoverPanel
-            focus
+            focus v-slot="{ close }"
             class="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800"
           >
             <div class="flex flex-row-reverse items-center justify-between">
@@ -43,10 +43,10 @@
             </div>
             <nav class="mt-6">
               <ul class="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                <MobileNavItem href="/about"><span class="text-xs">🧘🏾‍♂️</span> About</MobileNavItem>
-                <MobileNavItem href="/work"><span class="text-xs">💼</span> Work</MobileNavItem>
-                <MobileNavItem href="/projects"><span class="text-xs">👨🏽‍💻</span> Projects</MobileNavItem>
-                <MobileNavItem href="/stack"><span class="text-xs">📦</span> Stack</MobileNavItem>
+                <MobileNavItem href="/about" @click="close()"><span class="text-xs">🧘🏾‍♂️</span> About</MobileNavItem>
+                <MobileNavItem href="/work" @click="close()"><span class="text-xs">💼</span> Work</MobileNavItem>
+                <MobileNavItem href="/projects" @click="close()"><span class="text-xs">👨🏽‍💻</span> Projects</MobileNavItem>
+                <MobileNavItem href="/stack" @click="close()"><span class="text-xs">📦</span> Stack</MobileNavItem>
               </ul>
             </nav>
           </HeadlessPopoverPanel>
