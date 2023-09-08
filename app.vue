@@ -41,6 +41,7 @@ function cursor(e: MouseEvent) {
 </script>
 
 <template>
+  <RobotMeta />
   <SeoKit/>
   <div v-if="!splash" ref="mouse" id="mouse" class="absolute w-[2rem] hidden lg:flex h-[2rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border-2 dark:border-white border-gray-600"/>
   <div v-show="!splash" v-motion-fade-visible-once class="fixed inset-0 flex justify-center sm:px-8">
