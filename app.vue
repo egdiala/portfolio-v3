@@ -23,12 +23,6 @@ useSchemaOrg([
   defineWebPage(),
 ])
 
-defineOgImage({
-  component: 'Example',
-  title: 'Welcome to my site!'
-})
-
-
 onMounted(() => {
   if (process.client) {
     window.addEventListener('mousemove', cursor)
