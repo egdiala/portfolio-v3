@@ -8,12 +8,31 @@ useHead({
     { charset: 'utf-8' },
     { name: 'description', content: 'As a frontend engineer with over 3 years of experience, he has helped various brands to stand out among their competition by providing them with various solutions.' },
   ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.ico'
+    }
+  ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
   },
   htmlAttrs: {
     lang: 'en'
   }
+})
+
+useSeoMeta({
+  title: 'About',
+  description: 'I create memorable experiences for brands around the world.',
+  ogTitle: 'Egwuchukwu S. Diala',
+  ogDescription: 'Egwuchukwu is a design-focused frontend engineer.',
+  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  twitterCard: 'summary',
+  twitterTitle: 'Egwuchukwu S. Diala',
+  twitterDescription: 'I create memorable experiences for brands around the world',
+  twitterImage: '/favicon.ico'
 })
 
 const portraitImage = "v1693016247/portfolio-v3/images/egdiala_n6s2o9.png"

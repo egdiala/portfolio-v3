@@ -10,6 +10,9 @@ export default defineNuxtConfig({
       baseURL: 'https://res.cloudinary.com/egdiala/image/upload/'
     }
   },
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  },
   devtools: { enabled: true },
   pages: true,
   extends: ["nuxt-seo-kit"],
@@ -29,6 +32,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-icon",
     "nuxt-swiper",
+    "nuxt-og-image",
     "@vueuse/motion/nuxt"
   ],
   colorMode: { classSuffix: '' },

@@ -8,6 +8,13 @@ useHead({
     { charset: 'utf-8' },
     { name: 'description', content: 'Egwuchukwu is a design-focused frontend engineer and designer based in Lagos, Nigeria. He combines his expertise to create meaningful experiences.' },
   ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.ico'
+    }
+  ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
   },
@@ -17,12 +24,15 @@ useHead({
 })
 
 useSeoMeta({
-  title: 'Frontend engineer, designer, music lover',
-  ogTitle: 'Egwuchukwu S. Diala - Frontend Engineer',
-  description: 'Egwuchukwu is a design-focused frontend engineer.',
+  title: 'Home',
+  description: 'Frontend engineer, designer, music lover.',
+  ogTitle: 'Egwuchukwu S. Diala',
   ogDescription: 'Egwuchukwu is a design-focused frontend engineer.',
   ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
   twitterCard: 'summary',
+  twitterTitle: 'Egwuchukwu S. Diala',
+  twitterDescription: 'Frontend engineer, designer, music lover',
+  twitterImage: '/favicon.ico'
 })
 
 const titleAnimation = () => ({
@@ -64,7 +74,7 @@ const icons: MotionVariants = {
     y: 0,
     opacity: 0
   },
-  visibleOnce: {
+  enter: {
     y: 0,
     opacity: 1,
     transition: {
@@ -99,7 +109,7 @@ onMounted(() => {
           <p class="paragraph mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7">
             I’m Egwuchukwu, a <span class="text-zinc-900 dark:text-zinc-50">design-focused</span> frontend engineer and designer based in Lagos, Nigeria. <span class="text-zinc-900 dark:text-zinc-50">I combine my expertise</span> in all levels of development and my <span class="text-zinc-900 dark:text-zinc-50">understanding of UI design</span> to <span class="text-zinc-900 dark:text-zinc-50">create meaningful experiences</span>.
           </p>
-          <div v-motion="{ initial: icons.initial, visibleOnce: icons.enter }" class="mt-6 flex gap-6">
+          <div v-motion="{ initial: icons.initial, enter: icons.enter }" class="mt-6 flex gap-6">
             <SocialIcon
               href="https://twitter.com/e_diala"
               aria-label="Follow on Twitter"

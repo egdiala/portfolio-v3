@@ -17,6 +17,7 @@
     "nuxt": "^3.7.1",
     "nuxt-headlessui": "^1.1.4",
     "nuxt-icon": "^0.4.1",
+    "nuxt-og-image": "^2.0.25",
     "nuxt-seo-kit": "^1.3.9",
     "nuxt-swiper": "^1.1.1"
   },
