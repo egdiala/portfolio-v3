@@ -8,12 +8,31 @@ useHead({
     { charset: 'utf-8' },
     { name: 'description', content: 'He has worked on tons of little projects over the years but these are the ones that he\'s most proud of.' },
   ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.ico'
+    }
+  ],
   bodyAttrs: {
     class: 'flex h-full flex-col bg-zinc-50 dark:bg-black scrollbar-hide'
   },
   htmlAttrs: {
     lang: 'en'
   }
+})
+
+useSeoMeta({
+  title: 'Projects',
+  description: 'He has worked on tons of little projects over the years but these are the ones that he\'s most proud of.',
+  ogTitle: 'Egwuchukwu S. Diala',
+  ogDescription: 'Things I’ve made trying to put my dent in the universe.',
+  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  twitterCard: 'summary',
+  twitterTitle: 'Egwuchukwu S. Diala',
+  twitterDescription: 'Things I’ve made trying to put my dent in the universe',
+  twitterImage: '/favicon.ico'
 })
 
 const projects = [

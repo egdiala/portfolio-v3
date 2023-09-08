@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { useMotion } from '@vueuse/motion';
 
+const openResume = async () => {
+  await navigateTo('https://docs.google.com/document/d/15QCrsfX5L4zmlZG57Th1hKWDeSjmcpoVhwUlzOWzqWo/edit?usp=sharing', { external: true, open: {
+    target: '_blank',
+    windowFeatures: {
+      width: 500,
+      height: 500
+    }
+  } })
+}
+
 interface Resume {
     company: string
     title: string
@@ -120,9 +130,9 @@ onMounted(() => {
           </li>
       </ol>
       <div class="download">
-        <Button variant="secondary" class="group mt-6 w-full">
-          Download CV
-          <Icon name="heroicons:arrow-down-20-solid" class="h-4 w-4 text-zinc-400 transition group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50" />
+        <Button variant="secondary" class="group mt-6 w-full" @click="openResume">
+          View Resume
+          <Icon name="heroicons:arrow-right-20-solid" class="h-4 w-4 text-zinc-400 transition duration-300 ease-out group-hover:-rotate-45 group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50" />
         </Button>
       </div>
     </div>

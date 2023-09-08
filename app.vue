@@ -23,7 +23,6 @@ useSchemaOrg([
   defineWebPage(),
 ])
 
-
 onMounted(() => {
   if (process.client) {
     window.addEventListener('mousemove', cursor)
