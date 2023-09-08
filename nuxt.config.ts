@@ -11,14 +11,14 @@ export default defineNuxtConfig({
     }
   },
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+    url: 'https://egdiala-v3.netlify.app',
   },
   devtools: { enabled: true },
   pages: true,
   extends: ["nuxt-seo-kit"],
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://egdiala-v3.netlify.app',
+      siteUrl: 'https://egdiala-v3.netlify.app',
       siteName: 'Egwuchukwu S. Diala',
       siteDescription: 'Egwuchukwu Diala\'s Portfolio Website',
       language: 'en',
@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     "nuxt-icon",
     "nuxt-swiper",
     "nuxt-og-image",
+    "nuxt-simple-robots",
     "@vueuse/motion/nuxt"
   ],
   colorMode: { classSuffix: '' },
