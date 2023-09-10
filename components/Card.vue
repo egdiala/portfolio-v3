@@ -10,15 +10,32 @@ interface Card {
     label?: string
 }
 
-defineProps<Card>()
+const cardProps = defineProps<Card>()
+
+const visitPage = async () => {
+    if (cardProps?.link?.startsWith('http')) {
+        await navigateTo(cardProps.link, {
+            external: true,
+            open: {
+                target: '_blank',
+                windowFeatures: {
+                    width: 500,
+                    height: 500
+                }
+            }
+        })
+    } else if (cardProps?.link?.startsWith('/')) {
+        await navigateTo(cardProps.link)
+    }
+}
 </script>
 
 <template>
-    <component :is="as" :class="`${cardClass ?? ''} group relative flex flex-col items-start`">
+    <component :is="as" :class="`${cardClass ?? ''} group relative flex flex-col items-start`" @click="visitPage()">
         <slot name="image" />
         <div className="absolute -inset-x-4 -inset-y-6 -z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
         <component :is="titleTag" class="relative text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-            <NuxtLink v-if="link" :to="link">{{ linkText }}</NuxtLink>
+            <template v-if="link" :to="link">{{ linkText }}</template>
             <template v-else>{{ linkText }}</template>
         </component>
         <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-6">
