@@ -28,7 +28,7 @@ useSeoMeta({
   description: 'He has worked on tons of little projects over the years but these are the ones that he\'s most proud of.',
   ogTitle: 'Egwuchukwu S. Diala',
   ogDescription: 'Things I’ve made trying to put my dent in the universe.',
-  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  ogImage: '/images/egdiala-mini.jpg',
   twitterCard: 'summary',
   twitterTitle: 'Egwuchukwu S. Diala',
   twitterDescription: 'Things I’ve made trying to put my dent in the universe',

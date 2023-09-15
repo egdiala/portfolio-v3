@@ -27,7 +27,7 @@ useSeoMeta({
   description: 'Stuff I built at previous roles.',
   ogTitle: 'Egwuchukwu S. Diala',
   ogDescription: 'Stuff I built at previous roles.',
-  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  ogImage: '/images/egdiala-mini.jpg',
   twitterCard: 'summary',
   twitterTitle: 'Egwuchukwu S. Diala',
   twitterDescription: 'Stuff I built at previous roles.',

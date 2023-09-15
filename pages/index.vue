@@ -28,7 +28,7 @@ useSeoMeta({
   description: 'Frontend engineer, designer, music lover.',
   ogTitle: 'Egwuchukwu S. Diala',
   ogDescription: 'Egwuchukwu is a design-focused frontend engineer.',
-  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  ogImage: '/images/egdiala-mini.jpg',
   twitterCard: 'summary',
   twitterTitle: 'Egwuchukwu S. Diala',
   twitterDescription: 'Frontend engineer, designer, music lover',

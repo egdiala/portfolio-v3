@@ -28,7 +28,7 @@ useSeoMeta({
   description: 'I create memorable experiences for brands around the world.',
   ogTitle: 'Egwuchukwu S. Diala',
   ogDescription: 'Egwuchukwu is a design-focused frontend engineer.',
-  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  ogImage: '/images/egdiala-mini.jpg',
   twitterCard: 'summary',
   twitterTitle: 'Egwuchukwu S. Diala',
   twitterDescription: 'I create memorable experiences for brands around the world',
