@@ -41,10 +41,10 @@ const visitPage = async () => {
         <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-6">
         {{ description }}
         </p>
-        <NuxtLink v-if="label" :to="link" class="relative z-10 mt-6 flex items-center text-sm font-medium text-zinc-400 transition-all ease-out duration-300 group-hover:text-emerald-500 dark:text-zinc-200">
+        <div v-if="label" class="relative z-10 mt-6 flex items-center text-sm font-medium text-zinc-400 transition-all ease-out duration-300 group-hover:text-emerald-500 dark:text-zinc-200">
             <Icon :name="icon" class="h-4 w-4 flex-none" />
             <span class="ml-2">{{ label }}</span>
-        </NuxtLink>
+        </div>
     </component>
 </template>
 

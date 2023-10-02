@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://egdiala-v3.netlify.app',
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   pages: true,
   extends: ["nuxt-seo-kit"],
   runtimeConfig: {
@@ -34,7 +34,8 @@ export default defineNuxtConfig({
     "nuxt-swiper",
     "nuxt-og-image",
     "nuxt-simple-robots",
-    "@vueuse/motion/nuxt"
+    "@vueuse/motion/nuxt",
+    "@nuxt/content"
   ],
   colorMode: { classSuffix: '' },
   ssr: true

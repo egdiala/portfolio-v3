@@ -43,6 +43,13 @@ const projects = [
     link: { href: 'https://ui.nenlabs.org', label: 'nen-ui' },
     logo: 'https://avatars.githubusercontent.com/u/114816453?s=200&v=4',
   },
+  {
+    name: 'Typed Res',
+    description:
+      '🧩 A browser extension that converts HTTP response objects to their exact typescript interfaces.',
+    link: { href: 'https://github.com/NenLabs/typed-res', label: 'typed-res' },
+    logo: 'https://avatars.githubusercontent.com/u/114816453?s=200&v=4',
+  },
 ]
 
 const titleAnimation = (i: number) => ({
