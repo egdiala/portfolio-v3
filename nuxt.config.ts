@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://egdiala-v3.netlify.app',
   },
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   pages: true,
   extends: ["nuxt-seo-kit"],
   runtimeConfig: {

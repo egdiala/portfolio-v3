@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { MotionVariants, useMotion } from '@vueuse/motion';
+import { useMotion } from '@vueuse/motion';
 import { useMouse } from '~/composables/useMouse';
+import type { MotionVariants } from "@vueuse/motion";
 
 useHead({
   title: 'Frontend engineer, designer, music lover',
@@ -131,23 +132,23 @@ onMounted(() => {
     <div class="mt-4 sm:mt-20">
         <div class="-my-4 flex justify-center gap-5 overflow-hidden py-11 sm:gap-8">
             <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 250 } } }"
-            :class="`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl`">
+            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
                 <NuxtImg provider="cloudinary" src="v1693016225/portfolio-v3/photos/image-1.jpg" alt="image_1" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
             </div>
             <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: -2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 500 } } }"
-            :class="`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl`">
+            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
                 <NuxtImg provider="cloudinary" src="v1693016225/portfolio-v3/photos/image-2.jpg" alt="image_2" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
             </div>
             <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 750 } } }"
-            :class="`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl`">
+            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
                 <NuxtImg provider="cloudinary" src="v1693016224/portfolio-v3/photos/image-3.jpg" alt="image_3" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
             </div>
             <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: -2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 1000 } } }"
-            :class="`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl`">
+            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
                 <NuxtImg provider="cloudinary" src="v1693016224/portfolio-v3/photos/image-4.jpg" alt="image_4" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
             </div>
             <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 1250 } } }"
-            :class="`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl`">
+            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
                 <NuxtImg provider="cloudinary" src="v1693016224/portfolio-v3/photos/image-5.jpg" alt="image_5" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
             </div>
           </div>
