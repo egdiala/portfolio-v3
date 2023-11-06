@@ -104,7 +104,7 @@ onMounted(() => {
             </div>
         </div>
     </Container>
-    <ContentRendererMarkdown class="content-doc" :value="data" />
+    <ContentRenderer class="content-doc" :value="data" />
     <Container outer-class="mt-24 md:mt-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-0 h-full">
             <Contact />
