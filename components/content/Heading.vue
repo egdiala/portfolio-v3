@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useMotion } from '@vueuse/motion';
-import type { MotionVariants } from "@vueuse/motion";
 
 defineProps(['tag'])
 
@@ -22,7 +21,7 @@ const titleAnimation = () => ({
 })
 
 onMounted(() => {
-    const titleTags = document.querySelectorAll('.content-heading') as HTMLHeadingElement[]
+    const titleTags = document.querySelectorAll('.content-heading')
 
     titleTags.forEach((titleTag: any, i: number) => {
         useMotion(titleTag, titleAnimation())
