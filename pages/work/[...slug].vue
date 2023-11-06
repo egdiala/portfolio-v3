@@ -57,7 +57,7 @@ const route = useRoute()
 
 const { data } = await useAsyncData(
     route.path,
-    () => queryContent().where({ _path: route.path }).findOne()
+    () => queryContent(route.path).findOne()
 );
 
 onMounted(() => {

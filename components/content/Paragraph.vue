@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useMotion } from '@vueuse/motion';
-import type { MotionVariants } from "@vueuse/motion";
-
 const paragraphAnimation = {
   initial: {
     y: 24,
