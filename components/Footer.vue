@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MotionVariants } from '@vueuse/motion';
+import type { MotionVariants } from '@vueuse/motion';
 
 const variants: MotionVariants = {
   initial: {

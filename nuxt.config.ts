@@ -34,7 +34,8 @@ export default defineNuxtConfig({
     "nuxt-swiper",
     "nuxt-og-image",
     "nuxt-simple-robots",
-    "@vueuse/motion/nuxt"
+    "@vueuse/motion/nuxt",
+    "@nuxt/content"
   ],
   colorMode: { classSuffix: '' },
   ssr: true

@@ -41,14 +41,14 @@ const works = [
       {
         name: 'Clearline HMO',
         description: 'A health insurance company offering robust healthcare plans tailored to satisfy the needs of individuals, families, groups, companies and the public sector.',
-        link: { href: '/work/', label: 'Read case study' },
+        link: { href: '/work/#', label: 'Read case study' },
         logo: 'https://clearline-admin.enyata.com/logo-40-gradient.svg',
         tasks: 'UI Kit, Admin Dashboard'
       },
       {
         name: 'Sojorne',
         description: 'A parent support app designed to help people live their best lives by coordinating tasks that rob them of time and mental space to enjoy their parenting journey.',
-        link: { href: '/work/', label: 'Read case study' },
+        link: { href: '/work/sojorne', label: 'Read case study' },
         logo: 'https://admin.sojorne.com/androidChrome.png',
         tasks: 'Admin Dashboard'
       },
@@ -60,7 +60,7 @@ const works = [
       {
         name: 'Melli',
         description: 'A personal assistant device, primarily targeted towards older people living in Germany, to make their lives easier and bring them closer to their loved ones.',
-        link: { href: '/work/', label: 'Read case study' },
+        link: { href: '/work/#', label: 'Read case study' },
         logo: 'https://assets.melli.com/logo.svg',
         tasks: 'Website'
       },
