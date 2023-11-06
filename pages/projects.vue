@@ -28,7 +28,7 @@ useSeoMeta({
   description: 'He has worked on tons of little projects over the years but these are the ones that he\'s most proud of.',
   ogTitle: 'Egwuchukwu S. Diala',
   ogDescription: 'Things I’ve made trying to put my dent in the universe.',
-  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  ogImage: '/images/egdiala-mini.jpg',
   twitterCard: 'summary',
   twitterTitle: 'Egwuchukwu S. Diala',
   twitterDescription: 'Things I’ve made trying to put my dent in the universe',
@@ -41,6 +41,13 @@ const projects = [
     description:
       'An unstyled component set library that provides functionalities and can be styled with TailwindCSS classes.',
     link: { href: 'https://ui.nenlabs.org', label: 'nen-ui' },
+    logo: 'https://avatars.githubusercontent.com/u/114816453?s=200&v=4',
+  },
+  {
+    name: 'Typed Res',
+    description:
+      '🧩 A browser extension that converts HTTP response objects to their exact typescript interfaces.',
+    link: { href: 'https://github.com/NenLabs/typed-res', label: 'typed-res' },
     logo: 'https://avatars.githubusercontent.com/u/114816453?s=200&v=4',
   },
 ]

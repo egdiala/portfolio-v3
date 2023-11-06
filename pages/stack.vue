@@ -25,7 +25,7 @@ useSeoMeta({
   description: 'Tools I love to use.',
   ogTitle: 'Egwuchukwu S. Diala',
   ogDescription: 'Tools I love to use.',
-  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/v1693016247/portfolio-v3/images/egdiala-mini.jpg',
+  ogImage: '/images/egdiala-mini.jpg',
   twitterCard: 'summary',
   twitterTitle: 'Egwuchukwu S. Diala',
   twitterDescription: 'Tools I love to use.',
