@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
     <Container outer-class="my-5">
         <div class="content-heading font-semibold text-xl dark:text-zinc-200 text-zinc-800">
-            <ContentSlot :use="$slots.default" />
+            <slot />
         </div>
     </Container>
 </template>

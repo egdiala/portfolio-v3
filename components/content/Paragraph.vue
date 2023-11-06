@@ -22,6 +22,6 @@ const paragraphAnimation = {
 
 <template>
     <Container v-motion="{ initial: paragraphAnimation.initial, visibleOnce: paragraphAnimation.visibleOnce }" outer-class="mb-2" inner-class="text-lg dark:text-zinc-400 text-zinc-600">
-       <ContentSlot :use="$slots.default" unwrap="p" />  
+       <slot />  
     </Container>
 </template>

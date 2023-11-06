@@ -60,12 +60,6 @@ const { data } = await useAsyncData(
     () => queryContent().where({ _path: route.path }).findOne()
 );
 
-const components = {
-  p: 'Paragraph',
-  h1: 'Heading',
-  div: 'Hero'
-}
-
 onMounted(() => {
   useMouse();
   const paragraphTags = document.querySelectorAll('.paragraph')
@@ -111,7 +105,7 @@ onMounted(() => {
         </div>
       </div>
     </Container>
-    <ContentRendererMarkdown class="content-doc" :value="data" :components="components" tag="article" />
+    <ContentRendererMarkdown class="content-doc" :value="data!" tag="article" />
   </ContentRenderer>
   <Container outer-class="mt-24 md:mt-28">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-0 h-full">
