@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     "nuxt-og-image",
     "nuxt-simple-robots",
     "@vueuse/motion/nuxt",
-    "@nuxt/content"
+    "@nuxt/content",
+    "@nuxthq/studio"
   ],
   colorMode: { classSuffix: '' },
   ssr: true
