@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MotionVariants } from "@vueuse/motion";
 
-defineProps(['image'])
+defineProps<{ image: string; }>()
 
 const hero: MotionVariants = {
   initial: {
