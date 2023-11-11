@@ -7,7 +7,17 @@ const sections = [
   { 
     "heading": "Project Overview",
     "subTexts": ["Sojorne is a parent and family support app designed to help people in need of special care by providing them access to special care providers. It is an empathetic venture to help parents and caregivers of special needs kids navigate care management.", "Efe Odeleye, CEO of Sojorne, had her life changed several years ago when her firstborn was diagnosed with a health condition that would impact her for life. It was a journey filled with countless doctor's appointments, therapy sessions, tears and triumphs, resilience, hope, and the power of innovating Sojorne."]
-  }
+  },
+  { 
+    "heading": "Goals",
+    "subTexts": ["Our primary aim was to deliver an MVP for the Sojorne project on which it can scale on. This MVP consisted of various modules including providers, communities, admin, customers and dashboard analytics.", "My role on Sojorne project was to lead the frontend team in delivering high quality and fully responsive admin dashboard."]
+  },
+]
+
+const infos = [
+  { title: "Role", text: "Lead Frontend Engineer", icon: "carbon:user-role"},
+  { title: "Timeline", text: "3 months", icon: "mdi:chart-timeline-variant-shimmer"},
+  { title: "Tools", text: "ReactJs, TailwindCSS, Jest", icon: "ph:code"},
 ]
 
 const titleAnimation = () => ({
@@ -90,12 +100,30 @@ const headingAnimation = () => ({
   }
 })
 
+const infoAnimation = (i: number) => ({
+  initial: {
+    y: 24,
+    opacity: 0
+  },
+  visibleOnce: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'tween',
+      ease: 'easeOut',
+      delay: 250*i,
+      duration: 800,
+    }
+  }
+})
+
 onMounted(() => {
   useMouse();
   const paragraphTags = document.querySelectorAll('.paragraph')
   const titleTags = document.querySelectorAll('.title')
   const headingTags = document.querySelectorAll('.content-heading')
   const contentParagraphs = document.querySelectorAll('.content-paragraph')
+  const infoTags = document.querySelectorAll('.info')
 
   headingTags.forEach((headTag: any, i: number) => {
       useMotion(headTag, headingAnimation())
@@ -111,6 +139,10 @@ onMounted(() => {
 
   titleTags.forEach((titleTag: any, i: number) => {
     useMotion(titleTag, titleAnimation())
+  })
+
+  infoTags.forEach((infoTag: any, i: number) => {
+      useMotion(infoTag, infoAnimation(i))
   })
 });
 </script>
@@ -146,8 +178,31 @@ onMounted(() => {
   </Container>
   <CHero image="v1699039494/portfolio-v3/work/sojorne/sojorne_dashboard.webp" />
   <Container v-for="(section, s) in sections" :key="s">
-    <h1 class="content-heading my-5 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ section?.heading }}</h1>
-    <p v-for="(subText, i) in section?.subTexts" :key="i" class="content-paragraph mb-2 text-lg dark:text-zinc-400 text-zinc-600">{{ subText }}</p>
+    <div class="mx-auto max-w-2xl lg:max-w-3xl">
+      <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ section?.heading }}</h1>
+      <p v-for="(subText, i) in section?.subTexts" :key="i" class="content-paragraph mb-2 text-lg dark:text-zinc-400 text-zinc-600">{{ subText }}</p>
+    </div>
+  </Container>
+  <Container outer-class="mt-24 md:mt-28">
+      <div class="mt-16 sm:mt-20">
+        <ul
+          role="list"
+          class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          <li v-for="skill in infos" :key="skill.title" class="info md:p-6 group relative flex flex-col items-start">
+            <div class="relative z-10 flex h-12 w-12 mb-2 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+                <Icon :name="skill.icon" class="dark:text-gray-50 text-gray-800 text-xl" />
+            </div>
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-zinc-50 opacity-0 md:opacity-100 dark:bg-zinc-800/50 sm:rounded-2xl" />
+            <h4 class="relative text-base font-semibold tracking-tight text-zinc-600 dark:text-zinc-400">
+              {{ skill.title }}
+            </h4>
+            <p class="relative z-10 mt-2 text-lg text-zinc-800 dark:text-zinc-100 leading-6">
+            {{ skill.text }}
+            </p>
+          </li>
+        </ul>
+      </div>
   </Container>
   <Container outer-class="mt-24 md:mt-28">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-0 h-full">
