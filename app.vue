@@ -63,7 +63,7 @@ function cursor(e: MouseEvent) {
 <style>
 * {
   @apply lg:cursor-none !important;
-   
+  
   >body {
     @apply transition-colors duration-500;
   }
@@ -74,7 +74,7 @@ function cursor(e: MouseEvent) {
 }
 
 .mouse {
-  @apply absolute w-[2rem] hidden lg:flex h-[2rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full border-2 border-transparent;
+  @apply absolute w-[1.5rem] hidden lg:flex h-[1.5rem] z-[99] transform -translate-x-1/2 -translate-y-1/2 duration-200 ease-out pointer-events-none rounded-full border-2 border-transparent;
 }
 
 .mouse-border {
