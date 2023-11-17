@@ -5,12 +5,25 @@ import { useMouse } from "@/composables/useMouse";
 
 const sections = [
   { 
-    "heading": "Project Overview",
+    "heading": "Introduction",
     "subTexts": ["Sojorne is a parent and family support app designed to help people in need of special care by providing them access to special care providers. It is an empathetic venture to help parents and caregivers of special needs kids navigate care management.", "Efe Odeleye, CEO of Sojorne, had her life changed several years ago when her firstborn was diagnosed with a health condition that would impact her for life. It was a journey filled with countless doctor's appointments, therapy sessions, tears and triumphs, resilience, hope, and the power of innovating Sojorne."]
   },
   { 
-    "heading": "Goals",
-    "subTexts": ["Our primary aim was to deliver an MVP for the Sojorne project on which it can scale on. This MVP consisted of various modules including providers, communities, admin, customers and dashboard analytics.", "My role on Sojorne project was to lead the frontend team in delivering high quality and fully responsive admin dashboard."]
+    "heading": "Problem Statement",
+    "subTexts": ["Our primary aim was to deliver an MVP for the Sojorne project on which it can scale, within the duration of 3 months. This MVP consisted of various modules including providers, communities, admin, customers and dashboard analytics.", "My role on Sojorne project was to lead the frontend team in delivering high quality and fully responsive admin dashboard."]
+  },
+]
+
+const solutions = [
+  { 
+    "heading": "Solution",
+    "subTexts": ["Sojorne was built using Agile methodology. The project was broken down into three milestones, and each milestone further broken down into sprints.", "The project was setup with <i>Atomic Design Principle</i> in mind, creating and documenting our component set with StorybookJs which helped our development process become more modular and manageable.",
+    "Testing environment was setup with Jest, React Testing Library. Formik and Yup for handling forms and validation. Redux Toolkit for state management. HeadlessUI and TailwindCSS for UI and styling."
+    ]
+  },
+  { 
+    "heading": "Implementation",
+    "subTexts": ["The implementation phase is where ideas transform into tangible solutions and as the driving force behind the frontend engineering of this project, my role extended beyond conceptualization to the meticulous crafting of a robust and efficient system. Let's delve into the intricacies of the coding journey that brought the envisioned solution to life."]
   },
 ]
 
@@ -183,26 +196,32 @@ onMounted(() => {
       <p v-for="(subText, i) in section?.subTexts" :key="i" class="content-paragraph mb-2 text-lg dark:text-zinc-400 text-zinc-600">{{ subText }}</p>
     </div>
   </Container>
-  <Container outer-class="mt-24 md:mt-28">
+  <Container outer-class="mb-10 md:mb-20">
       <div class="mt-16 sm:mt-20">
         <ul
           role="list"
           class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          <li v-for="skill in infos" :key="skill.title" class="info md:p-6 group relative flex flex-col items-start">
-            <div class="relative z-10 flex h-12 w-12 mb-2 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+          <li v-for="skill in infos" :key="skill.title" class="info p-6 group relative flex flex-col items-start">
+            <div class="relative z-10 flex h-12 w-12 mb-2.5 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
                 <Icon :name="skill.icon" class="dark:text-gray-50 text-gray-800 text-xl" />
             </div>
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-zinc-50 opacity-0 md:opacity-100 dark:bg-zinc-800/50 sm:rounded-2xl" />
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-zinc-50 opacity-100 dark:bg-zinc-800/50 rounded-2xl" />
             <h4 class="relative text-base font-semibold tracking-tight text-zinc-600 dark:text-zinc-400">
               {{ skill.title }}
             </h4>
-            <p class="relative z-10 mt-2 text-lg text-zinc-800 dark:text-zinc-100 leading-6">
+            <p class="relative z-10 mt-1 text-lg text-zinc-800 dark:text-zinc-100 leading-6">
             {{ skill.text }}
             </p>
           </li>
         </ul>
       </div>
+  </Container>
+  <Container v-for="(solution, s) in solutions" :key="s">
+    <div class="mx-auto max-w-2xl lg:max-w-3xl">
+      <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ solution?.heading }}</h1>
+      <p v-for="(subText, i) in solution?.subTexts" :key="i" class="content-paragraph mb-2 text-lg dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
+    </div>
   </Container>
   <Container outer-class="mt-24 md:mt-28">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-0 h-full">
