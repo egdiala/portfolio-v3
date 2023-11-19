@@ -18,8 +18,8 @@ onMounted(() => {
 <template>
   <Container outer-class="mt-5 md:mt-10">
     <div class="mx-auto max-w-2xl lg:max-w-3xl">
-        <div ref="slideshow" class="flex w-full h-64 md:h-[26rem] lg:h-[30rem] rounded-xl md:rounded-3xl overflow-hidden relative">
-            <div class="absolute z-10 group opacity-0 hover:opacity-100 transition-opacity ease-in duration-300 bg-gray-500/50 flex flex-col justify-center top-0 left-0 bottom-0 px-6" @click="prev()">
+        <div ref="slideshow" class="flex w-full h-64 md:h-[26rem] lg:h-[30rem] rounded-xl md:rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 relative">
+            <div class="absolute z-10 group opacity-0 hover:opacity-100 transition-opacity ease-in duration-300 bg-gray-500/50 flex flex-col justify-center left-0 inset-y-0 px-6" @click="prev()">
                 <Icon name="heroicons:chevron-left-solid" class="w-6 h-6 text-zinc-400 transition dark:group-hover:text-zinc-50"/>
             </div>
             <Transition
