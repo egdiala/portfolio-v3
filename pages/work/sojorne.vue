@@ -23,7 +23,9 @@ const solutions = [
   },
   { 
     "heading": "Implementation",
-    "subTexts": ["The implementation phase is where ideas transform into tangible solutions and as the driving force behind the frontend engineering of this project, my role extended beyond conceptualization to the meticulous crafting of a robust and efficient system. Let's delve into the intricacies of the coding journey that brought the envisioned solution to life."]
+    "subTexts": ["The implementation phase is where ideas transform into tangible solutions and as the driving force behind the frontend engineering of this project, my role extended beyond conceptualization to the meticulous crafting of a robust and efficient system. Let's delve into the intricacies of the coding journey that brought the envisioned solution to life.",
+    "With the technologies at our disposal, we were able to build out the admin dashboard for Sojorne."
+    ]
   },
 ]
 
@@ -32,6 +34,16 @@ const infos = [
   { title: "Timeline", text: "3 months", icon: "mdi:chart-timeline-variant-shimmer"},
   { title: "Tools", text: "ReactJs, TailwindCSS, Jest", icon: "ph:code"},
 ]
+
+const challenges = [
+  { 
+    "heading": "Challenges",
+    "subTexts": ["Embarking on any ambitious project inevitably invites challenges, which in turn, creates room for growth and innovation. In the labyrinth of code and creativity, I encountered hurdles that tested the mettle of our undertaking.", "This section unveils the challenges faced during the development phase, shedding light on the twists and turns that required careful navigation. From unexpected technical intricacies to strategic decisions demanding foresight, the journey was rife with opportunities for problem-solving and continuous improvement."
+    ]
+  },
+]
+
+const slides = ["v1700252201/portfolio-v3/work/sojorne/sojorne_create_subcategory.webp", "v1700252204/portfolio-v3/work/sojorne/sojorne_invite_admin.webp", "v1700252202/portfolio-v3/work/sojorne/sojorne_provider_categories.webp", "v1700252209/portfolio-v3/work/sojorne/sojorne_providers_list.webp", "v1699039494/portfolio-v3/work/sojorne/sojorne_dashboard.webp"]
 
 const titleAnimation = () => ({
   initial: {
@@ -161,8 +173,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <Container outer-class="mt-24 md:mt-28">
-    <div class="dark:text-white text-black mx-auto max-w-7xl px-0 mb-6">
+  <Container outer-class="mt-14 md:mt-28">
+    <div class="dark:text-white text-black mx-auto max-w-7xl px-0">
         <div class="relative px-0 lg:px-12">
             <div class="mx-auto max-w-2xl lg:max-w-5xl">
                 <div class="flex items-center justify-between">
@@ -175,7 +187,7 @@ onMounted(() => {
     </div>
     <div class="mx-auto max-w-7xl px-0 sm:px-6 lg:px-0 h-full">
       <div class="mx-auto max-w-2xl lg:max-w-5xl">
-        <span class="title mt-10 block text-center max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 dark:text-neutral-50 [text-wrap:balance] sm:text-6xl mx-auto">Ready. Set. Live.</span>
+        <span class="title md:mt-10 block text-center max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 dark:text-neutral-50 [text-wrap:balance] sm:text-6xl mx-auto">Ready. Set. Live.</span>
         <p class="paragraph my-6 max-w-3xl text-center text-xl text-neutral-600 dark:text-neutral-400 mx-auto">A parent support app designed to help people live their best lives by coordinating tasks that rob them of time and mental space to enjoy their parenting journey.</p>
         <div v-motion="{ initial: details.initial, enter: details.enter }" class="flex items-center justify-center gap-3">
           <span class="text-base text-zinc-400 dark:text-zinc-500">Sojorne</span>
@@ -190,10 +202,10 @@ onMounted(() => {
     </div>
   </Container>
   <CHero image="v1699039494/portfolio-v3/work/sojorne/sojorne_dashboard.webp" />
-  <Container v-for="(section, s) in sections" :key="s">
-    <div class="mx-auto max-w-2xl lg:max-w-3xl">
+  <Container>
+    <div v-for="(section, s) in sections" :key="s" class="mx-auto max-w-2xl lg:max-w-3xl">
       <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ section?.heading }}</h1>
-      <p v-for="(subText, i) in section?.subTexts" :key="i" class="content-paragraph mb-2 text-lg dark:text-zinc-400 text-zinc-600">{{ subText }}</p>
+      <p v-for="(subText, i) in section?.subTexts" :key="i" class="content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600">{{ subText }}</p>
     </div>
   </Container>
   <Container outer-class="mb-10 md:mb-20">
@@ -217,10 +229,17 @@ onMounted(() => {
         </ul>
       </div>
   </Container>
-  <Container v-for="(solution, s) in solutions" :key="s">
-    <div class="mx-auto max-w-2xl lg:max-w-3xl">
+  <Container>
+    <div v-for="(solution, s) in solutions" :key="s" class="mx-auto max-w-2xl lg:max-w-3xl">
       <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ solution?.heading }}</h1>
-      <p v-for="(subText, i) in solution?.subTexts" :key="i" class="content-paragraph mb-2 text-lg dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
+      <p v-for="(subText, i) in solution?.subTexts" :key="i" class="content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
+    </div>
+  </Container>
+  <CImplementation v-motion="{ initial: details.initial, enter: details.enter }" :slides="slides" />
+  <Container>
+    <div v-for="(challenge, c) in challenges" :key="c" class="mx-auto max-w-2xl lg:max-w-3xl">
+      <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ challenge?.heading }}</h1>
+      <p v-for="(subText, i) in challenge?.subTexts" :key="i" class="content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
     </div>
   </Container>
   <Container outer-class="mt-24 md:mt-28">
