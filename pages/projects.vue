@@ -102,7 +102,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Container  class="mt-16 sm:mt-32">
+  <Container class="mt-16 sm:mt-32">
     <div class="max-w-2xl">
       <h1 class="text-4xl leading-10 font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl sm:leading-[3.5rem] titleText">
         Things I’ve made trying to put my dent in the universe.
