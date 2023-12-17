@@ -235,7 +235,7 @@ onMounted(() => {
       <p v-for="(subText, i) in solution?.subTexts" :key="i" class="content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
     </div>
   </Container>
-  <CImplementation v-motion="{ initial: details.initial, enter: details.enter }" :slides="slides" />
+  <CImplementation :slides="slides" />
   <Container>
     <div v-for="(challenge, c) in challenges" :key="c" class="mx-auto max-w-2xl lg:max-w-3xl">
       <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ challenge?.heading }}</h1>
