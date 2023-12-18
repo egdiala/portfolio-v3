@@ -8,7 +8,6 @@
             <NavItem to="/about" label="About" />
             <NavItem to="/work" label="Work" />
             <NavItem to="/projects" label="Projects" />
-            <NavItem to="/tools" label="Tools" />
         </ul>
     </nav>
 </template>
