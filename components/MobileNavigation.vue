@@ -46,7 +46,6 @@
                 <MobileNavItem href="/about" @click="close()"><span class="text-xs">🧘🏾‍♂️</span> About</MobileNavItem>
                 <MobileNavItem href="/work" @click="close()"><span class="text-xs">💼</span> Work</MobileNavItem>
                 <MobileNavItem href="/projects" @click="close()"><span class="text-xs">👨🏽‍💻</span> Projects</MobileNavItem>
-                <MobileNavItem href="/tools" @click="close()"><span class="text-xs">📦</span> Tools</MobileNavItem>
               </ul>
             </nav>
           </HeadlessPopoverPanel>
