@@ -52,7 +52,7 @@ const resume = ref<Resume[]>([
         company: 'Enyata',
         title: 'Software Engineer',
         logo: 'v1693016273/portfolio-v3/work/enyata_luugvs.jpg',
-        start: '2023',
+        start: 'Feb, 2023',
         end: {
             label: 'Present',
             dateTime: new Date().getFullYear(),

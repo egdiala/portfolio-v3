@@ -7,7 +7,7 @@ defineProps<MobileNavItemProps>()
 
 <template>
     <li>
-      <NuxtLink :to="href" class="block py-2">
+      <NuxtLink :to="href" v-bind="$attrs" class="block py-2">
         <slot />
       </NuxtLink>
     </li>

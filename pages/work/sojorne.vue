@@ -38,12 +38,64 @@ const infos = [
 const challenges = [
   { 
     "heading": "Challenges",
-    "subTexts": ["Embarking on any ambitious project inevitably invites challenges, which in turn, creates room for growth and innovation. In the labyrinth of code and creativity, I encountered hurdles that tested the mettle of our undertaking.", "This section unveils the challenges faced during the development phase, shedding light on the twists and turns that required careful navigation. From unexpected technical intricacies to strategic decisions demanding foresight, the journey was rife with opportunities for problem-solving and continuous improvement."
+    "subTexts": ["Embarking on any ambitious project inevitably invites challenges, which in turn, creates room for growth and innovation. In the labyrinth of code and creativity, I encountered hurdles that tested the mettle of our undertaking.", "This section unveils a few of the challenges faced during the development phase, shedding light on the twists and turns that required careful navigation. These are the few challenges I faced while building Sojorne Admin Dashboard."
+    ]
+  },
+]
+
+const challengesList = [
+  {
+    title: 'Fixing Blank Screen Issue Found on iPhone 🐞',
+    url: 'https://blog.egdiala.dev/debugging-chronicles-resolving-the-iphone-blank-screen-bug-in-react'
+  },
+  {
+    title: 'Implementing Dynamic Form Validation 🚀',
+    url: '#'
+  },
+]
+
+const testing = [
+  { 
+    "heading": "Testing",
+    "subTexts": ["While building out Sojorne Admin Dashboard, we adopted a few testing strategies.", "This section unveils a few of the challenges faced during the development phase, shedding light on the twists and turns that required careful navigation. These are the few challenges I faced while building Sojorne Admin Dashboard."
+    ]
+  },
+]
+
+const testingList = [
+  {
+    title: 'Unit Testing',
+    subText: 'After building out components with StorybookJs, I wrote unit tests for those components with Jest and RTL, maintaining a coverage of over 80%.'
+  },
+  {
+    title: 'Integration Testing',
+    subText: 'After putting the components together on different pages of the app, I wrote tests that checks the interaction between different parts and components, ensuring they work together as expected.'
+  },
+  {
+    title: 'Acceptance Testing',
+    subText: 'At each sprint, I check the work done so far to ensure it meets the user\'s requirements and the current state of the app works as it is expected to by end users.'
+  },
+  {
+    title: 'Visual Regression Testing',
+    subText: 'I also compare the UI conversion with the available designs on Figma to ensure it\'s pixel perfect.'
+  },
+  {
+    title: 'Cross-browser Compatibility Testing',
+    subText: 'After each implementation, I test across browsers and devices to make sure there are no bugs. Doing this help me spot a blank screen bug (as mentioned in the previous section 👆🏾🙃).'
+  },
+]
+
+const conclusion = [
+  { 
+    "heading": "Conclusion",
+    "subTexts": ["Sojorne is currently <a class='underline dark:hover:text-white hover:text-zinc-900 content-paragraph' href='https://www.prnewswire.com/news-releases/techstars-atlanta-powered-by-cox-enterprises-announces-2023-class-301878475.html' target='_blank'>backed by Techstars 🎉</a>. The CEO of Sojorne, Efe Odeleye, was very satisfied with the work we did for Sojorne, communication and the way we carried her along with the whole development process. You can watch the review shared by the CEO of Sojorne <a class='underline dark:hover:text-white hover:text-zinc-900 content-paragraph' href='https://www.instagram.com/reel/CydmSaloSvU' target='_blank'>here.</a>✨",
     ]
   },
 ]
 
 const slides = ["v1700252201/portfolio-v3/work/sojorne/sojorne_create_subcategory.webp", "v1700252204/portfolio-v3/work/sojorne/sojorne_invite_admin.webp", "v1700252202/portfolio-v3/work/sojorne/sojorne_provider_categories.webp", "v1700252209/portfolio-v3/work/sojorne/sojorne_providers_list.webp", "v1699039494/portfolio-v3/work/sojorne/sojorne_dashboard.webp"]
+
+const testImages = ["v1700255932/portfolio-v3/work/sojorne/sojorne_test_coverage_1.webp", "v1700255935/portfolio-v3/work/sojorne/sojorne_test_coverage_2.webp"]
 
 const titleAnimation = () => ({
   initial: {
@@ -240,6 +292,39 @@ onMounted(() => {
     <div v-for="(challenge, c) in challenges" :key="c" class="mx-auto max-w-2xl lg:max-w-3xl">
       <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ challenge?.heading }}</h1>
       <p v-for="(subText, i) in challenge?.subTexts" :key="i" class="content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
+    </div>
+    <div class="mx-auto max-w-2xl lg:max-w-3xl">
+      <ul>
+        <li v-for="(item, i) in challengesList" :key="i" class="italic list-disc list-inside underline dark:hover:text-white hover:text-zinc-900 content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600">
+          <NuxtLink :to="item.url" target="_blank">{{ item.title }}</NuxtLink>
+        </li>
+      </ul>
+    </div>
+  </Container>
+  <Container>
+    <div v-for="(test, s) in testing" :key="s" class="mx-auto max-w-2xl lg:max-w-3xl">
+      <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ test?.heading }}</h1>
+      <p v-for="(subText, i) in test?.subTexts" :key="i" class="content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
+    </div>
+    <div class="mx-auto max-w-2xl lg:max-w-3xl my-4">
+      <ul>
+        <li v-for="(item, i) in testingList" :key="i" class="list-disc list-inside content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600">
+          <strong>{{ item.title }}:</strong> {{ item.subText }}
+        </li>
+      </ul>
+    </div>
+    <div class="mx-auto max-w-2xl lg:max-w-3xl">
+      <div class="grid gap-3">
+        <div v-for="item in testImages" class="info group overflow-hidden first:rounded-t-xl last:rounded-b-xl h-44">
+          <NuxtImg provider="cloudinary" :src="item" :key="item" :alt="item.split('/').at(-1)?.split('.')[0]" preload loading="lazy" class="object-cover scale-105 group-first-of-type:object-left-top group-last-of-type:object-left-bottom w-full h-full" />
+        </div>
+      </div>
+    </div>
+  </Container>
+  <Container>
+    <div v-for="(solution, s) in conclusion" :key="s" class="mx-auto max-w-2xl lg:max-w-3xl">
+      <h1 class="content-heading mt-5 mb-2 font-semibold text-xl dark:text-zinc-200 text-zinc-800">{{ solution?.heading }}</h1>
+      <p v-for="(subText, i) in solution?.subTexts" :key="i" class="content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600" v-html="subText"></p>
     </div>
   </Container>
   <Container outer-class="mt-24 md:mt-28">

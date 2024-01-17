@@ -25,6 +25,7 @@ const variants: MotionVariants = {
                 <NavLink href="/about">About</NavLink>
                 <NavLink href="/work">Work</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
+                <NavLink href="https://blog.egdiala.dev" target="_blank">Blog</NavLink>
             </div>
             <p class="text-sm text-zinc-400 dark:text-zinc-500">
             &copy; {{ new Date().getFullYear() }} Egwuchukwu S. Diala. All rights

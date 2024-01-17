@@ -41,7 +41,6 @@ const works = [
       {
         name: 'Clearline HMO',
         description: 'A health insurance company offering robust healthcare plans tailored to satisfy the needs of individuals, families, groups, companies and the public sector.',
-        link: { href: '/work/#', label: 'Read case study' },
         logo: 'https://clearline-admin.enyata.com/logo-40-gradient.svg',
         tasks: 'UI Kit, Admin Dashboard'
       },
@@ -60,7 +59,6 @@ const works = [
       {
         name: 'Melli',
         description: 'A personal assistant device, primarily targeted towards older people living in Germany, to make their lives easier and bring them closer to their loved ones.',
-        link: { href: '/work/#', label: 'Read case study' },
         logo: 'https://assets.melli.com/logo.svg',
         tasks: 'Website'
       },
@@ -130,7 +128,7 @@ onMounted(() => {
       <div class="grid gap-20">
         <Section v-for="work in works" :title="work.firm" :id="work.firm.toLowerCase()">
           <div class="grid gap-16">
-            <Card v-for="project in work.projects" as="article" :key="project.name" class="project" title-tag="h2" :linkText="project.name" :description="project.description" :label="project.link.label" :link="project.link.href" icon="heroicons:link">
+            <Card v-for="project in work.projects" as="article" :key="project.name" class="project" title-tag="h2" :linkText="project.name" :description="project.description" :label="project?.link?.label" :link="project?.link?.href" icon="heroicons:link">
               <template #image>
                 <div class="grid gap-3">
                   <div class="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
