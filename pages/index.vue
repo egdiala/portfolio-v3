@@ -86,10 +86,33 @@ const icons: MotionVariants = {
   }
 }
 
+const scrollImagesAnimation = (i: number) => ({
+  initial: {
+    opacity: 0, x: 50
+  },
+  enter: {
+    opacity: 1, x: 0,
+    transition: {
+      type: 'keyframe', ease: 'linear', duration: 500, delay: (i+1) * 250
+    }
+  }
+})
+
+const scrollImages = [
+  'v1702938451/portfolio-v3/work/gaming_peasants/gaming_peasants_review_f9q2rs.webp',
+  'v1699039494/portfolio-v3/work/sojorne/sojorne_dashboard.webp',
+  'v1702938419/portfolio-v3/work/clearline/clearline_hmo_admin_admins_yl5ro8.webp',
+  'v1702938480/portfolio-v3/work/kitchenshare/kitchen_share_i0creu.webp',
+  'v1702938451/portfolio-v3/work/gaming_peasants/gaming_peasants_zhdfcx.webp',
+  'v1700252209/portfolio-v3/work/sojorne/sojorne_providers_list.webp',
+  'v1702938420/portfolio-v3/work/clearline/clearline_hmo_admin_templates_k5pphk.webp'
+]
+
 onMounted(() => {
   useMouse();
   const paragraphTags = document.querySelectorAll('.paragraph')
   const titleTags = document.querySelectorAll('.title')
+  const scrollContainer = document.querySelectorAll('.scrollContainer')
 
   paragraphTags.forEach((paragraphTag: any, i: number) => {
     useMotion(paragraphTag, paragraphAnimation())
@@ -97,6 +120,10 @@ onMounted(() => {
 
   titleTags.forEach((titleTag: any, i: number) => {
     useMotion(titleTag, titleAnimation())
+  })
+
+  scrollContainer.forEach((img: any, i: number) => {
+    useMotion(img, scrollImagesAnimation(i))
   })
 });
 </script>
@@ -129,7 +156,7 @@ onMounted(() => {
           </div>
         </div>
     </Container>
-    <div class="mt-4 sm:mt-20">
+    <!-- <div class="mt-4 sm:mt-20">
         <div class="-my-4 flex justify-center gap-5 overflow-hidden py-11 sm:gap-8">
             <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 250 } } }"
             class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
@@ -152,6 +179,12 @@ onMounted(() => {
                 <NuxtImg provider="cloudinary" src="v1693016224/portfolio-v3/photos/image-5.jpg" alt="image_5" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
             </div>
           </div>
+    </div> -->
+    <div class="mt-4 overflow-hidden">
+      <NuxtImg provider="cloudinary" src="v1702933419/portfolio-v3/photos/work-scribble_lxztcg.svg" sizes="sm:1500px" alt="image_1" class="w-52 mix-blend-difference" />
+      <div class="flex justify-start space-x-6 overflow-x-scroll py-8 scrollbar-hide">
+        <NuxtImg v-for="(img, i) in scrollImages" :key="i" provider="cloudinary" :src="img" sizes="sm:1500px" :alt="`image_${i}`" width="620" height="400" class="scrollContainer object-cover lg:border-2 lg:border-zinc-100/10" />
+      </div>
     </div>
     <Container outer-class="mt-24 md:mt-28">
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
