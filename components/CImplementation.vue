@@ -45,7 +45,7 @@ onMounted(() => {
                 leave-active-class="duration-700 ease-in"
                 leave-from-class="opacity-100"
                 leave-to-class="opacity-0">
-                    <NuxtImg provider="cloudinary" :src="state" :key="state" :alt="state.split('/').at(-1)?.split('.')[0]" loading="lazy" class="absolute w-full h-64 md:h-[26rem] lg:h-[30rem] rounded-xl md:rounded-3xl" />
+                  <NuxtImg provider="cloudinary" :src="state" :key="state" :alt="state.split('/').at(-1)?.split('.')[0]" preload loading="lazy" class="absolute w-full h-64 md:h-[26rem] lg:h-[30rem] rounded-xl md:rounded-3xl" />
             </Transition>
             <div class="absolute z-10 group opacity-0 hover:opacity-100 transition-opacity ease-in duration-300 bg-gray-500/50 flex flex-col justify-center top-0 right-0 bottom-0 px-6" @click="next()">
                 <Icon name="heroicons:chevron-right-solid" class="w-6 h-6 text-zinc-400 transition dark:group-hover:text-zinc-50"/>

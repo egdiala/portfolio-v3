@@ -8,6 +8,7 @@
             <NavItem to="/about" label="About" />
             <NavItem to="/work" label="Work" />
             <NavItem to="/projects" label="Projects" />
+            <NavItem to="https://blog.egdiala.dev" target="_blank" label="Blog" />
         </ul>
     </nav>
 </template>
