@@ -156,34 +156,10 @@ onMounted(() => {
           </div>
         </div>
     </Container>
-    <!-- <div class="mt-4 sm:mt-20">
-        <div class="-my-4 flex justify-center gap-5 overflow-hidden py-11 sm:gap-8">
-            <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 250 } } }"
-            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
-                <NuxtImg provider="cloudinary" src="v1693016225/portfolio-v3/photos/image-1.jpg" alt="image_1" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
-            </div>
-            <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: -2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 500 } } }"
-            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
-                <NuxtImg provider="cloudinary" src="v1693016225/portfolio-v3/photos/image-2.jpg" alt="image_2" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
-            </div>
-            <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 750 } } }"
-            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
-                <NuxtImg provider="cloudinary" src="v1693016224/portfolio-v3/photos/image-3.jpg" alt="image_3" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
-            </div>
-            <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: -2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 1000 } } }"
-            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
-                <NuxtImg provider="cloudinary" src="v1693016224/portfolio-v3/photos/image-4.jpg" alt="image_4" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
-            </div>
-            <div v-motion="{ initial: { opacity: 0, y: 24, rotate: 0 }, enter: { opacity: 1, y: 0, rotate: 2, transition:{ type: 'tween', ease: 'ease', duration: 500, delay: 1250 } } }"
-            class="relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl">
-                <NuxtImg provider="cloudinary" src="v1693016224/portfolio-v3/photos/image-5.jpg" alt="image_5" sizes="sm:640px" class="absolute inset-0 h-full w-44 sm:w-72 object-cover" />
-            </div>
-          </div>
-    </div> -->
     <div class="mt-4 overflow-hidden">
       <NuxtImg provider="cloudinary" src="v1702933419/portfolio-v3/photos/work-scribble_lxztcg.svg" sizes="sm:1500px" alt="image_1" class="w-52 mix-blend-difference" />
       <div class="flex justify-start space-x-6 overflow-x-scroll py-8 scrollbar-hide">
-        <NuxtImg v-for="(img, i) in scrollImages" :key="i" provider="cloudinary" :src="img" sizes="sm:1500px" :alt="`image_${i}`" width="620" height="400" class="scrollContainer object-cover lg:border-2 lg:border-zinc-100/10" />
+        <NuxtImg v-for="(img, i) in scrollImages" :key="i" provider="cloudinary" :src="img" sizes="sm:1500px" :alt="`image_${i}`" width="620" height="400" class="scrollContainer object-cover lg:border-2 lg:border-zinc-100/10 w-[350px] md:w-[620px]" />
       </div>
     </div>
     <Container outer-class="mt-24 md:mt-28">
