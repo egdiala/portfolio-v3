@@ -8,7 +8,14 @@ useHead({
   },
   htmlAttrs: {
     lang: 'en'
-  }
+  },
+  script: [
+    {
+      src: 'https://eu.umami.is/script.js',
+      async: true,
+      'data-website-id': 'cccdc190-300e-45a6-9178-63c356330f63'
+    }
+  ]
 })
 
 useSchemaOrg([
