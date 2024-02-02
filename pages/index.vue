@@ -3,6 +3,7 @@ import { useMotion } from '@vueuse/motion';
 import { useMouse } from '~/composables/useMouse';
 import type { MotionVariants } from "@vueuse/motion";
 
+const route = useRoute()
 useHead({
   title: 'Frontend engineer, designer, music lover',
   meta: [
@@ -110,6 +111,7 @@ const scrollImages = [
 
 onMounted(() => {
   useMouse();
+  umTrackView(route.path)
   const paragraphTags = document.querySelectorAll('.paragraph')
   const titleTags = document.querySelectorAll('.title')
   const scrollContainer = document.querySelectorAll('.scrollContainer')
@@ -138,17 +140,17 @@ onMounted(() => {
             I’m Egwuchukwu, a <span class="text-zinc-900 dark:text-zinc-50">design-focused</span> frontend engineer and designer based in Lagos, Nigeria. <span class="text-zinc-900 dark:text-zinc-50">I combine my expertise</span> in all levels of development and my <span class="text-zinc-900 dark:text-zinc-50">understanding of UI design</span> to <span class="text-zinc-900 dark:text-zinc-50">create meaningful experiences</span>.
           </p>
           <div v-motion="{ initial: icons.initial, enter: icons.enter }" class="mt-6 flex gap-6">
-            <SocialIcon
+            <SocialIcon v-umami="'View-Twitter-Page'"
               href="https://twitter.com/e_diala"
               aria-label="Follow on Twitter"
               icon="bxl:twitter"
             />
-            <SocialIcon
+            <SocialIcon v-umami="'View-GitHub-Page'"
               href="https://github.com/egdiala"
               aria-label="Follow on GitHub"
               icon="bxl:github"
             />
-            <SocialIcon
+            <SocialIcon v-umami="'View-LinkedIn-Page'"
               href="https://www.linkedin.com/in/egwuchukwu-diala/"
               aria-label="Follow on LinkedIn"
               icon="bxl:linkedin-square"

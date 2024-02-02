@@ -22,10 +22,10 @@ const variants: MotionVariants = {
       <Container inner-class="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40">
         <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                <NavLink href="/about">About</NavLink>
-                <NavLink href="/work">Work</NavLink>
-                <NavLink href="/projects">Projects</NavLink>
-                <NavLink href="https://blog.egdiala.dev" target="_blank">Blog</NavLink>
+                <NavLink href="/about" v-umami="'View-About-Page-Footer'">About</NavLink>
+                <NavLink href="/work" v-umami="'View-Work-Page-Footer'">Work</NavLink>
+                <NavLink href="/projects" v-umami="'View-Projects-Page-Footer'">Projects</NavLink>
+                <NavLink href="https://blog.egdiala.dev" target="_blank" v-umami="'View-Blog-Page-Footer'">Blog</NavLink>
             </div>
             <p class="text-sm text-zinc-400 dark:text-zinc-500">
             &copy; {{ new Date().getFullYear() }} Egwuchukwu S. Diala. All rights

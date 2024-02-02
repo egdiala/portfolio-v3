@@ -2,6 +2,7 @@
 import { useMotion } from '@vueuse/motion';
 import { useMouse } from '#imports';
 
+const route = useRoute();
 useHead({
   title: 'Things I’ve made trying to put my dent in the universe',
   meta: [
@@ -88,6 +89,7 @@ const projectAnimation = (i: number) => ({
 
 onMounted(() => {
     useMouse();
+    umTrackView(route.path)
     const titleTags = document.querySelectorAll('.titleText')
     const projectTags = document.querySelectorAll('.project')
 

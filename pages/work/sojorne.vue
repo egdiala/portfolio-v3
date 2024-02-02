@@ -3,6 +3,8 @@ import { useMotion } from '@vueuse/motion';
 import type { MotionVariants } from "@vueuse/motion";
 import { useMouse } from "@/composables/useMouse";
 
+const route = useRoute();
+
 const sections = [
   { 
     "heading": "Introduction",
@@ -196,6 +198,7 @@ const infoAnimation = (i: number) => ({
 
 onMounted(() => {
   useMouse();
+  umTrackView(route.path)
   const paragraphTags = document.querySelectorAll('.paragraph')
   const titleTags = document.querySelectorAll('.title')
   const headingTags = document.querySelectorAll('.content-heading')
@@ -295,7 +298,7 @@ onMounted(() => {
     </div>
     <div class="mx-auto max-w-2xl lg:max-w-3xl">
       <ul>
-        <li v-for="(item, i) in challengesList" :key="i" class="italic list-disc list-inside underline dark:hover:text-white hover:text-zinc-900 content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600">
+        <li v-for="(item, i) in challengesList" :key="i" :v-umami="`View-${item.title}-Page`" class="italic list-disc list-inside underline dark:hover:text-white hover:text-zinc-900 content-paragraph mb-2 text-base dark:text-zinc-400 text-zinc-600">
           <NuxtLink :to="item.url" target="_blank">{{ item.title }}</NuxtLink>
         </li>
       </ul>

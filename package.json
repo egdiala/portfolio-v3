@@ -24,6 +24,7 @@
     "nuxt-swiper": "^1.1.1"
   },
   "dependencies": {
-    "@vueuse/motion": "^2.0.0"
+    "@vueuse/motion": "^2.0.0",
+    "nuxt-umami": "^2.5.7"
   }
 }

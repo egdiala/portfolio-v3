@@ -9,7 +9,7 @@ defineProps<SocialLinkProps>()
 </script>
 
 <template>
-    <li :class="`${outerClass} flex`">
+    <li :class="`${outerClass} flex`" v-bind="$attrs">
       <NuxtLink
         :to="href" target="_blank"
         class="group flex items-center text-sm font-medium text-zinc-800 transition hover:text-emerald-500 dark:text-zinc-200 dark:hover:text-emerald-500"

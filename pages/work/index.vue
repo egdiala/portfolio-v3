@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useMotion } from '@vueuse/motion';
 
+const route = useRoute();
+
 useHead({
   title: 'Stuff I built at previous roles.',
   meta: [
@@ -101,6 +103,7 @@ const projectAnimation = (i: number) => ({
 })
 
 onMounted(() => {
+    umTrackView(route.path)
     const titleTags = document.querySelectorAll('.titleText')
     const projectTags = document.querySelectorAll('.project')
 
