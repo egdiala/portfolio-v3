@@ -15,7 +15,14 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   pages: true,
-  extends: ["nuxt-seo-kit"],
+  extends: ["nuxt-seo-kit", "nuxt-umami"],
+  appConfig: {
+    umami: {
+      id: 'cccdc190-300e-45a6-9178-63c356330f63',
+      host: 'https://eu.umami.is/script.js',
+      useDirective: true
+    },
+  },
   runtimeConfig: {
     public: {
       siteUrl: 'https://egdiala-v3.netlify.app',

@@ -2,6 +2,7 @@
 import { useMotion } from '@vueuse/motion';
 import { useMouse } from '~/composables/useMouse';
 
+const route = useRoute();
 useHead({
   title: 'I create memorable experiences for brands around the world',
   meta: [
@@ -134,6 +135,7 @@ const quoteAnimation = () => ({
 
 onMounted(() => {
     useMouse();
+    umTrackView(route.path)
     const aboutTags = document.querySelectorAll('.aboutText')
     const socialTags = document.querySelectorAll('.socialLink')
     const skillTags = document.querySelectorAll('.skill')
@@ -194,7 +196,7 @@ onMounted(() => {
             </div>
             <div class="lg:pl-20">
                 <ul role="list">
-                    <SocialLink v-for="(link, index) in socialLinks" :key="index" :href="link.link" :icon="link.icon" :outer-class="link?.class">
+                    <SocialLink :v-umami="`View-${link.name}-Page`" v-for="(link, index) in socialLinks" :key="index" :href="link.link" :icon="link.icon" :outer-class="link?.class">
                         {{ link.name }}
                     </SocialLink>
                 </ul>

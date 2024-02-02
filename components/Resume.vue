@@ -130,7 +130,7 @@ onMounted(() => {
           </li>
       </ol>
       <div class="download">
-        <Button variant="secondary" class="group mt-6 w-full" @click="openResume">
+        <Button variant="secondary" class="group mt-6 w-full" @click="openResume" v-umami="'View-Resume'">
           View Resume
           <Icon name="heroicons:arrow-right-20-solid" class="h-4 w-4 text-zinc-400 transition duration-300 ease-out group-hover:-rotate-45 group-active:text-zinc-600 dark:group-hover:text-zinc-50 dark:group-active:text-zinc-50" />
         </Button>
