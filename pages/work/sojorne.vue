@@ -5,6 +5,18 @@ import { useMouse } from "@/composables/useMouse";
 
 const route = useRoute();
 
+useSeoMeta({
+  title: 'Sojorne',
+  description: 'A parent support app designed to help people live their best lives by coordinating tasks that rob them of time and mental space to enjoy their parenting journey.',
+  ogTitle: 'Egwuchukwu S. Diala',
+  ogDescription: 'A parent support app designed to help people live their best lives by coordinating tasks that rob them of time and mental space to enjoy their parenting journey.',
+  ogImage: 'https://res.cloudinary.com/egdiala/image/upload/f_auto,q_auto,w_3000/v1699039494/portfolio-v3/work/sojorne/sojorne_dashboard.webp',
+  twitterCard: 'summary',
+  twitterTitle: 'Egwuchukwu S. Diala',
+  twitterDescription: 'A parent support app designed to help people live their best lives by coordinating tasks that rob them of time and mental space to enjoy their parenting journey.',
+  twitterImage: 'https://res.cloudinary.com/egdiala/image/upload/f_auto,q_auto,w_3000/v1699039494/portfolio-v3/work/sojorne/sojorne_dashboard.webp'
+})
+
 const sections = [
   { 
     "heading": "Introduction",

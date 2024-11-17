@@ -7,7 +7,7 @@ useHead({
   title: 'I create memorable experiences for brands around the world',
   meta: [
     { charset: 'utf-8' },
-    { name: 'description', content: 'As a frontend engineer with over 3 years of experience, he has helped various brands to stand out among their competition by providing them with various solutions.' },
+    { name: 'description', content: 'As a frontend engineer with over 5 years of experience, he has helped various brands to stand out among their competition by providing them with various solutions.' },
   ],
   link: [
     {
@@ -184,7 +184,7 @@ onMounted(() => {
                         With my experience, I have helped brands using frontend skills as well as my understanding of the principles of design to level up their visual language
                     </p>
                     <p class="aboutText">
-                        As a frontend engineer with over 3 years of experience, I have helped various brands to stand out among their competition by providing them with various solutions.
+                        As a frontend engineer with over 5 years of experience, I have helped various brands to stand out among their competition by providing them with various solutions.
                     </p>
                     <p class="aboutText">
                         By applying the principles of design to my processes, I am able to keep users at the center focus of my process. This allows me to create <em>highly functional</em> products.

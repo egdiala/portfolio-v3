@@ -79,6 +79,13 @@ const resume = ref<Resume[]>([
         start: 'Aug, 2021',
         end: 'Jan, 2022',
     },
+    {
+        company: 'WayaPayChat',
+        title: 'Frontend Developer',
+        logo: 'v1714151480/portfolio-v3/work/wayapaychat_rjwxlm.jpg',
+        start: 'Jan, 2020',
+        end: 'Jan, 2021',
+    },
 ])
 
 onMounted(() => {
