@@ -2,7 +2,7 @@
 import { useMotion } from '@vueuse/motion';
 
 const openResume = async () => {
-  await navigateTo('https://docs.google.com/document/d/15QCrsfX5L4zmlZG57Th1hKWDeSjmcpoVhwUlzOWzqWo/edit?usp=sharing', { external: true, open: {
+  await navigateTo('https://docs.google.com/document/d/15QCrsfX5L4zmlZG57Th1hKWDeSjmcpoVhwUlzOWzqWo/edit?tab=t.0', { external: true, open: {
     target: '_blank',
     windowFeatures: {
       width: 500,
@@ -17,6 +17,7 @@ interface Resume {
     logo: string
     start: string
     end: any
+    link: string
 }
 
 const downloadAnimation = () => ({
@@ -49,14 +50,34 @@ const resumeAnimation = (i: number) => ({
 
 const resume = ref<Resume[]>([
     {
-        company: 'Enyata',
-        title: 'Software Engineer',
-        logo: 'v1693016273/portfolio-v3/work/enyata_luugvs.jpg',
-        start: 'Feb, 2023',
+        company: 'Blockless Network',
+        title: 'Web3 Frontend Engineer',
+        logo: 'v1757717639/portfolio-v3/work/blockless_guzgxq.png',
+        start: 'Mar, 2025',
+        link: 'https://bless.network/',
         end: {
             label: 'Present',
             dateTime: new Date().getFullYear(),
         },
+    },
+    {
+        company: 'Eigen Explorer',
+        title: 'Web3 Frontend Engineer',
+        logo: 'v1757716304/portfolio-v3/work/default-img_lfbnvy.png',
+        start: 'Mar, 2025',
+        link: 'https://www.eigenexplorer.com/',
+        end: {
+            label: 'Present',
+            dateTime: new Date().getFullYear(),
+        },
+    },
+    {
+        company: 'Enyata',
+        title: 'Senior Frontend Engineer',
+        logo: 'v1693016273/portfolio-v3/work/enyata_luugvs.jpg',
+        start: 'Feb, 2023',
+        end: 'Sep, 2024',
+        link: 'https://enyata.com/',
     },
     {
         company: 'BLK Labs',
@@ -64,6 +85,7 @@ const resume = ref<Resume[]>([
         logo: 'v1693016273/portfolio-v3/work/blk_fsz6pr.jpg',
         start: 'Apr, 2022',
         end: 'Jul, 2023',
+        link: 'https://blklabs.co/',
     },
     {
         company: 'Melli',
@@ -71,6 +93,7 @@ const resume = ref<Resume[]>([
         logo: 'v1693016274/portfolio-v3/work/melli_ur6fmt.jpg',
         start: 'May, 2022',
         end: 'Dec, 2022',
+        link: 'https://melli.com/',
     },
     {
         company: 'Trail Group',
@@ -78,6 +101,7 @@ const resume = ref<Resume[]>([
         logo: 'v1693016273/portfolio-v3/work/trail_jyediy.jpg',
         start: 'Aug, 2021',
         end: 'Jan, 2022',
+        link: 'https://trail.group/',
     },
     {
         company: 'WayaPayChat',
@@ -85,6 +109,7 @@ const resume = ref<Resume[]>([
         logo: 'v1714151480/portfolio-v3/work/wayapaychat_rjwxlm.jpg',
         start: 'Jan, 2020',
         end: 'Jan, 2021',
+        link: '#',
     },
 ])
 
@@ -107,7 +132,8 @@ onMounted(() => {
         <span class="ml-3">Work</span>
       </h2>
       <ol class="mt-6 space-y-4">
-          <li v-for="(role, roleIndex) in resume" :key="roleIndex" class="resume-item flex gap-4">
+          <li v-for="(role, roleIndex) in resume" :key="roleIndex" class="resume-item flex gap-4 relative">
+            <a :href="role.link" :target="role.link === '#' ? '' : '_blank'" class="absolute inset-0"></a>
             <div class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
               <NuxtImg provider="cloudinary" :src="role.logo" loading="lazy" :alt="role.company" class="rounded-full h-7 w-7" />
             </div>
