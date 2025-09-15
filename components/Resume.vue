@@ -49,6 +49,28 @@ const resumeAnimation = (i: number) => ({
 
 const resume = ref<Resume[]>([
     {
+        company: 'Blockless Network',
+        title: 'Web3 Frontend Engineer',
+        logo: 'v1757717639/portfolio-v3/work/blockless_guzgxq.png',
+        start: 'Mar, 2025',
+        link: 'https://bless.network/',
+        end: {
+            label: 'Present',
+            dateTime: new Date().getFullYear(),
+        },
+    },
+    {
+        company: 'Eigen Explorer',
+        title: 'Web3 Frontend Engineer',
+        logo: 'v1757716304/portfolio-v3/work/default-img_lfbnvy.png',
+        start: 'Mar, 2025',
+        link: 'https://www.eigenexplorer.com/',
+        end: {
+            label: 'Present',
+            dateTime: new Date().getFullYear(),
+        },
+    },
+    {
         company: 'Enyata',
         title: 'Software Engineer',
         logo: 'v1693016273/portfolio-v3/work/enyata_luugvs.jpg',
