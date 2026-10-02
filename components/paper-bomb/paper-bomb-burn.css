@@ -1,0 +1,122 @@
+/* Click-to-burn effect for PaperBomb. GSAP drives one timeline (mask
+   growth, ignition flash, staggered falling ash) plus a ticker-driven
+   canvas flame that licks along the burn front.
+
+   An SVG turbulence filter on the mask edge was tried for a jagged look,
+   but recomputing feTurbulence every frame as the mask grows tanked frame
+   time to single-digit fps — removed. The flickering flame and irregular
+   ash already read as organic without that cost. */
+
+.burn-stage {
+  position: relative;
+  cursor: pointer;
+}
+
+.burn-stage[data-burned] {
+  cursor: default;
+}
+
+.burn-paper {
+  position: absolute;
+  inset: 0;
+}
+
+.burn-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.burn-base {
+  -webkit-mask-image: radial-gradient(
+    circle at var(--burn-ox) var(--burn-oy),
+    transparent 0,
+    transparent var(--burn-r),
+    white calc(var(--burn-r) + 1px),
+    white 100%
+  );
+  mask-image: radial-gradient(
+    circle at var(--burn-ox) var(--burn-oy),
+    transparent 0,
+    transparent var(--burn-r),
+    white calc(var(--burn-r) + 1px),
+    white 100%
+  );
+}
+
+.burn-char {
+  filter: grayscale(1) brightness(0.24) contrast(1.4);
+  -webkit-mask-image: radial-gradient(
+    circle at var(--burn-ox) var(--burn-oy),
+    transparent 0,
+    transparent calc(var(--burn-r) - 70px),
+    white calc(var(--burn-r) - 52px),
+    white calc(var(--burn-r) - 8px),
+    transparent var(--burn-r),
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle at var(--burn-ox) var(--burn-oy),
+    transparent 0,
+    transparent calc(var(--burn-r) - 70px),
+    white calc(var(--burn-r) - 52px),
+    white calc(var(--burn-r) - 8px),
+    transparent var(--burn-r),
+    transparent 100%
+  );
+}
+
+.burn-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* No blend mode: over the paper's near-white interior, `screen` washes
+     a much larger area to solid white than the flame actually covers,
+     reading as instant destruction. Plain alpha compositing keeps the
+     flame's real extent honest; blobs still add up brightly via the
+     canvas's own "lighter" composite operation. */
+}
+
+.burn-flash {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #fffbe8 0%, #ffb347 40%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.burn-ash {
+  position: absolute;
+  width: var(--size);
+  height: calc(var(--size) * 0.55);
+  border-radius: 2px;
+  background: linear-gradient(135deg, #3a2a20, #171310);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.burn-haze {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  backdrop-filter: blur(0.4px);
+  opacity: 0;
+}
+
+.burn-hint {
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+}
+
+.burn-hint[data-hidden] {
+  opacity: 0;
+}
