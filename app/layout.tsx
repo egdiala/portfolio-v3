@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Asimovian, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
@@ -25,6 +25,10 @@ const asimovian = Asimovian({
 export const metadata: Metadata = {
   title: "stephen diala",
   description: "Frontend engineer at Moniepoint, working on MonieDesk.",
+};
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

@@ -45,7 +45,11 @@ function NavbarBlur() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 h-31.5"
+      className="pointer-events-none absolute inset-x-0 top-0 h-[calc(7.875rem+env(safe-area-inset-top))]"
+      style={{
+        background:
+          "linear-gradient(to bottom, var(--background) 0, transparent env(safe-area-inset-top))",
+      }}
     >
       {BLUR_LAYERS.map((layer, index) => (
         <div
@@ -66,7 +70,7 @@ function NavbarBlur() {
 
 export const Navbar = () => {
   return (
-    <Container as="nav" className="sticky top-0 z-50 px-5">
+    <Container as="nav" className="sticky top-0 z-50 px-5 pt-[env(safe-area-inset-top)]">
       <NavbarBlur />
       <ContainerInner className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-3 py-4">
         <NameMorph />
