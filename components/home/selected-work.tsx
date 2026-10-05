@@ -52,7 +52,7 @@ function ArchiveTab() {
 
 export const SelectedWork = () => {
     return (
-        <Container as="section" className="overflow-x-clip px-5 sm:py-8 py-16">
+        <Container as="section" className="overflow-x-clip px-5 lg:px-0 sm:py-8 py-16">
             <ContainerInner>
                 <SectionLink id="things-i-have-shipped" className="text-base text-neutral-600 font-medium">
                     Things I've shipped
