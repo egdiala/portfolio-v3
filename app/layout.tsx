@@ -48,7 +48,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Navbar />
-        <main id="content" className="min-h-[calc(100svh+8.75rem)] scroll-mt-20">
+        <main id="content" className="@container/page min-h-[calc(100svh+8.75rem)] scroll-mt-20">
           {children}
         </main>
       </body>
