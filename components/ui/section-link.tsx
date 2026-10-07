@@ -13,13 +13,13 @@ export function SectionLink({
   const labelId = `${id}-link`
 
   return (
-    <div className="group relative flex items-center gap-2 xl:block">
+    <div className="group relative flex items-center gap-2 @min-[80rem]/page:block">
       <a
         href={`#${id}`}
         aria-labelledby={`${labelId} ${id}`}
         className="relative shrink-0 rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
-        <LinkIcon aria-hidden="true" className="hidden xl:block xl:absolute xl:top-0 xl:-left-8 xl:opacity-0 xl:transition-opacity xl:duration-300 xl:group-hover:opacity-100 xl:focus-visible:opacity-100" />
+        <LinkIcon aria-hidden="true" className="hidden @min-[80rem]/page:absolute @min-[80rem]/page:top-0 @min-[80rem]/page:-left-8 @min-[80rem]/page:block @min-[80rem]/page:opacity-0 @min-[80rem]/page:transition-opacity @min-[80rem]/page:duration-300 @min-[80rem]/page:group-hover:opacity-100 @min-[80rem]/page:focus-visible:opacity-100" />
         <span id={labelId} className="sr-only">
           Link to
         </span>
