@@ -12,6 +12,8 @@ const INK = "#0a0a0a"
 const PAPER = "#fafafa"
 const MUTED = "#525252"
 
+const ROLE = "Design Engineer"
+
 // The 720 × 440 sheet sits whole against the right edge, centred top to
 // bottom. The view runs past it on the other sides, where the rhumb lines keep
 // going and the coast's off-sheet lead-in hides under the text column's fade.
@@ -116,6 +118,12 @@ function ChartLabel({
   )
 }
 
+function Role({ size }: Readonly<{ size: number }>) {
+  return (
+    <div style={{ fontSize: size, lineHeight: 1, letterSpacing: "0.22em", color: MUTED }}>{ROLE.toUpperCase()}</div>
+  )
+}
+
 /**
  * The share card for a page: its title over a sea chart drawn from a fresh
  * seed on every request, the way clicking the chart in the lab redraws it.
@@ -158,16 +166,16 @@ export async function ogImage({ title, eyebrow }: Readonly<{ title?: string; eye
           height: OG_SIZE.height,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          justifyContent: title ? "space-between" : "flex-end",
           padding: "64px 72px",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-          {title ? <div style={{ fontFamily: "Asimovian", fontSize: 40, lineHeight: 1, color: INK }}>{SITE_NAME}</div> : null}
-          <div style={{ fontSize: 17, lineHeight: 1, letterSpacing: "0.22em", color: MUTED }}>
-            {`CHART NO. ${seed}`}
+        {title ? (
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ fontFamily: "Asimovian", fontSize: 40, lineHeight: 1, color: INK }}>{SITE_NAME}</div>
+            <Role size={17} />
           </div>
-        </div>
+        ) : null}
 
         <div style={{ display: "flex", flexDirection: "column", gap: 16, width: SHEET_LEFT - 72 }}>
           {eyebrow ? <div style={{ fontSize: 26, lineHeight: 1.2, color: MUTED }}>{eyebrow}</div> : null}
@@ -176,7 +184,10 @@ export async function ogImage({ title, eyebrow }: Readonly<{ title?: string; eye
               {title}
             </div>
           ) : (
-            <div style={{ fontFamily: "Asimovian", fontSize: 92, lineHeight: 0.95, color: INK }}>{SITE_NAME}</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <div style={{ fontFamily: "Asimovian", fontSize: 92, lineHeight: 0.95, color: INK }}>{SITE_NAME}</div>
+              <Role size={24} />
+            </div>
           )}
         </div>
       </div>
