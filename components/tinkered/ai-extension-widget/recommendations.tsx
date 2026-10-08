@@ -6,8 +6,9 @@ import { motion } from "motion/react"
 import { useTimeScale } from "@/components/playground/time-scale"
 import { media } from "@/lib/media"
 import { InfoIcon, PhotoEditIcon, RefreshIcon } from "./icons"
+import type { RecommendationStatus } from "./types"
 
-export type RecommendationStatus = "pending" | "working" | "accepted" | "dismissed"
+export type { RecommendationStatus } from "./types"
 
 const PHOTOS = [
   { src: media("tinkered/ai-chrome-extension-widget/buds-1.jpg"), alt: "Pink earbuds in an open charging case" },

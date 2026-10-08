@@ -1,40 +1,15 @@
 "use client"
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { LayoutGroup, motion } from "motion/react"
 import { useTimeScale } from "@/components/playground/time-scale"
+import { TUNED_BOUNCE } from "./constants"
+import { useWidth } from "./hooks/use-width"
 import { Music, PLAYER_SPRING, TRACK } from "./music"
 import { Ring } from "./ring"
+import type { IslandView } from "./types"
 
-export type IslandView = "idle" | "ring" | "music"
-
-// Keyed by "from-to". The bigger the change in size, the less it bounces.
-export const TUNED_BOUNCE: Record<string, number> = {
-  idle: 0.5,
-  "idle-ring": 0.5,
-  "ring-idle": 0.5,
-  "ring-music": 0.35,
-  "music-ring": 0.35,
-  "idle-music": 0.3,
-  "music-idle": 0.3,
-}
-
-function useWidth<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
-  const [width, setWidth] = useState<number | null>(null)
-
-  useLayoutEffect(() => {
-    const node = ref.current
-    if (!node) return
-    const observer = new ResizeObserver(([entry]) => {
-      if (entry) setWidth(entry.contentRect.width)
-    })
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
-
-  return [ref, width] as const
-}
+export type { IslandView } from "./types"
 
 export function DynamicIsland({
   view,

@@ -3,8 +3,9 @@
 import { AnimatePresence, motion, type Transition } from "motion/react"
 import { useTimeScale } from "@/components/playground/time-scale"
 import { cn } from "@/lib/utils"
+import type { Tone } from "./types"
 
-export type Tone = { solid: string; track: string; wash: string }
+export type { Tone } from "./types"
 
 const TONES = {
   poor: { solid: "#DC2828", track: "#FFC9C9", wash: "#FEF1F1" },
