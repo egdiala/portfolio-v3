@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 @custom-variant anchored (@supports (anchor-name: --a));
 @custom-variant unanchored (@supports not (anchor-name: --a));
+@custom-variant ios (@supports (-webkit-touch-callout: none));
 
 @theme inline {
   --color-background: var(--background);
