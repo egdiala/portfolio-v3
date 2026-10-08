@@ -1,0 +1,89 @@
+import { AiExtensionWidgetPlayground } from "@/components/tinkered/ai-extension-widget/playground"
+
+<AiExtensionWidgetPlayground />
+
+This started as an After Effects animation by [@zuriks_](https://x.com/zuriks_), who [posted it on X](https://x.com/zuriks_/status/1873092964383375377). It's a concept for a browser extension that grades a product listing and helps fix it, not a real product. He shared his Figma file with me, so the icons, colors, and product photos here are the ones he used. The motion wasn't in the file, so I rewatched his video until I could rebuild each part of it with React and Motion.
+
+## From pill to panel
+
+The closed pill and the open panel are two different elements that share a `layoutId`. When one leaves and the other mounts, Motion animates the box from the pill's size and position to the panel's, and crossfades the two along the way. The radius lives in `style`, so Motion can correct it while the box scales, and the corners go from 32px to 16px without warping.
+
+```tsx
+<AnimatePresence initial={false}>
+  {open ? (
+    <motion.div key="panel" layoutId="widget" style={{ borderRadius: 16 }}>
+      {panel}
+    </motion.div>
+  ) : (
+    <motion.button key="pill" layoutId="widget" style={{ borderRadius: 32 }}>
+      {pill}
+    </motion.button>
+  )}
+</AnimatePresence>
+```
+
+A crossfade alone would read as one card dissolving into another. Three pieces of the pill survive the trip instead. The score, the pencil, and the count each have a `layoutId` of their own, so the score rises and grows from 48px to 62px while the count shrinks into the badge next to Recommendations. Set **Speed** to 0.1× and open the pill to follow each one, then turn off **Shared elements** to see the morph without them.
+
+The rest of the panel's rows use `layout="position"`. Motion counter-scales them, so the text doesn't stretch while the panel grows around it.
+
+## The score
+
+The ring is two SVG circles: a pale track, and a stroke that animates `pathLength` to the score out of 100. The circles are turned a quarter so the stroke fills from the top. The color follows the score, red below 60, orange below 80, and green from there.
+
+The number rolls instead of swapping. Each digit is a column of 0 to 9 behind a window one line tall, and the column slides with `y` to show its value.
+
+```tsx
+<span className="block h-[1em] overflow-hidden">
+  <motion.span animate={{ y: `${-digit}em` }} className="flex flex-col">
+    {DIGITS.map((value) => (
+      <span key={value} className="h-[1em]">
+        {value}
+      </span>
+    ))}
+  </motion.span>
+</span>
+```
+
+Digits are keyed by place value, counted from the right, rather than by their position in the string. When 82 becomes 100, the tens and ones roll down to zero and a new hundreds column fades in on the left. Each column has `layout="position"`, so the others slide over to make room. Screen readers skip the rolling digits and hear "100 out of 100" instead.
+
+## While the AI works
+
+Accepting a recommendation puts a spinning border around its card for the two seconds the AI is working. The border is a conic gradient on a square layer behind the card, larger than the card and turning with `animate-spin`. The card clips 2px off its own edges with `clip-path: inset()`, and the gradient shows through the gap.
+
+```tsx
+<motion.div
+  animate={{ clipPath: working ? "inset(2px round 8px)" : "inset(0px round 8px)" }}
+  className="rounded-lg bg-[#F2F3F4] p-3"
+/>
+```
+
+Rotating the layer is a transform, so the browser spins it without repainting the gradient. Animating the gradient's angle would repaint it on every frame. Clipping the card, rather than scaling it down, keeps the text from shrinking and keeps the border an even 2px on every side.
+
+When the work is done, the info icon shrinks away and the title slides into its place. A second later, the next card comes in.
+
+## One card at a time
+
+The cards sit in an `AnimatePresence` keyed by index. Going forward, the old card leaves to the left and the new one comes in from the right. Going back reverses both.
+
+```tsx
+const slide = {
+  enter: (direction: number) => ({ x: `${110 * direction}%`, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (direction: number) => ({ x: `${-110 * direction}%`, opacity: 0 }),
+}
+
+<AnimatePresence mode="popLayout" initial={false} custom={direction}>
+  <motion.div
+    key={index}
+    custom={direction}
+    variants={slide}
+    initial="enter"
+    animate="center"
+    exit="exit"
+  />
+</AnimatePresence>
+```
+
+The direction goes on `AnimatePresence` as well as on the card. The card that's leaving has already been removed from React, so it can only read the new direction from `AnimatePresence`.
+
+The three cards are different heights. The panel is already a layout animation, so it eases to each new height, and the buttons below glide with it instead of jumping. Once nothing is left to fix, the insight and the queue blur out and the panel closes up around the final score.

@@ -18,18 +18,10 @@ export function InViewEnter({
 }>) {
     const ref = useRef<HTMLElement>(null)
     const [state, setState] = useState<RevealState>("pending")
-    const [reduce, setReduce] = useState(false)
 
     useEffect(() => {
         const element = ref.current
         if (!element) return
-
-        const motion = window.matchMedia("(prefers-reduced-motion: reduce)")
-        if (motion.matches) {
-            setReduce(true)
-            setState("shown")
-            return
-        }
 
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -49,10 +41,10 @@ export function InViewEnter({
         return () => observer.disconnect()
     }, [])
 
-    const style: CSSProperties | undefined = state === "shown" && !reduce ? { animationDelay: `${delay}ms` } : undefined
+    const style: CSSProperties | undefined = state === "shown" ? { animationDelay: `${delay}ms` } : undefined
     const shared = {
         "data-reveal": state,
-        className: cn(!reduce && state === "shown" && "home-enter", className),
+        className: cn(state === "shown" && "rise-in", className),
         style,
         children,
     }

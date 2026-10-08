@@ -2,6 +2,7 @@ import { BoxArchiveIcon } from "../icons/box-archive"
 import { LoopVideo } from "../loop-video"
 import { Container, ContainerInner } from "../ui/container"
 import { SectionLink } from "../ui/section-link"
+import { SnapRail } from "./snap-rail"
 
 type Work = {
     name: string
@@ -78,28 +79,28 @@ function WorkDestination({ work }: Readonly<{ work: Work }>) {
 
 export const SelectedWork = () => {
     return (
-        <Container as="section" className="overflow-x-clip px-5 py-16 @min-[40rem]/page:py-8 @min-[64rem]/page:px-0">
+        <Container as="section" className="overflow-x-clip px-5 py-16 @min-[40rem]/page:py-8">
             <ContainerInner>
-                <div className="home-enter" style={{ animationDelay: "200ms" }}>
+                <div className="rise-in" style={{ animationDelay: "200ms" }}>
                     <SectionLink id="things-i-have-shipped" className="text-base text-neutral-600 font-medium">
                         Things I've shipped
                     </SectionLink>
                 </div>
             </ContainerInner>
-            <div
+            <SnapRail
                 aria-labelledby="things-i-have-shipped"
-                className="home-enter relative -mx-5 mt-6 flex w-[calc(100%+2.5rem)] snap-x snap-mandatory items-start gap-6 overflow-x-auto overscroll-x-contain pt-8 pb-14 pl-5 pr-5 scroll-pl-5 scroll-pr-5 scrollbar-none @min-[64rem]/page:mx-0 @min-[64rem]/page:w-full @min-[64rem]/page:px-[max(0px,calc((100%-64rem)/2))] @min-[64rem]/page:scroll-px-[max(0px,calc((100%-64rem)/2))] [&::-webkit-scrollbar]:hidden"
+                className="rise-in relative -mx-5 mt-6 flex w-[calc(100%+2.5rem)] snap-x snap-mandatory items-start gap-6 overflow-x-auto overscroll-x-contain px-(--inset) pt-8 pb-14 scroll-px-(--inset) scrollbar-none [--inset:max(1.25rem,calc((100cqw_+_2.5rem_-_64rem)/2))] [--peek:2.75rem] [&::-webkit-scrollbar]:hidden"
                 style={{ animationDelay: "280ms" }}
             >
                 {WORK.map((work) => (
                     <article
                         key={work.title}
-                        className="flex-[0_0_100%] snap-start"
+                        className="w-[min(100%,calc(100%_+_var(--inset)_-_1.5rem_-_var(--peek)))] shrink-0 snap-start"
                     >
                         <div className="relative">
                             {work.link.status === "archived" ? <ArchiveTab /> : null}
                             <div className="relative aspect-400/289 overflow-hidden rounded-2xl border">
-                                <LoopVideo name={work.name} className="h-full w-full object-cover" />
+                                <LoopVideo name={work.name} label={work.title} standalone className="h-full w-full object-cover" />
                             </div>
                         </div>
                         <div className="mt-4 max-w-[50ch]">
@@ -111,7 +112,7 @@ export const SelectedWork = () => {
                         </div>
                     </article>
                 ))}
-            </div>
+            </SnapRail>
         </Container>
     )
 }

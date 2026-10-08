@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant anchored (@supports (anchor-name: --a));
+@custom-variant unanchored (@supports not (anchor-name: --a));
 
 @theme inline {
   --color-background: var(--background);
@@ -83,6 +85,16 @@
 
   --brand-moniepoint: #0059f7;
   --brand-moniepoint-ink: oklch(0.412 0.186 261.636);
+
+  --sh-identifier: oklch(0.29 0 0);
+  --sh-keyword: oklch(0.5 0.17 15);
+  --sh-string: oklch(0.48 0.11 150);
+  --sh-class: oklch(0.47 0.12 230);
+  --sh-entity: oklch(0.48 0.13 255);
+  --sh-property: oklch(0.47 0.12 290);
+  --sh-jsxliterals: oklch(0.35 0 0);
+  --sh-sign: oklch(0.5 0 0);
+  --sh-comment: oklch(0.54 0 0);
 }
 
 .dark {
@@ -126,14 +138,27 @@
   html {
     scrollbar-width: thin;
     scrollbar-color: var(--color-neutral-400) transparent;
-    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
   body {
     @apply bg-background text-foreground min-h-screen font-sans text-pretty;
   }
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  summary {
+    touch-action: manipulation;
+  }
 }
 
-@keyframes home-enter {
+@keyframes rise-in {
   from {
     opacity: 0;
     transform: translateY(8px);
@@ -144,7 +169,7 @@
   }
 }
 
-@keyframes home-enter-fade {
+@keyframes rise-in-fade {
   from {
     opacity: 0;
   }
@@ -153,15 +178,32 @@
   }
 }
 
-.home-enter {
-  animation: home-enter 520ms cubic-bezier(0.23, 1, 0.32, 1) both;
+.rise-in {
+  animation: rise-in 520ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-enter {
-    animation-name: home-enter-fade;
+  .rise-in {
+    animation-name: rise-in-fade;
     animation-duration: 200ms;
     animation-delay: 0ms;
+  }
+}
+
+@keyframes chart-dot {
+  from {
+    opacity: 0;
+  }
+}
+
+.chart-track circle {
+  animation: chart-dot 240ms ease-out both;
+  animation-delay: calc(450ms + var(--i) * 9ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-track circle {
+    animation: none;
   }
 }
 
@@ -172,7 +214,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal="armed"] {
-    opacity: 1;
     transform: none;
   }
 }

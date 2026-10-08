@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Asimovian, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,8 +24,13 @@ const asimovian = Asimovian({
 });
 
 export const metadata: Metadata = {
-  title: "stephen diala",
-  description: "Frontend engineer at Moniepoint, working on MonieDesk.",
+  metadataBase: SITE_URL,
+  title: { default: SITE_NAME, template: `%s — ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: "Stephen Diala", url: "https://x.com/e_diala" }],
+  creator: "Stephen Diala",
+  twitter: { card: "summary_large_image", creator: "@e_diala" },
 };
 
 export const viewport: Viewport = {
@@ -37,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="pointer-fine:overscroll-none">
+    <html lang="en" data-scroll-behavior="smooth" className="pointer-fine:overscroll-none">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${asimovian.variable} antialiased`}
       >

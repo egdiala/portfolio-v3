@@ -1,0 +1,88 @@
+import { DynamicIslandPlayground } from "@/components/tinkered/dynamic-island/playground"
+
+<DynamicIslandPlayground />
+
+This started in [Animations on the Web](https://animations.dev/), [@emilkowalski](https://x.com/emilkowalski)'s course. One lesson walks through his Dynamic Island: an Idle state, a Ring state, and a Timer. In his Ring state the bell shakes, and the clapper stays still inside it. I split the clapper onto its own path so it swings with the bell.
+
+His walkthrough has a timer. I built a music state in its place, mostly because I like music, so the island opens into a now-playing pill and a full player.
+
+When it was done I screen recorded it and [posted it on X](https://x.com/e_diala/status/1895517998414500265). That post got 10K views. It's the one that got me a role at EigenExplorer and Bless.
+
+The island is still one object pretending to be many. The ringer, the now-playing pill, and the full player are the same black shape. The work is in making every change between them feel like that shape moved, rather than one thing being swapped for another.
+
+## One shape, many states
+
+The island is a single `motion.div` with `layout`. Whatever is inside decides its size, and Motion animates from the old box to the new one. The radius is set through `style` instead of a class, which lets Motion correct it while the box scales, so the corners stay round mid-flight.
+
+```tsx
+<motion.div
+  layout
+  transition={{ type: "spring", bounce }}
+  style={{ borderRadius: 32 }}
+  className="h-fit min-w-[100px] overflow-hidden bg-black"
+>
+  <motion.div
+    key={view}
+    initial={{ scale: 0.9, opacity: 0, filter: "blur(5px)" }}
+    animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+  >
+    {content}
+  </motion.div>
+</motion.div>
+```
+
+The inner element is keyed by state, so the content is replaced while the shell stays put. New content scales up from 0.9 and unblurs, which covers the frames where the old and new content would otherwise overlap. Turn off **Blur content in** in the playground to see the swap without it.
+
+Because `layout` resizes the shell with a scale transform, anything inside would stretch along with it. The pieces inside, like the bell, the labels, and both faces of the player, get `layout="position"` instead. Motion counter-scales them, so they keep their size and only glide to where they now sit.
+
+## A bounce for every transition
+
+The spring's bounce depends on where the island is coming from and where it is going. Small changes get more bounce. Large ones, like opening the music pill, get less, so they settle instead of wobbling.
+
+```tsx
+const TUNED_BOUNCE = {
+  "idle-ring": 0.5,
+  "ring-idle": 0.5,
+  "ring-music": 0.35,
+  "music-ring": 0.35,
+  "idle-music": 0.3,
+  "music-idle": 0.3,
+}
+```
+
+Set **Bounce** to None, then to 0.5, and switch between Idle and Music. With no bounce, the island moves like a machine. With the same bounce everywhere, the bigger changes overshoot.
+
+## The ringer
+
+The bell shakes with a rotation that decays toward zero. In the course the clapper is part of the bell, so it only turns with it. Here the clapper is a separate path with a wider swing of its own, and the two move together without looking bolted to each other. When the phone goes silent, a red pill grows behind the bell, the bell slides over it, and the strike-through draws in 150ms later, once the bell has landed.
+
+```tsx
+<motion.div
+  animate={{
+    rotate: silent
+      ? [0, -15, 5, -2, 0]
+      : [0, 20, -15, 12.5, -10, 10, -7.5, 7.5, -5, 5, 0],
+    x: silent ? 9 : 0,
+  }}
+/>
+```
+
+The Ring and Silent labels swap with scale, opacity, and blur in `popLayout` mode. The outgoing label leaves the layout right away, so the island can resize around the new one.
+
+## Now playing
+
+The music state isn't in the course. The compact pill and the full player share their artwork through `layoutId`. The cover grows from 24px into its place in the player instead of fading out and back in. The rest of the player fades and unblurs around it.
+
+The seek bar is a native range input, stretched invisibly over the bar you see. That gives it keyboard support and a screen reader label for free. The visible bar only has to show progress and thicken while it is hovered, focused, or dragged.
+
+```tsx
+<input
+  type="range"
+  min={0}
+  max={duration}
+  value={seconds}
+  aria-label="Seek"
+  aria-valuetext={`${formatTime(seconds)} of ${formatTime(duration)}`}
+  className="absolute inset-x-0 top-1/2 h-11 w-full -translate-y-1/2 opacity-0"
+/>
+```

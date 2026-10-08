@@ -1,14 +1,29 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { useReducedMotion } from "motion/react"
+import { media } from "@/lib/media"
 
-const mediaBase = process.env.NEXT_PUBLIC_MEDIA_URL ?? "/videos"
+const subscribeToNothing = () => () => {}
 
-export function LoopVideo({ name, className }: Readonly<{ name: string; className?: string }>) {
+export function LoopVideo({
+    name,
+    className,
+    label,
+    standalone = false,
+}: Readonly<{
+    name: string
+    className?: string
+    label?: string
+    /** Not inside a link, so it can offer native controls when reduced motion stops autoplay. */
+    standalone?: boolean
+}>) {
     const ref = useRef<HTMLVideoElement>(null)
     const prefersReducedMotion = useReducedMotion()
     const [ready, setReady] = useState(false)
+    // The server can't know the motion preference, so controls wait until hydration is done.
+    const hydrated = useSyncExternalStore(subscribeToNothing, () => true, () => false)
+    const controls = hydrated && Boolean(prefersReducedMotion) && standalone
 
     useEffect(() => {
         const video = ref.current
@@ -49,14 +64,16 @@ export function LoopVideo({ name, className }: Readonly<{ name: string; classNam
             muted
             loop
             playsInline
+            controls={controls}
             preload="none"
-            poster={`${mediaBase}/${name}.jpg`}
+            poster={media(`videos/${name}.jpg`)}
+            aria-label={label}
             className={className}
         >
-            {ready ? (
+            {ready || controls ? (
                 <>
-                    <source src={`${mediaBase}/${name}.webm`} type="video/webm" />
-                    <source src={`${mediaBase}/${name}.mp4`} type="video/mp4" />
+                    <source src={media(`videos/${name}.webm`)} type="video/webm" />
+                    <source src={media(`videos/${name}.mp4`)} type="video/mp4" />
                 </>
             ) : null}
         </video>
