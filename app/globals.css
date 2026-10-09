@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant anchored (@supports (anchor-name: --a));
+@custom-variant unanchored (@supports not (anchor-name: --a));
+@custom-variant ios (@supports (-webkit-touch-callout: none));
 
 @theme inline {
   --color-background: var(--background);
@@ -45,6 +48,64 @@
 
   --color-moniepoint: var(--brand-moniepoint);
   --color-moniepoint-ink: var(--brand-moniepoint-ink);
+
+  --color-mmb-background-dark: var(--mmb-background-dark);
+  --color-mmb-background: var(--mmb-background);
+  --color-mmb-background-light: var(--mmb-background-light);
+  --color-mmb-content: var(--mmb-content);
+  --color-mmb-contrast-lower: var(--mmb-contrast-lower);
+  --color-mmb-contrast-low: var(--mmb-contrast-low);
+  --color-mmb-contrast-high: var(--mmb-contrast-high);
+  --color-mmb-primary: var(--mmb-primary);
+  --color-mmb-secondary: var(--mmb-secondary);
+  --color-mmb-yellow: var(--mmb-yellow);
+  --shadow-mmb-overlay-popup: var(--mmb-shadow-overlay-popup);
+  --shadow-mmb-overlay-inner-popup: var(--mmb-shadow-overlay-inner-popup);
+  --text-mmb-2xs: 0.625rem;
+  --text-mmb-xs: 0.688rem;
+  --text-mmb-xs--line-height: calc(1 / 0.75);
+  --text-mmb-sm: 0.75rem;
+  --text-mmb-sm--line-height: calc(1.25 / 0.875);
+  --animate-mmb-bounce-ball: mmb-bounce-ball 1.2s ease-in-out infinite;
+
+  --color-area-background-dark: var(--area-background-dark);
+  --color-area-background: var(--area-background);
+  --color-area-background-light: var(--area-background-light);
+  --color-area-contrast-low: var(--area-contrast-low);
+  --color-area-contrast-high: var(--area-contrast-high);
+  --color-area-contrast-high-3: var(--area-contrast-high-3);
+  --color-area-contrast-high-6: var(--area-contrast-high-6);
+  --color-area-contrast-high-8: var(--area-contrast-high-8);
+  --color-area-contrast-high-10: var(--area-contrast-high-10);
+  --color-area-contrast-high-12: var(--area-contrast-high-12);
+  --color-area-contrast-high-90: var(--area-contrast-high-90);
+  --color-area-rose: var(--area-rose);
+  --font-area-sans: "Helvetica Neue", sans-serif;
+  --text-area-xs: 0.6875rem;
+  --text-area-xs--line-height: 1;
+  --text-area-sm: 0.75rem;
+  --text-area-sm--line-height: 1;
+  --text-area-base: 0.8125rem;
+  --text-area-base--line-height: 1;
+  --radius-area-xs: 0.25rem;
+  --radius-area-lg: 0.75rem;
+  --ease-area-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --shadow-area-xs:
+    0px 6px 4px hsl(0 0 0 / calc(0.01 * var(--area-shadow-intensity))),
+    0px 4px 3px -1px hsl(0 0 0 / calc(0.02 * var(--area-shadow-intensity))),
+    0px 3px 3px -1px hsl(0 0 0 / calc(0.04 * var(--area-shadow-intensity))),
+    0px 1px 1px hsl(0 0 0 / calc(0.05 * var(--area-shadow-intensity)));
+  --shadow-area-sm:
+    0px 10px 4px hsl(0 0 0 / calc(0.01 * var(--area-shadow-intensity))),
+    0px 6px 3px hsl(0 0 0 / calc(0.02 * var(--area-shadow-intensity))),
+    0px 3px 3px hsl(0 0 0 / calc(0.04 * var(--area-shadow-intensity))),
+    0px 1px 1px hsl(0 0 0 / calc(0.05 * var(--area-shadow-intensity)));
+  --shadow-area-md:
+    0px 27px 11px -3px hsl(0 0 0 / calc(0.01 * var(--area-shadow-intensity))),
+    0px 15px 9px -2px hsl(0 0 0 / calc(0.03 * var(--area-shadow-intensity))),
+    0px 7px 7px -2px hsl(0 0 0 / calc(0.06 * var(--area-shadow-intensity))),
+    0px 2px 4px -1px hsl(0 0 0 / calc(0.07 * var(--area-shadow-intensity)));
+  --animate-area-ping: area-ping 2s infinite;
 }
 
 :root {
@@ -83,6 +144,49 @@
 
   --brand-moniepoint: #0059f7;
   --brand-moniepoint-ink: oklch(0.412 0.186 261.636);
+
+  --mmb-background-dark: #f3f2f1;
+  --mmb-background: #020202;
+  --mmb-background-light: #ffffff;
+  --mmb-content: #0d0d0d;
+  --mmb-contrast-lower: #e2e2e2;
+  --mmb-contrast-low: #a49f98;
+  --mmb-contrast-high: #070707;
+  --mmb-primary: #099aaf;
+  --mmb-secondary: #ec368e;
+  --mmb-yellow: #fdc700;
+  --mmb-shadow-overlay-popup:
+    0px 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 50px 20px rgba(0, 0, 0, 0.01),
+    0px 28px 17px rgba(0, 0, 0, 0.03), 0px 13px 13px rgba(0, 0, 0, 0.05),
+    0px 3px 7px rgba(0, 0, 0, 0.05);
+  --mmb-shadow-overlay-inner-popup: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+
+  --area-background-dark: rgba(241, 239, 239, 1);
+  --area-background: rgba(252, 251, 251, 1);
+  --area-background-light: rgba(255, 255, 255, 1);
+  --area-background-light-90: rgba(255, 255, 255, 0.9);
+  --area-contrast-low: rgba(163, 160, 156, 1);
+  --area-contrast-high: rgba(16, 16, 26, 1);
+  --area-contrast-high-3: rgba(16, 16, 26, 0.03);
+  --area-contrast-high-6: rgba(16, 16, 26, 0.06);
+  --area-contrast-high-8: rgba(16, 16, 26, 0.08);
+  --area-contrast-high-10: rgba(16, 16, 26, 0.1);
+  --area-contrast-high-12: rgba(16, 16, 26, 0.12);
+  --area-contrast-high-90: rgba(16, 16, 26, 0.9);
+  --area-contrast-high-95: rgba(16, 16, 26, 0.95);
+  --area-rose: rgba(255, 135, 217, 1);
+  --area-white-30: rgba(255, 255, 255, 0.3);
+  --area-shadow-intensity: 1;
+
+  --sh-identifier: oklch(0.29 0 0);
+  --sh-keyword: oklch(0.5 0.17 15);
+  --sh-string: oklch(0.48 0.11 150);
+  --sh-class: oklch(0.47 0.12 230);
+  --sh-entity: oklch(0.48 0.13 255);
+  --sh-property: oklch(0.47 0.12 290);
+  --sh-jsxliterals: oklch(0.35 0 0);
+  --sh-sign: oklch(0.5 0 0);
+  --sh-comment: oklch(0.54 0 0);
 }
 
 .dark {
@@ -117,6 +221,36 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --mmb-background-dark: #0d0d0d;
+  --mmb-background: #212121;
+  --mmb-background-light: #333333;
+  --mmb-content: #fafafa;
+  --mmb-contrast-lower: #353535;
+  --mmb-contrast-low: #7a736c;
+  --mmb-contrast-high: #fafafa;
+  --mmb-secondary: #fc49a0;
+  --mmb-shadow-overlay-popup:
+    0px 1px 0px rgba(2, 2, 3, 0.04), 0px 0px 0px 1px rgba(2, 2, 3, 0.07),
+    0px 15px 6px -3px rgba(0, 0, 0, 0.01), 0px 6px 5px -2px rgba(0, 0, 0, 0.02),
+    0px 3px 3px -1px rgba(0, 0, 0, 0.04), 0px 1px 2px -0.5px rgba(0, 0, 0, 0.04),
+    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.06), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
+  --mmb-shadow-overlay-inner-popup: 0px 0px 0px 1px rgba(255, 255, 255, 0.04);
+
+  --area-background-dark: rgba(7, 7, 8, 1);
+  --area-background: rgba(27, 27, 29, 1);
+  --area-background-light: rgba(44, 44, 48, 1);
+  --area-background-light-90: rgba(44, 44, 48, 0.9);
+  --area-contrast-low: rgba(111, 111, 113, 1);
+  --area-contrast-high: rgba(253, 253, 253, 1);
+  --area-contrast-high-3: rgba(253, 253, 253, 0.03);
+  --area-contrast-high-6: rgba(253, 253, 253, 0.06);
+  --area-contrast-high-8: rgba(253, 253, 253, 0.08);
+  --area-contrast-high-10: rgba(253, 253, 253, 0.1);
+  --area-contrast-high-12: rgba(253, 253, 253, 0.12);
+  --area-contrast-high-90: rgba(253, 253, 253, 0.9);
+  --area-contrast-high-95: rgba(253, 253, 253, 0.95);
+  --area-shadow-intensity: 2.5;
 }
 
 @layer base {
@@ -126,9 +260,208 @@
   html {
     scrollbar-width: thin;
     scrollbar-color: var(--color-neutral-400) transparent;
-    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
   body {
     @apply bg-background text-foreground min-h-screen font-sans text-pretty;
+  }
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  summary {
+    touch-action: manipulation;
+  }
+  /* Area sets its border color and a medium weight on every element. */
+  .area-theme * {
+    @apply border-area-contrast-high-10 font-medium;
+  }
+}
+
+@layer components {
+  .area-prose {
+    @apply font-area-sans text-area-base text-area-contrast-high-90 leading-4 font-normal;
+  }
+  .area-prose p {
+    @apply font-area-sans text-area-base text-area-contrast-high-90 inline-block leading-4 font-normal;
+  }
+  .area-prose ol,
+  .area-prose ul {
+    @apply my-2 list-inside space-y-1.5;
+  }
+  .area-prose ol {
+    @apply list-decimal;
+  }
+  .area-prose ul {
+    @apply list-disc;
+  }
+  .area-prose li {
+    @apply space-y-1 font-normal;
+  }
+  .area-prose code {
+    @apply whitespace-break-spaces;
+  }
+  .area-prose strong,
+  .area-prose a,
+  .area-prose h3,
+  .area-prose blockquote {
+    @apply text-inherit;
+  }
+  /* Not in Area's styles, where a link in an answer looks like the text around it. */
+  .area-prose a {
+    @apply underline underline-offset-2;
+  }
+  .area-prose h1,
+  .area-prose h2,
+  .area-prose h3,
+  .area-prose h4,
+  .area-prose h5,
+  .area-prose h6 {
+    @apply text-area-contrast-high mt-2 mb-1 font-semibold;
+  }
+}
+
+@utility animate-area-gradient {
+  background-size: 200% 200%;
+  animation: area-gradient-scroll 4s linear infinite;
+}
+
+@utility animate-area-gradient-text {
+  background-size: 200% auto;
+  background-position: 0% 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: area-gradient-scroll 4s linear infinite;
+}
+
+@keyframes area-gradient-scroll {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes area-ping {
+  0% {
+    scale: 0;
+    opacity: 1;
+  }
+  70%,
+  100% {
+    scale: 2;
+    opacity: 0;
+  }
+}
+
+/* The three dots, in the orb and while an answer loads. Each starts half a second into the loop behind the next. */
+.area-orbit > div {
+  background-color: #ffadd2;
+  animation: area-orbit-flow 2.5s infinite;
+  animation-delay: calc(var(--orbit-dot-index) * -0.5s);
+}
+
+@keyframes area-orbit-flow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 0.6;
+  }
+  66% {
+    opacity: 0.39;
+  }
+}
+
+.area-outer-orbit {
+  background: var(--area-background-light-90);
+  box-shadow:
+    inset -2px -2px 3px rgba(144, 197, 255, 0.11),
+    inset 2px -2px 2px rgba(255, 173, 210, 0.17),
+    inset 0px 2.5px 2px rgba(178, 247, 202, 0.2),
+    inset 0px 1px 0px var(--area-background-light-90);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rise-in-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.rise-in {
+  animation: rise-in 520ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation-name: rise-in-fade;
+    animation-duration: 200ms;
+    animation-delay: 0ms;
+  }
+}
+
+@keyframes mmb-bounce-ball {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+  }
+  25%,
+  75% {
+    transform: translateY(-8px) scaleX(0.9) scaleY(1.1);
+  }
+  50% {
+    transform: translateY(0) scaleX(1.1) scaleY(0.9);
+  }
+}
+
+@keyframes chart-dot {
+  from {
+    opacity: 0;
+  }
+}
+
+.chart-track circle {
+  animation: chart-dot 240ms ease-out both;
+  animation-delay: calc(450ms + var(--i) * 9ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-track circle {
+    animation: none;
+  }
+}
+
+[data-reveal="armed"] {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal="armed"] {
+    transform: none;
   }
 }

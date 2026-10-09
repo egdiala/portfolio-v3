@@ -1,0 +1,130 @@
+import { AskAreaPlayground } from "@/components/tinkered/ask-area/playground";
+
+<AskAreaPlayground />
+
+[Area](https://docs.area.club/introduction) is a marketplace for restaking. Ask Area is the chat that goes everywhere in its app with you. It sits behind the orb at the bottom of the sidebar and answers from Area's documentation, so you can ask what restaking is without leaving the page you're on.
+
+The design is by [@guerriero_se](https://x.com/guerriero_se). The interaction is mine, and part of it is borrowed from Apple's [Dynamic Island](/tinkered/dynamic-island), where one surface changes shape as its job changes. Here the orb's menu becomes the chat box, and the chat box becomes the menu again.
+
+The playground above is that component, lifted out of the app. In the app the first two rows of the menu open walkthroughs. Here they hand their question to Ask Area.
+
+## One container, two sizes
+
+The menu and the chat are never the same element. Each has its own container, keyed by the view, so `AnimatePresence` treats a change of view as one container leaving while another arrives.
+
+```tsx
+<AnimatePresence initial={false} custom={{ isOpen, prevView }}>
+  {isOpen && (
+    <motion.div
+      key={view}
+      variants={variants[view]}
+      initial='initial'
+      animate='animate'
+      exit='exit'
+      custom={{ isOpen, prevView }}
+    >
+      {content}
+    </motion.div>
+  )}
+</AnimatePresence>
+```
+
+What makes it read as one container is where each one starts. The chat enters at the menu's size and grows to its own. Going back, the menu enters at the chat's size and shrinks. The one arriving is drawn on top of the one leaving, so the swap is hidden and all you see is the resize.
+
+```tsx
+const closed = { width: 0, height: 0, opacity: 0 };
+const menu = { width: 200, height: 240, bottom: 48, opacity: 1 };
+const chat = { width: 350, height: 380, bottom: 48, opacity: 1 };
+
+const variants = {
+  "orbit-menu": {
+    initial: ({ prevView }) => (prevView === "ask-area" ? chat : closed),
+    animate: menu,
+    exit: closed,
+  },
+  "ask-area": {
+    initial: menu,
+    animate: chat,
+    exit: ({ isOpen }) => (isOpen ? menu : closed),
+  },
+};
+```
+
+`custom` is how a variant learns where it came from or where it's going. A container that is leaving is no longer rendered, so it can't be given new props. `AnimatePresence` hands it `custom` instead, and that is how the chat knows whether to shrink back into the menu or collapse into the orb.
+
+Everything inside shares one spring, half a second long with a little bounce, set once on a `MotionConfig`.
+
+```tsx
+<MotionConfig transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}>
+```
+
+Set **Speed** to 0.1× and switch **View** between Menu and Ask Area to watch one size turn into the other.
+
+## The row you tap is the header you land on
+
+Ask Area appears in both views, as a row in the menu and as the title of the chat. Its icon and its label carry the same `layoutId` in both places.
+
+```tsx
+// The row in the menu
+<motion.span layoutId="ask-area-icon"><AskAreaIcon /></motion.span>
+<motion.span layoutId="ask-area-text">Ask Area</motion.span>
+
+// The header of the chat
+<motion.span layoutId="ask-area-icon"><AskAreaIcon /></motion.span>
+<motion.span layoutId="ask-area-text">Ask Area</motion.span>
+```
+
+When one leaves and the other arrives, Motion animates between their two positions. The label slides from the third row up to the middle of the header while everything around it is replaced. It's the one thing your eye can follow through the change, and it makes the same trip home when you press Back.
+
+## Three dots
+
+The orb has three dots that fade in turn. They are one keyframe animation, and each dot starts further into it than the dot beside it.
+
+```css
+.area-orbit > div {
+  animation: area-orbit-flow 2.5s infinite;
+  animation-delay: calc(var(--orbit-dot-index) * -0.5s);
+}
+
+@keyframes area-orbit-flow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 0.6;
+  }
+  66% {
+    opacity: 0.39;
+  }
+}
+```
+
+The delays are negative, so a dot begins partway through its loop. With positive delays, all three would sit at full opacity and fall into step one at a time. This way they are already out of step on the first frame.
+
+While an answer is on its way, the same three dots sit in the reply bubble. What you tapped to get here is what shows that it's working.
+
+## References as pills
+
+An answer ends with up to four pills. They are the pages the answer came from, and each one opens that page in the docs.
+
+```tsx
+<motion.div
+  initial={{ x: 10, opacity: 0, filter: "blur(2px)" }}
+  whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+  viewport={{ once: true }}
+  transition={{ delay: index * 0.2, bounce: 0 }}
+/>
+```
+
+They slide in from the right and unblur, 200ms apart. They use `whileInView` because a long answer pushes them below the edge of a panel that is only 380px tall. They wait until you scroll down to them, and `once` keeps them from replaying when you scroll back up.
+
+## Asking the docs
+
+In the app, Ask Area talks to [Mintlify](https://www.mintlify.com/), which hosts [Area's docs](https://docs.area.club/). Mintlify indexes the docs and puts an assistant in front of them. Through its REST API the app opened a topic, sent it a question, and got back an answer with its sources attached after a `||`.
+
+This component asks a different way. A server route searches a copy of the same docs for the sections closest to your question, numbers them, and sends them with the question to GPT-4.1 through [Vercel's AI Gateway](https://vercel.com/ai-gateway).
+
+The model answers only from those sections, and it ends its reply with one line naming the ones it used. It's the same idea as Mintlify's `||`: the answer and its sources arrive together, and the route takes them apart.
+
+Questions are capped at 400 characters and eight a visit.

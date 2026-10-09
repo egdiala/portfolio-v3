@@ -1,6 +1,8 @@
 "use client"
 
 import { useLayoutEffect, useRef, useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
   motion,
   useMotionTemplate,
@@ -12,41 +14,45 @@ import {
 } from "motion/react"
 
 const SCROLL_DISTANCE = 140
+const FADE_PORTION = 0.45
+const BLUR_MAX = 4
 
-type Side = "start" | "end" | "keep" | "gap"
+type Side = "start" | "end" | "keep" | "enter"
 
 type Glyph = {
   char: string
-  keep: boolean
   side: Side
 }
 
-function sideFor(index: number, keepIndex: number): Side {
-  if (index < keepIndex) return "start"
-  if (index > keepIndex) return "end"
-  return "keep"
-}
-
-function word(text: string, keepIndex: number): Glyph[] {
-  return [...text].map((char, index) => ({
-    char,
-    keep: index === keepIndex,
-    side: sideFor(index, keepIndex),
-  }))
-}
-
-// "stephen" keeps its p. "diala" keeps its d. The space between them closes too.
+// "stephen diala" settles on "egdiala". The second e in "stephen" stays,
+// and so does "diala". Everything else blurs shut. "g" is not in the full
+// name, so it opens in the same slot language, unblurring as it arrives.
 const GLYPHS: Glyph[] = [
-  ...word("stephen", 3),
-  { char: "\u00A0", keep: false, side: "gap" },
-  ...word("diala", 0),
+  { char: "s", side: "start" },
+  { char: "t", side: "start" },
+  { char: "e", side: "start" },
+  { char: "p", side: "start" },
+  { char: "h", side: "start" },
+  { char: "e", side: "keep" },
+  { char: "g", side: "enter" },
+  { char: "n", side: "end" },
+  { char: "\u00A0", side: "end" },
+  { char: "d", side: "keep" },
+  { char: "i", side: "keep" },
+  { char: "a", side: "keep" },
+  { char: "l", side: "keep" },
+  { char: "a", side: "keep" },
 ]
 
 const ALIGN: Record<Side, string> = {
   start: "justify-end",
   end: "justify-start",
   keep: "justify-center",
-  gap: "justify-start",
+  enter: "justify-start",
+}
+
+function fadeIn(value: number) {
+  return Math.min(1, value / FADE_PORTION)
 }
 
 function GlyphSlot({
@@ -66,22 +72,34 @@ function GlyphSlot({
   const width = useTransform(progress, (value) => {
     const full = widthRef.current
     if (full == null) return 0
-    return glyph.keep ? full : full * (1 - value)
+    if (glyph.side === "keep") return full
+    if (glyph.side === "enter") return full * fadeIn(value)
+    return full * (1 - value)
   })
   const opacity = useTransform(progress, (value) => {
-    if (glyph.keep) return 1
-    return Math.max(0, 1 - value / 0.45)
+    if (glyph.side === "keep") return 1
+    if (glyph.side === "enter") return fadeIn(value)
+    return Math.max(0, 1 - value / FADE_PORTION)
   })
-  const blur = useTransform(progress, (value) =>
-    glyph.keep ? 0 : Math.min(4, (value / 0.45) * 4),
-  )
+  const blur = useTransform(progress, (value) => {
+    if (glyph.side === "keep") return 0
+    if (glyph.side === "enter") return BLUR_MAX * (1 - fadeIn(value))
+    return Math.min(BLUR_MAX, (value / FADE_PORTION) * BLUR_MAX)
+  })
   const filter = useMotionTemplate`blur(${blur}px)`
+
+  let slotStyle: { width: number | MotionValue<number>; opacity: number | MotionValue<number> } | undefined
+  if (fullWidth == null && glyph.side === "enter") {
+    slotStyle = { width: 0, opacity: 0 }
+  } else if (fullWidth != null) {
+    slotStyle = { width, opacity }
+  }
 
   return (
     <motion.span
       aria-hidden="true"
-      className={`inline-flex min-w-0 overflow-hidden ${ALIGN[glyph.side]}`}
-      style={fullWidth == null ? undefined : { width, opacity }}
+      className={`inline-flex min-w-0 [clip-path:inset(-0.4em_0)] ${ALIGN[glyph.side]}`}
+      style={slotStyle}
     >
       <motion.span
         ref={measureRef}
@@ -95,6 +113,7 @@ function GlyphSlot({
 }
 
 export function NameMorph() {
+  const pathname = usePathname()
   const prefersReducedMotion = useReducedMotion()
   const reduceRef = useRef(prefersReducedMotion)
   reduceRef.current = prefersReducedMotion
@@ -136,22 +155,35 @@ export function NameMorph() {
     return () => window.removeEventListener("resize", measure)
   }, [])
 
+  const glyphs = GLYPHS.map((glyph, index) => (
+    <GlyphSlot
+      key={`${glyph.side}-${index}`}
+      glyph={glyph}
+      progress={progress}
+      fullWidth={widths[index]}
+      measureRef={(node) => {
+        glyphRefs.current[index] = node
+      }}
+    />
+  ))
+  const nameClassName =
+    "inline-flex shrink-0 items-baseline font-asimovian text-2xl leading-none font-bold"
+
+  if (pathname === "/") {
+    return (
+      <h1 aria-label="stephen diala" className={nameClassName}>
+        {glyphs}
+      </h1>
+    )
+  }
+
   return (
-    <h1
-      aria-label="stephen diala"
-      className="inline-flex shrink-0 items-baseline font-asimovian text-2xl leading-none font-bold"
+    <Link
+      href="/"
+      aria-label="stephen diala, home"
+      className={`${nameClassName} rounded-sm outline-none focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
     >
-      {GLYPHS.map((glyph, index) => (
-        <GlyphSlot
-          key={`${glyph.side}-${index}`}
-          glyph={glyph}
-          progress={progress}
-          fullWidth={widths[index]}
-          measureRef={(node) => {
-            glyphRefs.current[index] = node
-          }}
-        />
-      ))}
-    </h1>
+      {glyphs}
+    </Link>
   )
 }

@@ -1,0 +1,101 @@
+import { MemorybaseLlmOverlayPlayground } from "@/components/tinkered/memorybase-llm-overlay/playground"
+
+<MemorybaseLlmOverlayPlayground />
+
+[MemoryBase](https://memorybase.app) keeps what you've worked through with one AI, so you can bring it into a chat with another. This overlay is the part that lives inside the chat. The extension adds it under the message box on Claude, Gemini, and ChatGPT, the three it supports today, and it's how context from your other conversations gets attached to the one you're in.
+
+The design is by [@guerriero_se](https://x.com/guerriero_se). I built it as a standalone prototype first, with a stand-in chat box above it, and it then went into the extension. The playground above is that prototype.
+
+## One word changes
+
+The pill always says where memory stands: syncing, ready, or attached. Only the last word changes, so only the last word moves. It sits in a `TextMorph` from [Torph](https://torph.lochie.me), which animates the change letter by letter instead of swapping one word for the next.
+
+```tsx
+<span>
+  Memory is <TextMorph>{word}</TextMorph>
+</span>
+```
+
+Turn off **Morph text** and pick a different **Status** to see the swap without it.
+
+The dot on the logo carries the same status. While memory syncs, it's yellow and it bounces, squashing where it lands and stretching as it rises. That loop is a CSS keyframe animation, so it runs for as long as syncing takes without React having to do anything.
+
+```css
+@keyframes mmb-bounce-ball {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+  }
+  25%,
+  75% {
+    transform: translateY(-8px) scaleX(0.9) scaleY(1.1);
+  }
+  50% {
+    transform: translateY(0) scaleX(1.1) scaleY(0.9);
+  }
+}
+```
+
+Once memory is ready, the dot turns teal and holds still. When you attach something, it grows, and a check scales and unblurs into it. Three seconds later the pill is back to ready.
+
+## Growing out of the pill
+
+The popup opens from where you tapped. It starts with no width and no height, 10px below where it ends up, and springs to 420 by 380 while it fades in and unblurs. It's anchored to the pill by its bottom edge, so growing reads as rising.
+
+```tsx
+<motion.div
+  initial={{ y: 10, width: 0, height: 0, opacity: 0, filter: "blur(4px)" }}
+  animate={{ y: 0, width: 420, height: 380, opacity: 1, filter: "blur(0px)" }}
+  exit={{ y: 10, width: 0, height: 0, opacity: 0, filter: "blur(4px)" }}
+  transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
+/>
+```
+
+The contents are laid out at full size and pinned to the bottom of the popup, which clips them. If they resized along with it, every row would rewrap on every frame. This way the popup uncovers a layout that is already finished. Set **Speed** to 0.1× and open it to watch the edges move past the rows.
+
+Animating width and height makes the browser lay the popup out on every frame, which a transform would avoid. A scale transform would also squash the text and the corners while it grows, so this trades a little work for a popup that keeps its shape. Turn off **Grow from the pill** to see it open with only the fade and the blur.
+
+## Tabs that know which way to go
+
+All Memories and Attached slide past each other. Attached sits on the right, so it comes in from the right while All Memories leaves to the left, and going back reverses both. It's the same pattern as the recommendation cards in the [AI extension widget](/tinkered/ai-chrome-extension-widget#one-card-at-a-time): a direction goes to both the panel and `AnimatePresence` as `custom`, so the panel that's leaving still learns which way to go.
+
+```tsx
+const selectTab = (next: PopupTab) => {
+  if (next === tab) return
+  setDirection(tab === "attached" ? -1 : 1)
+  setTab(next)
+}
+```
+
+With only two tabs, the direction depends on nothing but the one you're leaving.
+
+The count in the Attached tab is a `TextMorph` too. It has `tabular-nums`, so every digit takes the same width and the label doesn't twitch as it counts.
+
+## Attaching a memory
+
+Tap a row to attach it. The row tints teal over 300ms, and its plus becomes a check. The two icons swap inside an `AnimatePresence` in `wait` mode, so the plus finishes shrinking before the check starts to grow, and they're never on screen together.
+
+```tsx
+<AnimatePresence mode="wait" initial={false}>
+  <motion.span
+    key={state}
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.5 }}
+  >
+    <ActionIcon />
+  </motion.span>
+</AnimatePresence>
+```
+
+Below the popup, the pill answers too. Its word changes to attached and its dot takes the check.
+
+Rows you haven't attached have a hover state made of one pseudo-element. It starts at 90% scale and fully transparent, then scales up and fades in behind the row, so the highlight seems to arrive from inside the row instead of switching on. That one is plain CSS.
+
+```tsx
+<div className="relative isolate after:absolute after:inset-0 after:-z-10 after:scale-90 after:rounded-lg after:bg-mmb-contrast-high/5 after:opacity-0 after:transition hover:after:scale-100 hover:after:opacity-100" />
+```
+
+Close the popup and press send, and whatever you attached moves under Already attached in conversation, where its check doubles.
+
+> Want to try the extension? Visit [memorybase.app](https://memorybase.app) to get started.

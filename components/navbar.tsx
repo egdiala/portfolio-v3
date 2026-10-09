@@ -41,11 +41,13 @@ const BLUR_LAYERS = [
   },
 ]
 
+const SCRIM_MASK = "linear-gradient(to bottom, black 0.5rem, transparent)"
+
 function NavbarBlur() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 h-31.5"
+      className="pointer-events-none absolute inset-x-0 top-0 h-[calc(7.875rem+env(safe-area-inset-top))]"
     >
       {BLUR_LAYERS.map((layer, index) => (
         <div
@@ -60,15 +62,28 @@ function NavbarBlur() {
           }}
         />
       ))}
+      {/*
+        iOS Safari draws the page behind the status bar and only covers it when the box pinned
+        under the top edge has a solid background-color. Gradients and backdrop-filter don't
+        count, and nothing may sit above this box there, so the nav holds the top padding.
+      */}
+      <div
+        className="absolute inset-x-0 top-0 h-[env(safe-area-inset-top)] bg-background ios:h-[max(env(safe-area-inset-top),2rem)]"
+        style={{
+          zIndex: BLUR_LAYERS.length + 1,
+          maskImage: SCRIM_MASK,
+          WebkitMaskImage: SCRIM_MASK,
+        }}
+      />
     </div>
   )
 }
 
 export const Navbar = () => {
   return (
-    <Container as="nav" className="sticky top-0 z-50 px-5">
+    <Container as="nav" className="sticky top-0 z-50 px-5 pt-[calc(1rem+env(safe-area-inset-top))]">
       <NavbarBlur />
-      <ContainerInner className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-3 py-4">
+      <ContainerInner className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-3 pb-4">
         <NameMorph />
         <motion.div
           layout="position"
