@@ -47,6 +47,11 @@ export const TINKERED_WORKS: TinkeredWork[] = [
   {
     slug: "memorybase-llm-overlay",
     title: "LLM Overlay for MemoryBase",
+    summary:
+      "A pill under the chat box on Claude, Gemini, and ChatGPT that opens into a panel for attaching context from your other AI chats.",
+    description:
+      "The MemoryBase overlay, designed by @guerriero_se and built by me in React and Motion. Watch memory sync, open the panel, and attach a memory.",
+    writeup: true,
   },
   {
     slug: "business-switcher",

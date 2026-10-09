@@ -48,6 +48,25 @@
 
   --color-moniepoint: var(--brand-moniepoint);
   --color-moniepoint-ink: var(--brand-moniepoint-ink);
+
+  --color-mmb-background-dark: var(--mmb-background-dark);
+  --color-mmb-background: var(--mmb-background);
+  --color-mmb-background-light: var(--mmb-background-light);
+  --color-mmb-content: var(--mmb-content);
+  --color-mmb-contrast-lower: var(--mmb-contrast-lower);
+  --color-mmb-contrast-low: var(--mmb-contrast-low);
+  --color-mmb-contrast-high: var(--mmb-contrast-high);
+  --color-mmb-primary: var(--mmb-primary);
+  --color-mmb-secondary: var(--mmb-secondary);
+  --color-mmb-yellow: var(--mmb-yellow);
+  --shadow-mmb-overlay-popup: var(--mmb-shadow-overlay-popup);
+  --shadow-mmb-overlay-inner-popup: var(--mmb-shadow-overlay-inner-popup);
+  --text-mmb-2xs: 0.625rem;
+  --text-mmb-xs: 0.688rem;
+  --text-mmb-xs--line-height: calc(1 / 0.75);
+  --text-mmb-sm: 0.75rem;
+  --text-mmb-sm--line-height: calc(1.25 / 0.875);
+  --animate-mmb-bounce-ball: mmb-bounce-ball 1.2s ease-in-out infinite;
 }
 
 :root {
@@ -86,6 +105,22 @@
 
   --brand-moniepoint: #0059f7;
   --brand-moniepoint-ink: oklch(0.412 0.186 261.636);
+
+  --mmb-background-dark: #f3f2f1;
+  --mmb-background: #020202;
+  --mmb-background-light: #ffffff;
+  --mmb-content: #0d0d0d;
+  --mmb-contrast-lower: #e2e2e2;
+  --mmb-contrast-low: #a49f98;
+  --mmb-contrast-high: #070707;
+  --mmb-primary: #099aaf;
+  --mmb-secondary: #ec368e;
+  --mmb-yellow: #fdc700;
+  --mmb-shadow-overlay-popup:
+    0px 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 50px 20px rgba(0, 0, 0, 0.01),
+    0px 28px 17px rgba(0, 0, 0, 0.03), 0px 13px 13px rgba(0, 0, 0, 0.05),
+    0px 3px 7px rgba(0, 0, 0, 0.05);
+  --mmb-shadow-overlay-inner-popup: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
 
   --sh-identifier: oklch(0.29 0 0);
   --sh-keyword: oklch(0.5 0.17 15);
@@ -130,6 +165,21 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --mmb-background-dark: #0d0d0d;
+  --mmb-background: #212121;
+  --mmb-background-light: #333333;
+  --mmb-content: #fafafa;
+  --mmb-contrast-lower: #353535;
+  --mmb-contrast-low: #7a736c;
+  --mmb-contrast-high: #fafafa;
+  --mmb-secondary: #fc49a0;
+  --mmb-shadow-overlay-popup:
+    0px 1px 0px rgba(2, 2, 3, 0.04), 0px 0px 0px 1px rgba(2, 2, 3, 0.07),
+    0px 15px 6px -3px rgba(0, 0, 0, 0.01), 0px 6px 5px -2px rgba(0, 0, 0, 0.02),
+    0px 3px 3px -1px rgba(0, 0, 0, 0.04), 0px 1px 2px -0.5px rgba(0, 0, 0, 0.04),
+    inset 0px 0px 0px 1px rgba(255, 255, 255, 0.06), inset 0px 1px 0px rgba(255, 255, 255, 0.15);
+  --mmb-shadow-overlay-inner-popup: 0px 0px 0px 1px rgba(255, 255, 255, 0.04);
 }
 
 @layer base {
@@ -188,6 +238,20 @@
     animation-name: rise-in-fade;
     animation-duration: 200ms;
     animation-delay: 0ms;
+  }
+}
+
+@keyframes mmb-bounce-ball {
+  0%,
+  100% {
+    transform: translateY(0) scaleX(1) scaleY(1);
+  }
+  25%,
+  75% {
+    transform: translateY(-8px) scaleX(0.9) scaleY(1.1);
+  }
+  50% {
+    transform: translateY(0) scaleX(1.1) scaleY(0.9);
   }
 }
 
