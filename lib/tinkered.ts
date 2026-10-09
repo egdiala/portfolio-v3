@@ -42,7 +42,12 @@ export const TINKERED_WORKS: TinkeredWork[] = [
   {
     slug: "ask-area-ai-chat",
     title: "Ask Area AI Chat",
+    summary:
+      "A help menu that morphs into a chat grounded in Area's docs and back, with every answer ending in links to the pages it came from.",
+    description:
+      "Ask Area, the docs chat inside the Area app, designed by @guerriero_se and built by me. The menu becomes the chat the way the Dynamic Island changes state. Ask it something.",
     videoClassName: "object-[25%_90%]",
+    writeup: true,
   },
   {
     slug: "memorybase-llm-overlay",

@@ -1,0 +1,12 @@
+import type { SVGProps } from "react"
+
+export function BookOpen4Icon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" {...props}>
+      <path d="M9.00002 15.0512C9.17002 15.0512 9.33902 15.0062 9.49402 14.9172C10.137 14.5462 11.226 14.0702 12.635 14.0722C13.534 14.0732 14.302 14.2692 14.905 14.5072C15.553 14.7622 16.249 14.2672 16.249 13.5702V4.48716C16.249 4.13316 16.068 3.80716 15.763 3.62716C15.126 3.25116 14.037 2.76416 12.623 2.76416C10.733 2.76416 9.42502 3.63616 8.99902 3.94616" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.9963 6.92056C13.583 6.82516 13.1234 6.76416 12.6231 6.76416C12.1228 6.76416 11.6632 6.82526 11.25 6.92086" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.9963 10.4206C13.583 10.3252 13.1234 10.2642 12.6231 10.2642C12.1228 10.2642 11.6632 10.3253 11.25 10.4209" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8.99998 15.0511C8.82998 15.0511 8.66098 15.0061 8.50598 14.9171C7.86298 14.5461 6.77398 14.0701 5.36498 14.0721C4.46598 14.0731 3.69798 14.2691 3.09498 14.5071C2.44698 14.7621 1.75098 14.2701 1.75098 13.5741V4.48414C1.75098 4.13014 1.93198 3.80814 2.23698 3.62814C2.87398 3.25214 3.96298 2.76514 5.37698 2.76514C7.26698 2.76514 8.57498 3.63714 9.00098 3.94714V15.0511H8.99998Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
