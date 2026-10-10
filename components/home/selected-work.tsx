@@ -83,7 +83,7 @@ export const SelectedWork = () => {
             <ContainerInner>
                 <div className="rise-in" style={{ animationDelay: "200ms" }}>
                     <SectionLink id="things-i-have-shipped" className="text-base text-neutral-600 font-medium">
-                        Things I've shipped
+                        Things I&apos;ve shipped
                     </SectionLink>
                 </div>
             </ContainerInner>

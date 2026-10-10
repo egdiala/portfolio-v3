@@ -31,6 +31,7 @@ export function Music({
 }>) {
   const time = useTimeScale()
   const playback = usePlayback()
+  const { audioRef } = playback
   const rootRef = useRef<HTMLDivElement>(null)
   const playRef = useRef<HTMLButtonElement>(null)
 
@@ -71,7 +72,7 @@ export function Music({
       className="relative flex"
     >
       <audio
-        ref={playback.audioRef}
+        ref={audioRef}
         src={TRACK.src}
         preload="none"
         onLoadedMetadata={(event) => playback.setDuration(event.currentTarget.duration)}

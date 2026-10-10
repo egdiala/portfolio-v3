@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, type RefObject } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ArrowDown } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import { ArrowUpIcon } from "@/components/icons/arrow-up"
@@ -15,12 +15,14 @@ import { useAskArea } from "./hooks/use-ask-area"
 
 export function AskArea({
   asked,
+  onAsked,
   starter,
   onBack,
   onClose,
 }: Readonly<{
   /** How many questions this page load has spent. It outlives the chat, which starts over each time it opens. */
-  asked: RefObject<number>
+  asked: number
+  onAsked: () => void
   /** A question to send as the chat opens. */
   starter?: string
   onBack: () => void
@@ -30,7 +32,7 @@ export function AskArea({
   const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState("")
   const [isBottomVisible, setIsBottomVisible] = useState(true)
-  const { messages, isLoading, atLimit, send } = useAskArea(asked, starter)
+  const { messages, isLoading, atLimit, send } = useAskArea(asked, onAsked, starter)
 
   const canSend = query.trim() !== "" && !isLoading && !atLimit
 

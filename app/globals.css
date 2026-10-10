@@ -106,6 +106,19 @@
     0px 7px 7px -2px hsl(0 0 0 / calc(0.06 * var(--area-shadow-intensity))),
     0px 2px 4px -1px hsl(0 0 0 / calc(0.07 * var(--area-shadow-intensity)));
   --animate-area-ping: area-ping 2s infinite;
+
+  --color-melun-background: var(--melun-background);
+  --color-melun-foreground: var(--melun-foreground);
+  --color-melun-popover: var(--melun-popover);
+  --color-melun-popover-foreground: var(--melun-popover-foreground);
+  --color-melun-ring: var(--melun-ring);
+  --color-melun-neutral-100: var(--melun-neutral-100);
+  --color-melun-neutral-200: var(--melun-neutral-200);
+  --color-melun-neutral-300: var(--melun-neutral-300);
+  --color-melun-neutral-800: var(--melun-neutral-800);
+  --color-melun-neutral-950: var(--melun-neutral-950);
+  --color-melun-lemon-999: var(--melun-lemon-999);
+  --color-melun-teal-950: var(--melun-teal-950);
 }
 
 :root {
@@ -177,6 +190,20 @@
   --area-rose: rgba(255, 135, 217, 1);
   --area-white-30: rgba(255, 255, 255, 0.3);
   --area-shadow-intensity: 1;
+
+  /* Melun's business app is light-only, so none of these change under .dark. */
+  --melun-background: oklch(1 0 0);
+  --melun-foreground: oklch(0.145 0 0);
+  --melun-popover: oklch(1 0 0);
+  --melun-popover-foreground: oklch(0.145 0 0);
+  --melun-ring: oklch(0.708 0 0);
+  --melun-neutral-100: #f9f9fb;
+  --melun-neutral-200: #eff0f3;
+  --melun-neutral-300: #e7e8ec;
+  --melun-neutral-800: #8b8d98;
+  --melun-neutral-950: #62636c;
+  --melun-lemon-999: #2e4122;
+  --melun-teal-950: #13322b;
 
   --sh-identifier: oklch(0.29 0 0);
   --sh-keyword: oklch(0.5 0.17 15);

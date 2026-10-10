@@ -61,6 +61,11 @@ export const TINKERED_WORKS: TinkeredWork[] = [
   {
     slug: "business-switcher",
     title: "Business Switcher",
+    summary:
+      "The menu at the top of Melun's sidebar for moving between the businesses on one account, where each business's avatar leaves a stack and becomes its row.",
+    description:
+      "Melun's business switcher, designed by @seektheinyamah and built by me on shadcn and Motion. It's in the showcase on Motion's website. Open the menu and open the list.",
+    writeup: true,
   },
 ]
 

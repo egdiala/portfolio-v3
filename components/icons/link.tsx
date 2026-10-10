@@ -3,10 +3,9 @@ import React, {SVGProps} from 'react';
 type IconProps = SVGProps<SVGSVGElement> & {
 	secondaryfill?: string;
 	strokewidth?: number;
-	title?: string;
 }
 
-export const LinkIcon = ({title = 'Link', ...props}: IconProps) => {
+export const LinkIcon = (props: IconProps) => {
 	return (
 		<svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
             <g fill="none">

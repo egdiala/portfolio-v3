@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useEffectEvent, useRef, useState } from "react"
 import { useReducedMotionConfig } from "motion/react"
 import { useTimeScale } from "@/components/playground/time-scale"
 import { ATTACHED_MS, MEMORIES, POPUP_HEIGHT, POPUP_WIDTH, SYNC_MS } from "../constants"
@@ -33,8 +33,7 @@ export function useOverlay({ mode, held, onModeChange, morph, grow, width }: Ove
   const pillRef = useRef<HTMLButtonElement>(null)
   const popupRef = useRef<HTMLDivElement>(null)
   const restoreFocus = useRef(false)
-  const changeMode = useRef(onModeChange)
-  changeMode.current = onModeChange
+  const settle = useEffectEvent(() => onModeChange("ready"))
 
   // The pill can't be opened while memory syncs, so an open popup goes with it.
   if (mode === "syncing" && open) setOpen(false)
@@ -42,10 +41,7 @@ export function useOverlay({ mode, held, onModeChange, morph, grow, width }: Ove
   // Syncing and attached are passing states. Each attach restarts the wait.
   useEffect(() => {
     if (held || mode === "ready") return
-    const timer = window.setTimeout(
-      () => changeMode.current("ready"),
-      time.ms(mode === "syncing" ? SYNC_MS : ATTACHED_MS),
-    )
+    const timer = window.setTimeout(() => settle(), time.ms(mode === "syncing" ? SYNC_MS : ATTACHED_MS))
     return () => window.clearTimeout(timer)
   }, [mode, held, attaches, time])
 
@@ -111,7 +107,7 @@ export function useOverlay({ mode, held, onModeChange, morph, grow, width }: Ove
     setPending((current) => [...current, memory.id])
     setAttaches((current) => current + 1)
     setAnnouncement(`${memory.title} attached.`)
-    changeMode.current("attached")
+    onModeChange("attached")
   }
 
   // Sending a message takes its attachments with it.

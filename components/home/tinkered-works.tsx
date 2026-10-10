@@ -11,7 +11,7 @@ export const TinkeredWorks = () => {
             <ContainerInner>
                 <InViewEnter className="flex items-center justify-between gap-4">
                     <SectionLink id="tinkered-works" className="text-base text-neutral-600 font-medium">
-                        Things I've tinkered with
+                        Things I&apos;ve tinkered with
                     </SectionLink>
                     <Link
                         href="/tinkered"

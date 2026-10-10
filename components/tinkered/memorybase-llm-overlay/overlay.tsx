@@ -62,12 +62,13 @@ export function LlmOverlay({
 }>) {
   const [ref, width] = useWidth<HTMLDivElement>()
   const overlay = useOverlay({ mode, held, onModeChange, morph, grow, width })
+  const { anchorRef } = overlay
 
   return (
     <OverlayContext value={overlay}>
       <div ref={ref} className="flex w-full max-w-lg flex-col items-center gap-8">
         <ChatBox />
-        <div ref={overlay.anchorRef} className="relative flex justify-center">
+        <div ref={anchorRef} className="relative flex justify-center">
           <OverlayPopup />
           <OverlayPill />
         </div>

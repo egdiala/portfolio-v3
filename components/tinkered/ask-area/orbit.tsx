@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useId, useRef } from "react"
+import { useCallback, useEffect, useId, useRef, useState } from "react"
 import { AnimatePresence, LayoutGroup, MotionConfig, motion, useReducedMotionConfig } from "motion/react"
 import { useTimeScale } from "@/components/playground/time-scale"
 import { useWidth } from "@/components/tinkered/dynamic-island/hooks/use-width"
@@ -31,7 +31,7 @@ export function Orbit({
   const triggerRef = useRef<HTMLButtonElement>(null)
   const restoreFocus = useRef(false)
   // Counted here, so going back to the menu and into the chat again doesn't start the count over.
-  const asked = useRef(0)
+  const [asked, setAsked] = useState(0)
   const layoutGroup = useId()
 
   const { isOpen, view } = state
@@ -123,6 +123,7 @@ export function Orbit({
                   ) : (
                     <AskArea
                       asked={asked}
+                      onAsked={() => setAsked((count) => count + 1)}
                       starter={state.starter}
                       onBack={() => onChange({ isOpen: true, view: "orbit-menu", prevView: "ask-area" })}
                       onClose={() => close(true)}

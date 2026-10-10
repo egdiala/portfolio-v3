@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState, type RefObject } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { MAX_QUESTIONS } from "../constants"
 import type { ChatMessage } from "../types"
 
@@ -19,11 +19,11 @@ const nextId = () => ++lastId
  * One conversation with the docs. It starts over whenever the chat is reopened,
  * as it does in the app, so `asked` is owned by the caller and outlives it.
  */
-export function useAskArea(asked: RefObject<number>, starter?: string) {
+export function useAskArea(asked: number, onAsked: () => void, starter?: string) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
-  const [atLimit, setAtLimit] = useState(() => asked.current >= MAX_QUESTIONS)
   const latest = useRef(messages)
   const started = useRef(false)
+  const atLimit = asked >= MAX_QUESTIONS
 
   useEffect(() => {
     latest.current = messages
@@ -34,14 +34,13 @@ export function useAskArea(asked: RefObject<number>, starter?: string) {
   const send = useCallback(
     async (question: string) => {
       const text = question.trim()
-      if (!text || latest.current.some((message) => message.loading) || asked.current >= MAX_QUESTIONS) return
+      if (!text || latest.current.some((message) => message.loading) || atLimit) return
 
       const history = latest.current
         .filter((message) => !message.failed)
         .map((message) => ({ role: message.sender === "me" ? "user" : "assistant", content: message.message }))
 
-      asked.current += 1
-      setAtLimit(asked.current >= MAX_QUESTIONS)
+      onAsked()
       const pending: ChatMessage[] = [
         { id: nextId(), sender: "me", message: text },
         { id: nextId(), sender: "ai", message: "", loading: true },
@@ -68,7 +67,7 @@ export function useAskArea(asked: RefObject<number>, starter?: string) {
         current.map((message) => (message.id === pending[1].id ? { ...message, ...reply, loading: false } : message)),
       )
     },
-    [asked],
+    [atLimit, onAsked],
   )
 
   // A shortcut row in the menu opens the chat with its question already asked.

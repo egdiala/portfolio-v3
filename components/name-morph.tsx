@@ -66,15 +66,11 @@ function GlyphSlot({
   fullWidth: number | null
   measureRef: (node: HTMLSpanElement | null) => void
 }>) {
-  const widthRef = useRef(fullWidth)
-  widthRef.current = fullWidth
-
   const width = useTransform(progress, (value) => {
-    const full = widthRef.current
-    if (full == null) return 0
-    if (glyph.side === "keep") return full
-    if (glyph.side === "enter") return full * fadeIn(value)
-    return full * (1 - value)
+    if (fullWidth == null) return 0
+    if (glyph.side === "keep") return fullWidth
+    if (glyph.side === "enter") return fullWidth * fadeIn(value)
+    return fullWidth * (1 - value)
   })
   const opacity = useTransform(progress, (value) => {
     if (glyph.side === "keep") return 1
@@ -115,12 +111,10 @@ function GlyphSlot({
 export function NameMorph() {
   const pathname = usePathname()
   const prefersReducedMotion = useReducedMotion()
-  const reduceRef = useRef(prefersReducedMotion)
-  reduceRef.current = prefersReducedMotion
 
   const { scrollY } = useScroll()
   const rawProgress = useTransform(scrollY, (latest) => {
-    if (reduceRef.current) return 0
+    if (prefersReducedMotion) return 0
     return Math.min(1, Math.max(0, latest / SCROLL_DISTANCE))
   })
   const progress = useSpring(rawProgress, {
