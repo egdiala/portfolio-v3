@@ -1,3 +1,4 @@
+import { media } from "@/lib/media"
 import type { Business } from "./types"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
@@ -22,7 +23,7 @@ export function BusinessAvatar({
 }>) {
   return (
     <Avatar className={className}>
-      <AvatarImage src={business.logo} alt={decorative ? "" : business.name} className={imageClassName} />
+      <AvatarImage src={media(business.logo)} alt={decorative ? "" : business.name} className={imageClassName} />
       <AvatarFallback aria-hidden={decorative || undefined}>{initials(business.name)}</AvatarFallback>
     </Avatar>
   )
