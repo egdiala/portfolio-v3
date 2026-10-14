@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Asimovian, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/metadata";
 
@@ -54,9 +55,10 @@ export default function RootLayout({
           Skip to content
         </a>
         <Navbar />
-        <main id="content" className="@container/page min-h-[calc(100svh+8.75rem)] scroll-mt-20">
+        <main id="content" className="@container/page flex-1 scroll-mt-20">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

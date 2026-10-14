@@ -91,7 +91,7 @@ export const Navbar = () => {
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
           <Button size="lg" asChild>
-            <a href="https://www.linkedin.com/in/egwuchukwu-diala">
+            <a href="mailto:dialaegwuchukwu@gmail.com" target="_blank" rel="noopener noreferrer">
               Send a Raven <PaperPlaneIcon aria-hidden="true" />
             </a>
           </Button>
