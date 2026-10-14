@@ -1,0 +1,43 @@
+Blank screen in your web projects can be mysterious, particularly when there are no error logs in your browser console. It can be caused by anything and that's why it can be tricky to pinpoint the exact cause of the blank screen.
+
+In this article, I'll explain how I noticed the issue, found the cause of the issue and fixed the blank screen issue.
+
+## The Encounter
+
+While building Sojorne, a project for a client with my team at Enyata, I noticed a blank screen on my iPhone as I wanted to test the new responsive layout I just finished. Usually, I test my new features across multiple devices and multiple browsers to ensure there are no bugs. Opening any page on the website resulted to a blank screen on my iPhone. I tested on my Android device and multiple browsers on my Mac but I couldn't replicate the issue - everything worked just fine.
+
+## The Discovery
+
+At that point, I tried stopping the dev vite server and restarting it to see if there'll be any change, but the issue still persisted. I then went ahead to modify my `index.html` file from this 👇🏾
+
+```html
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+```
+
+to this 👇🏾
+
+```html
+<body>
+    <div>Hello</div>
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+```
+
+My **Hello** text rendered on my screen. This confirmed one thing for me, something I implemented previously was causing this issue.
+
+I had to revisit my previous git branches, as my branches were named according to features I worked on and my commits were written conventionally. I reverted my local repository to an old commit and everything worked fine. On reverting to the next recent commit, I encountered the blank screen.
+
+I finally figured out the library I installed, [*country-state-city*](https://www.npmjs.com/package/country-state-city/v/3.0.1-beta.1), was the cause of this blank screen. It had a bundle size of over 50MB which caused a *"Maximum Call Stack Size Error"* for iOS users as mentioned in one of the issues [*here*](https://github.com/harpreetkhalsagtbit/country-state-city/issues/123).
+
+## The Fix
+
+In order to fix this issue, I had to uninstall the library and reimplement that feature with an [*external API*](https://countrystatecity.in/) instead of a library.
+
+## Conclusion
+
+Installing the library was like adding a database to my app💀 which made things break on iOS. Also, I was able to easily track where the problem came from partly because of how I wrote my commits and named my branches.
+
+It's good practice to test your app after implementing each new feature, across all browsers and devices. Blank screen in your frontend applications can be as a result of anything and this is just one of the many causes you may find out there.

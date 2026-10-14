@@ -1,10 +1,12 @@
 import { Experience } from "@/components/home/experience";
+import { FiguredOut } from "@/components/home/figured-out";
 import { IntroSection } from "@/components/home/intro-section";
 import { SelectedWork } from "@/components/home/selected-work";
 import { TinkeredWorks } from "@/components/home/tinkered-works";
 import { pageMetadata, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/metadata";
+import { Metadata } from "next";
 
-export const metadata = pageMetadata({ title: SITE_NAME, description: SITE_DESCRIPTION, path: "/" });
+export const metadata: Metadata = pageMetadata({ title: SITE_NAME, description: SITE_DESCRIPTION, path: "/" });
 
 const person = {
   "@context": "https://schema.org",
@@ -32,6 +34,7 @@ export default function Home() {
       <SelectedWork />
       <TinkeredWorks />
       <Experience />
+      <FiguredOut />
     </>
   );
 }

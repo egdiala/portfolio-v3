@@ -133,6 +133,8 @@ export async function ogImage({ title, eyebrow }: Readonly<{ title?: string; eye
   await connection()
   const seed = Math.floor(Math.random() * 1_000_000)
   const model = renderChart({ ...(config as ChartConfig), seed, ink: config.ink * OG_INK })
+  // The column is 358px wide, so a long article title at full size runs off the card.
+  const titleSize = title && title.length > 60 ? 46 : 60
 
   return new ImageResponse(
     <div style={{ display: "flex", width: "100%", height: "100%", position: "relative", background: PAPER, fontFamily: "Geist" }}>
@@ -180,7 +182,7 @@ export async function ogImage({ title, eyebrow }: Readonly<{ title?: string; eye
         <div style={{ display: "flex", flexDirection: "column", gap: 16, width: SHEET_LEFT - 72 }}>
           {eyebrow ? <div style={{ fontSize: 26, lineHeight: 1.2, color: MUTED }}>{eyebrow}</div> : null}
           {title ? (
-            <div style={{ fontSize: 60, fontWeight: 500, lineHeight: 1.05, letterSpacing: "-0.025em", color: INK }}>
+            <div style={{ fontSize: titleSize, fontWeight: 500, lineHeight: 1.05, letterSpacing: "-0.025em", color: INK }}>
               {title}
             </div>
           ) : (
