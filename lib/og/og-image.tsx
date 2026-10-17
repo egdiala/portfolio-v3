@@ -12,7 +12,7 @@ const INK = "#0a0a0a"
 const PAPER = "#fafafa"
 const MUTED = "#525252"
 
-const ROLE = "Design Engineer"
+const ROLE = "Frontend Engineer"
 
 // The 720 × 440 sheet sits whole against the right edge, centred top to
 // bottom. The view runs past it on the other sides, where the rhumb lines keep

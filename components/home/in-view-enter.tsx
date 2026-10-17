@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type Ref } from "react"
 import { cn } from "@/lib/utils"
 
-type RevealState = "pending" | "armed" | "shown"
+// "static" is for anything already on screen at load: it painted visible, so it stays put.
+type RevealState = "pending" | "armed" | "shown" | "static"
 
 export function InViewEnter({
     as = "div",
@@ -27,7 +28,7 @@ export function InViewEnter({
             ([entry]) => {
                 if (!entry) return
                 if (entry.isIntersecting) {
-                    setState("shown")
+                    setState((current) => (current === "armed" ? "shown" : "static"))
                     observer.disconnect()
                     return
                 }

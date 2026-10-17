@@ -217,6 +217,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -284,7 +285,12 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+  /* The fallback for anything without its own ring, like the mascot and inline links. */
+  :focus-visible {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 2px;
   }
   html {
     scrollbar-width: thin;
@@ -296,7 +302,14 @@
     }
   }
   body {
-    @apply bg-background text-foreground min-h-screen font-sans text-pretty flex flex-col;
+    @apply bg-background text-foreground min-h-svh font-sans text-pretty flex flex-col;
+    /* viewport-fit=cover drops WebKit's own side insets, so landscape iPhones need these. */
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+  }
+  /* A long press selects a control's label on iOS. */
+  button,
+  summary {
+    @apply select-none;
   }
   a,
   button,
@@ -359,6 +372,9 @@
 @utility animate-area-gradient {
   background-size: 200% 200%;
   animation: area-gradient-scroll 4s linear infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 @utility animate-area-gradient-text {
@@ -369,6 +385,9 @@
   color: transparent;
   -webkit-text-fill-color: transparent;
   animation: area-gradient-scroll 4s linear infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 @keyframes area-gradient-scroll {
@@ -492,5 +511,29 @@
 @media (prefers-reduced-motion: reduce) {
   [data-reveal="armed"] {
     transform: none;
+  }
+}
+
+/* A section the reader hasn't scrolled to yet would otherwise print blank. */
+@media print {
+  [data-reveal="armed"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * tw-animate-css has no reduced-motion rule. The ported menus and tooltips keep their fade
+ * and lose the slide and zoom. Unlayered, so it beats the side-specific utilities.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="dropdown-menu-content"],
+  [data-slot="tooltip-content"] {
+    --tw-enter-translate-x: 0px;
+    --tw-enter-translate-y: 0px;
+    --tw-enter-scale: 1;
+    --tw-exit-translate-x: 0px;
+    --tw-exit-translate-y: 0px;
+    --tw-exit-scale: 1;
   }
 }

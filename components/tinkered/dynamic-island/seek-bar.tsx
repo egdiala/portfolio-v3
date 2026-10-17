@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion, useTransform } from "motion/react"
 import { useTimeScale } from "@/components/playground/time-scale"
-import { formatTime } from "./hooks/use-playback"
+import { formatTime } from "@/lib/time"
 import type { Playback } from "./types"
 
 export function SeekBar({ playback }: Readonly<{ playback: Playback }>) {

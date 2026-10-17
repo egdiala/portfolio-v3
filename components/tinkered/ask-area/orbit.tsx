@@ -147,7 +147,7 @@ export function Orbit({
                 transition={{ scale: time.transition(defaultScale), opacity: time.transition(defaultFade) }}
                 className="pointer-events-none absolute top-0.75 right-0.75 size-2 rounded-full border border-area-rose bg-area-rose shadow-area-sm inset-shadow-2xs inset-shadow-white/25"
               >
-                <span className="absolute inset-[-2px] animate-area-ping rounded-[inherit] bg-area-rose" />
+                <span className="absolute inset-[-2px] animate-area-ping rounded-[inherit] bg-area-rose motion-reduce:animate-none" />
               </motion.span>
             )}
           </AnimatePresence>

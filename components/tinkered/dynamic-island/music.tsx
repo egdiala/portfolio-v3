@@ -3,10 +3,11 @@
 import { useEffect, useRef } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { useTimeScale } from "@/components/playground/time-scale"
+import { formatTime } from "@/lib/time"
 import { AudioVisualizer } from "./audio-visualizer"
 import { COMPACT, EXPANDED, fade, GLYPHS_MIN_WIDTH, iconSwap, PLAYER_SPRING, SKIP_SECONDS, TRACK } from "./constants"
 import { AirPlayGlyph, BackwardGlyph, ForwardGlyph, LyricsGlyph } from "./glyphs"
-import { formatTime, usePlayback } from "./hooks/use-playback"
+import { usePlayback } from "./hooks/use-playback"
 import { SeekBar } from "./seek-bar"
 import { Artwork, TransportButton } from "./transport"
 

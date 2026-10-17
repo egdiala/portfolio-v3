@@ -37,9 +37,9 @@ export function OrbitTrigger({
       )}
     >
       {/* Blurred ellipses */}
-      <div className="absolute top-[-3px] left-[5px] h-8 w-8 animate-pulse rounded-full bg-[#CAEFD7] blur-[7.5px]" />
-      <div className="absolute top-[8px] left-[-2px] h-8 w-8 animate-pulse rounded-full bg-[#F5BFD7] blur-[7.5px]" />
-      <div className="absolute top-[9px] left-[11px] h-8 w-8 animate-pulse rounded-full bg-[#ABC9E9] blur-[7.5px]" />
+      <div className="absolute top-[-3px] left-[5px] h-8 w-8 animate-pulse rounded-full motion-reduce:animate-none bg-[#CAEFD7] blur-[7.5px]" />
+      <div className="absolute top-[8px] left-[-2px] h-8 w-8 animate-pulse rounded-full motion-reduce:animate-none bg-[#F5BFD7] blur-[7.5px]" />
+      <div className="absolute top-[9px] left-[11px] h-8 w-8 animate-pulse rounded-full motion-reduce:animate-none bg-[#ABC9E9] blur-[7.5px]" />
 
       <div className="relative grid size-10 place-content-center overflow-hidden rounded-full">
         {/* Outer multicolor blurred ellipses */}

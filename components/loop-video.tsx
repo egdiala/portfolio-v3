@@ -11,33 +11,38 @@ export function LoopVideo({
     className,
     label,
     standalone = false,
+    eager = false,
 }: Readonly<{
     name: string
     className?: string
     label?: string
     /** Not inside a link, so it can offer native controls when reduced motion stops autoplay. */
     standalone?: boolean
+    /** On screen at load, so its poster is in the server HTML instead of waiting to be near. */
+    eager?: boolean
 }>) {
     const ref = useRef<HTMLVideoElement>(null)
     const prefersReducedMotion = useReducedMotion()
-    const [ready, setReady] = useState(false)
-    // The server can't know the motion preference, so controls wait until hydration is done.
+    // A poster downloads as soon as it's set, whatever `preload` says, so it waits until the video is near.
+    const [near, setNear] = useState(eager)
+    // The server can't know the motion preference, so sources and controls wait until hydration is done.
     const hydrated = useSyncExternalStore(subscribeToNothing, () => true, () => false)
+    const ready = hydrated && near && prefersReducedMotion === false
     const controls = hydrated && Boolean(prefersReducedMotion) && standalone
 
     useEffect(() => {
         const video = ref.current
-        if (!video || prefersReducedMotion !== false) return
+        if (!video || near) return
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry?.isIntersecting) setReady(true)
+                if (entry?.isIntersecting) setNear(true)
             },
             { rootMargin: "200px 40% 200px 40%", threshold: 0 },
         )
         observer.observe(video)
         return () => observer.disconnect()
-    }, [prefersReducedMotion])
+    }, [near])
 
     useEffect(() => {
         const video = ref.current
@@ -66,7 +71,7 @@ export function LoopVideo({
             playsInline
             controls={controls}
             preload="none"
-            poster={media(`videos/${name}.jpg`)}
+            poster={near ? media(`videos/${name}.jpg`) : undefined}
             aria-label={label}
             className={className}
         >

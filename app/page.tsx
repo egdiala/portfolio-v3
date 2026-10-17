@@ -1,6 +1,7 @@
 import { Experience } from "@/components/home/experience";
 import { FiguredOut } from "@/components/home/figured-out";
 import { IntroSection } from "@/components/home/intro-section";
+import { SaidOutLoud } from "@/components/home/said-out-loud";
 import { SelectedWork } from "@/components/home/selected-work";
 import { TinkeredWorks } from "@/components/home/tinkered-works";
 import { pageMetadata, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/metadata";
@@ -33,8 +34,9 @@ export default function Home() {
       <IntroSection />
       <SelectedWork />
       <TinkeredWorks />
-      <Experience />
       <FiguredOut />
+      <SaidOutLoud />
+      <Experience />
     </>
   );
 }

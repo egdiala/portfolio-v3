@@ -92,7 +92,7 @@ export const SelectedWork = () => {
                 className="rise-in relative -mx-5 mt-6 flex w-[calc(100%+2.5rem)] snap-x snap-mandatory items-start gap-6 overflow-x-auto overscroll-x-contain px-(--inset) pt-8 pb-14 scroll-px-(--inset) scrollbar-none [--inset:max(1.25rem,calc((100cqw_+_2.5rem_-_64rem)/2))] [--peek:2.75rem] [&::-webkit-scrollbar]:hidden"
                 style={{ animationDelay: "280ms" }}
             >
-                {WORK.map((work) => (
+                {WORK.map((work, index) => (
                     <article
                         key={work.title}
                         className="w-[min(100%,calc(100%_+_var(--inset)_-_1.5rem_-_var(--peek)))] shrink-0 snap-start"
@@ -100,7 +100,7 @@ export const SelectedWork = () => {
                         <div className="relative">
                             {work.link.status === "archived" ? <ArchiveTab /> : null}
                             <div className="relative aspect-400/289 overflow-hidden rounded-2xl border">
-                                <LoopVideo name={work.name} label={work.title} standalone className="h-full w-full object-cover" />
+                                <LoopVideo name={work.name} label={work.title} standalone eager={index === 0} className="h-full w-full object-cover" />
                             </div>
                         </div>
                         <div className="mt-4 max-w-[50ch]">

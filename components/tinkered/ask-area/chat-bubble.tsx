@@ -33,7 +33,7 @@ export function ChatBubble({ message }: Readonly<{ message: ChatMessage }>) {
         >
           <div
             className={cn(
-              "flex-1 rounded-b-md px-3 py-2.5",
+              "flex-1 rounded-b-md px-3 py-2.5 wrap-break-word",
               fromAi ? "origin-top-left rounded-tr-md bg-area-rose/13" : "origin-top-right rounded-tl-md bg-area-contrast-high/6",
             )}
           >

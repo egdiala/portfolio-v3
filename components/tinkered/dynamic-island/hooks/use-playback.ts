@@ -5,11 +5,6 @@ import { useMotionValue, useMotionValueEvent } from "motion/react"
 import { TRACK } from "../constants"
 import type { Playback } from "../types"
 
-export function formatTime(seconds: number) {
-  const whole = Math.max(0, Math.floor(seconds))
-  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`
-}
-
 export function usePlayback(): Playback {
   const audioRef = useRef<HTMLAudioElement>(null)
   const progress = useMotionValue(0)

@@ -10,7 +10,7 @@ export function ToggleControl({ label, checked, onChange }: Readonly<ToggleContr
 
   return (
     <ControlRow>
-      <label htmlFor={id} className={labelClassName}>
+      <label htmlFor={id} className={`${labelClassName} flex flex-1 items-center self-stretch`}>
         {label}
       </label>
       <span className="relative inline-flex size-11 items-center justify-center">

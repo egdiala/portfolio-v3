@@ -3,6 +3,8 @@ import { Asimovian, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { EpisodeProvider } from "@/components/said-out-loud/episode-provider";
+import { MiniPlayer } from "@/components/said-out-loud/mini-player";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/metadata";
 
 const geistSans = Geist({
@@ -13,6 +15,8 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  // Only code blocks use it, so it shouldn't compete with the page's own fonts.
+  preload: false,
 });
 
 const asimovian = Asimovian({
@@ -36,6 +40,10 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   viewportFit: "cover",
+  interactiveWidget: "resizes-content",
+  // Light-only for now: this also keeps Chrome's auto dark mode from inverting the page.
+  colorScheme: "only light",
+  themeColor: "#fafafa",
 };
 
 export default function RootLayout({
@@ -44,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className="pointer-fine:overscroll-none">
+    <html lang="en" data-scroll-behavior="smooth" className="pointer-fine:overscroll-y-none">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${asimovian.variable} antialiased`}
       >
@@ -54,11 +62,14 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Navbar />
-        <main id="content" className="@container/page flex-1 scroll-mt-20">
-          {children}
-        </main>
-        <Footer />
+        <EpisodeProvider>
+          <Navbar />
+          <main id="content" tabIndex={-1} className="@container/page flex-1 scroll-mt-20 outline-none">
+            {children}
+          </main>
+          <Footer />
+          <MiniPlayer />
+        </EpisodeProvider>
       </body>
     </html>
   );

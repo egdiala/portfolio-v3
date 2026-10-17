@@ -81,7 +81,7 @@ function NavbarBlur() {
 
 export const Navbar = () => {
   return (
-    <Container as="nav" className="sticky top-0 z-50 px-5 pt-[calc(1rem+env(safe-area-inset-top))]">
+    <Container as="header" className="sticky top-0 z-50 px-5 pt-[calc(1rem+env(safe-area-inset-top))]">
       <NavbarBlur />
       <ContainerInner className="relative z-10 flex flex-wrap items-center gap-x-4 gap-y-3 pb-4">
         <NameMorph />
@@ -90,8 +90,8 @@ export const Navbar = () => {
           className="ml-auto"
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
-          <Button size="lg" asChild>
-            <a href="mailto:dialaegwuchukwu@gmail.com" target="_blank" rel="noopener noreferrer">
+          <Button size="lg" asChild className="relative after:absolute after:inset-x-0 after:-inset-y-0.5">
+            <a href="mailto:dialaegwuchukwu@gmail.com">
               Send a Raven <PaperPlaneIcon aria-hidden="true" />
             </a>
           </Button>

@@ -46,4 +46,12 @@ function DropdownMenuItem({ className, ...props }: React.ComponentProps<typeof D
   )
 }
 
-export { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem }
+/**
+ * An unstyled item around a control that keeps its own look. Radix menus trap Tab and move
+ * focus between items with the arrow keys, so a plain button inside one can't be reached.
+ */
+function DropdownMenuAction(props: Omit<React.ComponentProps<typeof DropdownMenuPrimitive.Item>, "asChild">) {
+  return <DropdownMenuPrimitive.Item asChild {...props} />
+}
+
+export { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuAction }

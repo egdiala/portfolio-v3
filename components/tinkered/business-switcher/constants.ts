@@ -3,25 +3,25 @@ import type { Business } from "./types"
 export const BUSINESSES: Business[] = [
   {
     name: "Acme Technology Limited",
-    logo: "/tinkered/business-switcher/acme.png",
+    logo: "tinkered/business-switcher/acme.png",
     email: "admin@acme.com",
     plan: "Enterprise",
   },
   {
     name: "Cursor AI",
-    logo: "/tinkered/business-switcher/cursor.jpg",
+    logo: "tinkered/business-switcher/cursor.jpg",
     email: "hello@cursor.ai",
     plan: "AI",
   },
   {
     name: "Stripe",
-    logo: "/tinkered/business-switcher/stripe.svg",
+    logo: "tinkered/business-switcher/stripe.svg",
     email: "hello@stripe.com",
     plan: "Finance",
   },
   {
     name: "Netflix",
-    logo: "/tinkered/business-switcher/netflix.jpg",
+    logo: "tinkered/business-switcher/netflix.jpg",
     email: "hello@netflix.com",
     plan: "Entertainment",
   },

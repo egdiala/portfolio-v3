@@ -15,7 +15,7 @@ const EXPERIENCE: Array<{ company: string; partner?: string; role: string; dates
     },
     {
         company: "EigenExplorer",
-        partner: "Blockless",
+        partner: "Bless",
         role: "Frontend Engineer",
         dates: "Mar 2025 — 2026",
     },

@@ -23,10 +23,13 @@ export function WhereForm({
         <input
           id="label"
           name="label"
-          defaultValue={where.label}
+          defaultValue={state?.values?.label ?? where.label}
           required
           maxLength={40}
           autoComplete="off"
+          // The only password field here is the passphrase, so managers would save this as the username.
+          data-1p-ignore
+          data-lpignore="true"
           className={fieldClass}
         />
       </div>
@@ -37,10 +40,12 @@ export function WhereForm({
         <input
           id="timeZone"
           name="timeZone"
-          defaultValue={where.timeZone}
+          defaultValue={state?.values?.timeZone ?? where.timeZone}
           required
           list="time-zones"
           autoComplete="off"
+          data-1p-ignore
+          data-lpignore="true"
           spellCheck={false}
           className={fieldClass}
         />
@@ -63,19 +68,23 @@ export function WhereForm({
           className={fieldClass}
         />
       </div>
-      <Button type="submit" disabled={pending}>
-        {pending ? "Saving" : "Save place"}
+      <Button
+        type="submit"
+        size="lg"
+        disabled={pending}
+        className="relative min-w-32 after:absolute after:inset-x-0 after:-inset-y-0.5"
+      >
+        {pending ? "Saving…" : "Save place"}
       </Button>
-      {state?.error ? (
+      {/* Always rendered, so screen readers are already listening when a message arrives. */}
+      <div>
         <p role="alert" className="text-sm text-pretty text-neutral-600">
-          {state.error}
+          {state?.error}
         </p>
-      ) : null}
-      {state?.saved ? (
         <p role="status" className="text-sm text-pretty">
-          The footer now keeps time for {state.saved}.
+          {state?.saved ? `The footer now keeps time for ${state.saved}.` : null}
         </p>
-      ) : null}
+      </div>
     </form>
   )
 }

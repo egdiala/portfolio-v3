@@ -18,6 +18,7 @@ import { IconChevronUp } from "./icons"
 import type { Business } from "./types"
 import { Avatar, AvatarFallback } from "./ui/avatar"
 import { Button } from "./ui/button"
+import { DropdownMenuAction } from "./ui/dropdown-menu"
 import { GlobalTooltipProvider } from "./ui/global-tooltip/provider"
 import { GlobalTooltip, GlobalTooltipContent, GlobalTooltipTrigger } from "./ui/global-tooltip/tooltip"
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
@@ -62,9 +63,11 @@ export function BusinessStack({
                 <motion.div key="add-business-button" {...addButtonSwap} transition={swap}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button variant="ghost" size="icon-sm" type="button" aria-label="Add new business">
-                        <PlusIcon className="text-melun-neutral-800" />
-                      </Button>
+                      <DropdownMenuAction onSelect={(event) => event.preventDefault()}>
+                        <Button variant="ghost" size="icon-sm" type="button" aria-label="Add new business">
+                          <PlusIcon className="text-melun-neutral-800" />
+                        </Button>
+                      </DropdownMenuAction>
                     </TooltipTrigger>
                     <TooltipContent side="bottom" align="end">
                       Add new business
@@ -81,22 +84,22 @@ export function BusinessStack({
             </AnimatePresence>
           </div>
         </div>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          type="button"
-          aria-label="Show businesses"
-          aria-expanded={expanded}
-          onClick={onToggle}
+        <DropdownMenuAction
+          onSelect={(event) => {
+            event.preventDefault()
+            onToggle()
+          }}
         >
-          <IconChevronUp
-            className={cn(
-              "text-melun-neutral-800 transition-transform ease-out motion-reduce:transition-none",
-              expanded ? "rotate-0" : "rotate-180",
-            )}
-            style={{ transitionDuration: `${time.ms(CHEVRON_MS)}ms` }}
-          />
-        </Button>
+          <Button variant="ghost" size="icon-sm" type="button" aria-label="Show businesses" aria-expanded={expanded}>
+            <IconChevronUp
+              className={cn(
+                "text-melun-neutral-800 transition-transform ease-out motion-reduce:transition-none",
+                expanded ? "rotate-0" : "rotate-180",
+              )}
+              style={{ transitionDuration: `${time.ms(CHEVRON_MS)}ms` }}
+            />
+          </Button>
+        </DropdownMenuAction>
       </div>
     </div>
   )

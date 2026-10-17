@@ -1,6 +1,6 @@
 import { OG_SIZE, ogImage } from "@/lib/og/og-image"
 
-export const alt = "stephen diala, design engineer, written over a hand-drawn sea chart"
+export const alt = "stephen diala, frontend engineer, written over a hand-drawn sea chart"
 export const size = OG_SIZE
 export const contentType = "image/png"
 

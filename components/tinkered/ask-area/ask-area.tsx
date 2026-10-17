@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { ArrowDown } from "lucide-react"
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { ArrowUpIcon } from "@/components/icons/arrow-up"
 import { AskAreaIcon } from "@/components/icons/ask-area"
 import { ChevronRightIcon } from "@/components/icons/chevron-right"
@@ -42,9 +42,13 @@ export function AskArea({
     setQuery("")
   }
 
+  const reduceMotion = useReducedMotion()
+
   const scrollToBottom = () => {
     const viewport = viewportRef.current
-    viewport?.scroll({ behavior: "smooth", top: viewport.scrollHeight })
+    // The button leaves once the bottom shows, so focus moves to the log instead of dropping to the page.
+    viewport?.focus({ preventScroll: true })
+    viewport?.scroll({ behavior: reduceMotion ? "auto" : "smooth", top: viewport.scrollHeight })
   }
 
   useEffect(() => {
@@ -79,7 +83,7 @@ export function AskArea({
           whileTap={{ scale: 0.85 }}
           type="button"
           onClick={onBack}
-          className={cn("flex items-center gap-1 rounded-sm", headerButton, focusRing)}
+          className={cn("relative flex items-center gap-1 rounded-sm after:absolute after:-inset-x-2 after:-inset-y-3.5", headerButton, focusRing)}
         >
           <ChevronRightIcon className="-rotate-180" />
           Back
@@ -100,7 +104,7 @@ export function AskArea({
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className={cn("ml-auto rounded-sm", headerButton, focusRing)}
+          className={cn("relative ml-auto rounded-sm after:absolute after:-inset-4", headerButton, focusRing)}
         >
           <XMarkIcon />
         </motion.button>
@@ -164,7 +168,9 @@ export function AskArea({
             aria-label="Ask Area a question"
             value={query}
             maxLength={MAX_QUESTION}
-            disabled={atLimit}
+            // Read-only rather than disabled, so the input keeps focus after the last question is sent.
+            readOnly={atLimit}
+            aria-disabled={atLimit}
             enterKeyHint="send"
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}

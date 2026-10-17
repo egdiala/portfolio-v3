@@ -1,7 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises"
 import path from "node:path"
-import { updateTag } from "next/cache"
-import { connection } from "next/server"
+import { revalidatePath, updateTag } from "next/cache"
 
 export type Where = {
   label: string
@@ -59,7 +58,8 @@ async function readGitHub(): Promise<Where> {
   const url = `https://api.github.com/repos/${remote.owner}/${remote.repo}/contents/data/where.json?ref=${remote.branch}`
   const response = await fetch(url, {
     headers: githubHeaders(remote.token),
-    next: { tags: ["where"], revalidate: 60 },
+    // Saving calls updateTag("where"), so this only bounds how stale an edit made on GitHub can get.
+    next: { tags: ["where"], revalidate: 3600 },
   })
   if (!response.ok) return readDisk()
   const payload = (await response.json()) as { content?: string }
@@ -71,7 +71,6 @@ async function readGitHub(): Promise<Where> {
 export async function getWhere(): Promise<Where> {
   try {
     if (process.env.VERCEL === "1" && github()) return await readGitHub()
-    await connection()
     return await readDisk()
   } catch {
     return FALLBACK
@@ -106,4 +105,6 @@ export async function saveWhere(next: Where) {
     return
   }
   await writeFile(FILE, body, "utf8")
+  // The footer is in the root layout, and pages built before this save still show the old place.
+  revalidatePath("/", "layout")
 }
