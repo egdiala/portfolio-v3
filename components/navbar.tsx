@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import { EMAIL } from "@/lib/contact"
 import { Button } from "./ui/button"
 import { PaperPlaneIcon } from "./icons/paper-plane"
 import { Container, ContainerInner } from "./ui/container"
@@ -91,7 +92,7 @@ export const Navbar = () => {
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
           <Button size="lg" asChild className="relative after:absolute after:inset-x-0 after:-inset-y-0.5">
-            <a href="mailto:dialaegwuchukwu@gmail.com">
+            <a href={`mailto:${EMAIL}`}>
               Send a Raven <PaperPlaneIcon aria-hidden="true" />
             </a>
           </Button>

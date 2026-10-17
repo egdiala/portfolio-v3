@@ -1,14 +1,9 @@
+import { ELSEWHERE } from "@/lib/contact"
 import { SITE_URL } from "@/lib/metadata"
 import { getWhere } from "@/lib/where"
 import { Container, ContainerInner } from "./ui/container"
 import { FooterClock } from "./footer-clock"
 import Link from "next/link"
-
-const ELSEWHERE = [
-  { href: "https://x.com/e_diala", label: "X" },
-  { href: "https://github.com/egdiala", label: "GitHub" },
-  { href: "https://www.linkedin.com/in/egwuchukwu-diala", label: "LinkedIn" },
-]
 
 const linkClass =
   "inline-flex min-h-11 items-center rounded-sm px-0.5 text-neutral-600 underline decoration-neutral-400 underline-offset-2 transition-colors duration-100 ease-out outline-none hover:text-foreground hover:decoration-current focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"

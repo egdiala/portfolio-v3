@@ -1,9 +1,11 @@
+import { Contact } from "@/components/home/contact";
 import { Experience } from "@/components/home/experience";
 import { FiguredOut } from "@/components/home/figured-out";
 import { IntroSection } from "@/components/home/intro-section";
 import { SaidOutLoud } from "@/components/home/said-out-loud";
 import { SelectedWork } from "@/components/home/selected-work";
 import { TinkeredWorks } from "@/components/home/tinkered-works";
+import { ELSEWHERE } from "@/lib/contact";
 import { pageMetadata, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/metadata";
 import { Metadata } from "next";
 
@@ -17,11 +19,7 @@ const person = {
   url: SITE_URL.href,
   jobTitle: "Frontend Engineer",
   worksFor: { "@type": "Organization", name: "Moniepoint", url: "https://moniepoint.com" },
-  sameAs: [
-    "https://x.com/e_diala",
-    "https://www.linkedin.com/in/egwuchukwu-diala",
-    "https://github.com/egdiala",
-  ],
+  sameAs: ELSEWHERE.map((place) => place.href),
 };
 
 export default function Home() {
@@ -37,6 +35,7 @@ export default function Home() {
       <FiguredOut />
       <SaidOutLoud />
       <Experience />
+      <Contact />
     </>
   );
 }
