@@ -1,0 +1,123 @@
+import { BusinessSwitcherPlayground } from "@/components/tinkered/business-switcher/playground"
+
+<BusinessSwitcherPlayground />
+
+Melun is an app for organisations, and we're building it in stealth. One account can belong to several businesses, and this switcher at the top of the sidebar is how you move between them. It shows the business you're in, and its menu holds the others.
+
+The design is by [@seektheinyamah](https://x.com/seektheinyamah), my cofounder at Melun. I built it on [shadcn](https://ui.shadcn.com) components and animated it with Motion, and it's one of the projects in the showcase on [Motion's website](https://motion.dev/). The playground above is the component lifted out of the app, with four stand-in businesses.
+
+## The others wait in a stack
+
+The menu opens on the business you're in, with a button for its settings. Under that, the other businesses wait as a row of overlapping 24px avatars that ends in a +4.
+
+Hover the stack and a tooltip names each one. Every avatar is a trigger for the same tooltip, so moving from one avatar to the next doesn't close a tooltip and open another. The one tooltip moves over and changes its text. It has a `layoutId`, so Motion animates it to the next avatar, and to the width of the next name, on a spring.
+
+```tsx
+<motion.div
+  layoutId={`tooltip-overlay-${globalId}`}
+  initial={{ opacity: 0, scale: 0 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+>
+  {currentTooltip.content}
+</motion.div>
+```
+
+The first tooltip waits 150ms before it appears, so a cursor crossing the stack on its way somewhere else doesn't set it off. After that, moving between avatars is instant.
+
+## Avatars that become rows
+
+The chevron opens the stack into a list. Each business gets a row with a larger avatar, its name and its email. Tap one to switch to it.
+
+An avatar in the stack and the one in its row share a `layoutId`.
+
+```tsx
+// In the stack
+<motion.div layoutId={`${team.name}-avatar`}>
+  <Avatar className="size-6" />
+</motion.div>
+
+// In the list
+<motion.div layoutId={`${team.name}-avatar`}>
+  <Avatar className="size-9" />
+</motion.div>
+```
+
+When the rows mount, Motion finds the avatar in the stack with the same `layoutId` and animates from one to the other. The row's avatar starts where the stack's avatar is, at two-thirds of its size, and grows into place while it fades in. The stack's avatar makes the same trip and fades out. Closing the list sends each avatar back the way it came.
+
+The stack stays mounted the whole time, so both avatars are on the page during the move, and Motion crossfades them while it moves them.
+
+Turn off **Move avatars into the list** to compare. The rows bring their own avatars, and the stack stays as it is.
+
+## Measuring the list
+
+The list opens by growing its height. The rows sit in an inner element that `useMeasure` watches, and the outer element animates to the height it reports, or to 0 while the list is closed.
+
+```tsx
+const [ref, bounds] = useMeasure()
+
+<motion.div
+  animate={{ height: expanded ? bounds.height : 0 }}
+  transition={{ type: "spring", bounce: 0.1 }}
+  className="overflow-clip"
+>
+  <div ref={ref}>{rows}</div>
+</motion.div>
+```
+
+Only the outer element animates. The rows are laid out at full size from the first frame, and the outer element clips them, so growing uncovers them rather than squeezing them. The height comes from a measurement, not a number in the code, so a fifth business or a taller row changes it and the list still opens to fit. A `bounce` of 0.1 lets the edge overshoot a little and settle.
+
+Turn off **Animate the height** to see the list appear at full height at once. Set **Speed** to 0.1× to watch the edge pass the rows while the avatars travel.
+
+## +4 becomes a plus
+
+Opening the list also changes the end of the stack. The +4 goes, and a button for adding a business takes its place. The two swap inside an `AnimatePresence` in `wait` mode, so the +4 is gone before the plus starts to arrive.
+
+```tsx
+<AnimatePresence mode="wait" initial={false}>
+  {expanded ? (
+    <motion.div
+      key="add-team-button"
+      initial={{ opacity: 0, scale: 0.9, filter: "blur(4px)" }}
+      animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+      exit={{ opacity: 0, scale: 0.9, filter: "blur(4px)" }}
+    >
+      <AddBusinessButton />
+    </motion.div>
+  ) : (
+    <motion.div
+      key="team-avatar-rows"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+    >
+      <Avatar>+4</Avatar>
+    </motion.div>
+  )}
+</AnimatePresence>
+```
+
+Both shrink to 90% as they leave and grow from 90% as they arrive. The plus also unblurs, so it comes into focus as it appears. `initial={false}` stops the +4 from animating in every time the menu opens.
+
+## Always opens collapsed
+
+The menu's open handler sets `expanded` to the opposite of whether the menu is open.
+
+```tsx
+<DropdownMenu onOpenChange={(isOpen) => setExpanded(!isOpen)}>
+```
+
+Opening the menu always collapses the list, so the menu looks the same each time you open it, however you left it. Closing sets `expanded` back to true, but by then the menu is on its way out.
+
+The chevron turns with plain CSS. It's an up chevron, rotated 180° while the list is closed, with a 200ms transition between the two.
+
+```tsx
+<IconChevronUp
+  className={cn(
+    "transition-transform duration-200 ease-out",
+    expanded ? "rotate-0" : "rotate-180",
+  )}
+/>
+```
+
+It only ever moves between two angles and never enters or leaves, so a CSS transition is all it needs.

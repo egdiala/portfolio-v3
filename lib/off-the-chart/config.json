@@ -1,0 +1,15 @@
+{
+  "seed": 83989,
+  "mode": "coast",
+  "roughness": 0.35,
+  "surveyed": 0.58,
+  "unsurveyed": 0.16,
+  "waterlines": 5,
+  "firstOffset": 4,
+  "spacing": 1.3,
+  "winds": 32,
+  "roses": 16,
+  "rhumbStrength": 0.1,
+  "wander": 0.5,
+  "ink": 1
+}

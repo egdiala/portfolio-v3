@@ -1,0 +1,43 @@
+import { NetworkStatusPlayground } from "@/components/tinkered/network-status/playground"
+
+<NetworkStatusPlayground />
+
+This came out of an exercise in [Animations on the Web](https://animations.dev/), [@emilkowalski](https://x.com/emilkowalski)'s course. We had to animate something on our own. That meant finding a reference ourselves, then rebuilding it with what the lessons covered.
+
+The closest thing I had was my iPhone. Switching from airplane mode to a network, the plane flies out, the bars search, and the signal settles in under the carrier name. Those are the three states here, and each one hands off to the next.
+
+## Leaving airplane mode
+
+The airplane enters from the left and leaves to the right, so turning airplane mode off reads as the plane flying away. All three states swap inside one `AnimatePresence` in `popLayout` mode, which lets the incoming state take its place while the outgoing one is still animating.
+
+```tsx
+<motion.span
+  key="off"
+  initial={{ x: "-2em", opacity: 0 }}
+  animate={{ x: 0, opacity: 1 }}
+  exit={{ x: "6.25em", opacity: 0 }}
+  transition={{ ease: "easeInOut", duration: 0.4 }}
+/>
+```
+
+## Searching
+
+While searching, each bar pulses once and waits. The delays are spread across a single pulse, so a wave runs from left to right and then rests before the next one.
+
+```tsx
+transition={{
+  duration: 0.6,
+  ease: "linear",
+  repeat: Infinity,
+  repeatDelay: 0.8,
+  delay: (index * 0.6) / 4,
+}}
+```
+
+All four bars are the same 12px element, scaled from the bottom with `scaleY` instead of animating `height`. The browser only has to composite them, so the pulse never triggers layout.
+
+## One label, two words
+
+"Searching" and the carrier name share a `layoutId`, so the label slides to its new position instead of cutting. Adding `layout="position"` stops Motion from scaling the text between the two widths, which would squash the letters mid-flight.
+
+Every size is in `em`, so the whole indicator scales with `font-size`. The playground renders it at 28px for a closer look. In a real status bar it sits at 12px.

@@ -1,0 +1,94 @@
+import { LoopVideo } from "@/components/loop-video"
+
+Earlier this year, while I was building out [AreaDotClub](https://docs.area.club), I wanted a simple guarantee: to enforce Ethereum Mainnet on all pages, such that if a user switches chain from their wallet extension, it shows a popup or a page, alerting them that Area requires only Ethereum Mainnet. Not “warn later,” not “silently fail”—just a clear, friendly gate with a one-click fix. That led me to write `MainnetEnforcer`, a thin guard wrapped around children that checks the current chain and steers users back to Mainnet when they’re not there.
+
+## What the component does
+
+* **Detects current chain**: Uses [`useChainId`](https://wagmi.sh/react/api/hooks/useChainId#usechainid) from Wagmi.
+* **Offers safe switching**: Uses [`useSwitchChain`](https://wagmi.sh/react/api/hooks/useSwitchChain#useswitchchain) to move the wallet to Mainnet with one click.
+* **Prevents hydration issues**: Gates UI with isMounted to avoid SSR/CSR mismatches in Next.js.
+* **Delivers clean UX**: Shows a friendly message and a loading state while switching.
+
+## What I thought would be easy (and wasn’t)
+
+1. **Setting up WAGMI config for this specific feature**: The first step to implementing this feature is to configure chains in the wagmi config.
+
+    ```ts
+    import { mainnet } from "wagmi/chains";
+    import { createConfig, http } from "wagmi";
+    import { getDefaultConfig } from "connectkit";
+
+    const config = createConfig(
+      getDefaultConfig({
+        chains: [mainnet],
+        transports: {
+            [mainnet.id]: http(""), // rpc url here
+        },
+        // ...other configs
+      }),
+    );
+    ```
+
+    The problem with this setup, though, is that no matter what chain a user switches to, it won’t detect that change. You must be wondering why this happens, well the reasons are;
+
+    * When you configure only `mainnet` in `getDefaultConfig({ chains })`, Wagmi sets the initial chain to the first configured chain and treats any other wallet network as “unsupported.”
+    * For unsupported chains, Wagmi does not propagate the `chainChanged` update into `useChainId`. It keeps returning the initial chain (Mainnet), so our `<MainnetEnforcer />` thinks we are still on Mainnet and doesn’t react.
+    * With multiple chains configured, the wallet’s new chain is recognised and `useChainId` updates accordingly, so the enforcer sees the mismatch.
+
+    I was able to fix this by importing all chains from `wagmi/chains` and filtering out mainnet from the imported chains before appending it to the chains array within the config.
+
+    ```ts
+    import { mainnet } from "wagmi/chains";
+    import * as chains from "wagmi/chains";
+    import { createConfig, http } from "wagmi";
+    import { getDefaultConfig } from "connectkit";
+
+    const allChains = Object.values(chains)
+
+    const config = createConfig(
+      getDefaultConfig({
+        chains: [mainnet, ...allChains.filter(chain => chain.id !== mainnet.id)],
+        transports: {
+            [mainnet.id]: http(""), // rpc url here
+        },
+        // ...other configs
+      }),
+    );
+    ```
+
+2. **Hydration flicker caused by SSR vs CSR mismatch**: The first attempt rendered network-dependent UI immediately. In Next.js, `useChainId` isn’t consistent server-side vs client-side, so the page would first render without a wallet context, then “flip” after hydration. That caused a jarring flicker and occasional hydration warnings.
+
+I fixed this with a tiny “mount gate”: render nothing chain-dependent until the component is mounted.
+
+```js
+  useEffect(() => {
+    setIsMounted(true)
+  },[])
+
+  if (isMounted && (chainId !== mainnet.id)) {
+    // content to render here...
+  }
+```
+
+## The shape of the solution
+
+After bypassing the two issues i faced earlier, the only thing left was to hook up a descriptive UI with a button that allows users to switch back to mainnet.
+
+<div className="my-6 aspect-[160/119] overflow-hidden rounded-2xl border">
+  <LoopVideo
+    name="area-mainnet-enforcer"
+    label="Switching the wallet off Mainnet shows the Wrong Network screen, and Switch to Mainnet brings it back"
+    standalone
+    className="h-full w-full object-cover"
+  />
+</div>
+
+## Why this approach works in production
+
+* It avoids SSR pitfalls with a single `isMounted` flag.
+* It de-risks the UX with clear copy and a deterministic call-to-action.
+* It respects wallet state (don’t show WalletEnforcer content when there’s nothing to switch).
+
+## Wrapping it up
+
+What started as “just show Mainnet” turned into a small but meaningful tour through dapp ergonomics: avoiding hydration flicker, respecting wallet state, and surfacing honest feedback while switching. The last wrinkle—Wagmi treating non-configured networks as unsupported—was the quiet culprit behind “why doesn’t `useChainId` change?” I fixed it by listing more chains purely for detection, then letting the guard enforce Mainnet at the UX layer.
