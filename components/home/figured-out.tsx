@@ -6,7 +6,7 @@ import { SectionLink } from "../ui/section-link"
 
 export const FiguredOut = () => {
     return (
-        <Container as="section" className="px-5 py-16 @min-[40rem]/page:py-8">
+        <Container as="section" data-track-section="figured-out" className="px-5 py-16 @min-[40rem]/page:py-8">
             <ContainerInner>
                 <InViewEnter>
                     <SectionLink id="things-i-have-figured-out" className="text-base text-neutral-600 font-medium">

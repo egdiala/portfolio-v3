@@ -29,7 +29,7 @@ export function Playground({
   const value = useMemo(() => ({ rate, setRate }), [rate])
 
   return (
-    <figure className="my-10 @min-[52rem]/page:-mx-16">
+    <figure data-track-demo className="my-10 @min-[52rem]/page:-mx-16">
       <div className="relative overflow-hidden rounded-2xl border bg-white">
         <button
           type="button"

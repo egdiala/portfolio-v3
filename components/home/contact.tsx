@@ -9,7 +9,7 @@ export const Contact = async () => {
     const where = await getWhere()
 
     return (
-        <Container as="section" className="px-5 py-16 @min-[40rem]/page:py-8">
+        <Container as="section" data-track-section="contact" className="px-5 py-16 @min-[40rem]/page:py-8">
             <ContainerInner>
                 <InViewEnter>
                     <SectionLink id="contact" className="text-base text-neutral-600 font-medium">

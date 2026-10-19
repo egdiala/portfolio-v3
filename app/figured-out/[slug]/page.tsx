@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
+import { ReadTracker } from "@/components/read-tracker"
 import { Container } from "@/components/ui/container"
 import { AdjacentLink } from "@/components/writeup/adjacent-link"
 import { ARTICLES, formatDate, getAdjacentArticles, getArticle } from "@/lib/figured-out"
@@ -80,6 +81,7 @@ export default async function FiguredOutArticle(props: PageProps<"/figured-out/[
         >
           <Body />
         </div>
+        <ReadTracker slug={slug} />
 
         {previous || next ? (
           <nav aria-label="More things I've figured out" className="mt-16 grid grid-cols-2 gap-6 border-t pt-6">

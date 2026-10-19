@@ -33,7 +33,7 @@ const EXPERIENCE: Array<{ company: string; partner?: string; role: string; dates
 
 export const Experience = () => {
     return (
-        <Container as="section" className="px-5 py-16 @min-[40rem]/page:py-8">
+        <Container as="section" data-track-section="experience" className="px-5 py-16 @min-[40rem]/page:py-8">
             <ContainerInner>
                 <InViewEnter>
                     <SectionLink id="experience" className="text-base text-neutral-600 font-medium">

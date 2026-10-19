@@ -67,6 +67,8 @@ function WorkDestination({ work }: Readonly<{ work: Work }>) {
                 href={work.link.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track-project={work.title}
+                data-track-status={work.link.status}
                 className="inline-flex min-h-11 items-center rounded-sm text-base underline decoration-neutral-400 underline-offset-2 transition-colors duration-100 ease-out outline-none hover:decoration-current focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
                 {archived ? "Read the docs" : "Visit site"}
@@ -79,7 +81,7 @@ function WorkDestination({ work }: Readonly<{ work: Work }>) {
 
 export const SelectedWork = () => {
     return (
-        <Container as="section" className="overflow-x-clip px-5 py-16 @min-[40rem]/page:py-8">
+        <Container as="section" data-track-section="shipped" className="overflow-x-clip px-5 py-16 @min-[40rem]/page:py-8">
             <ContainerInner>
                 <div className="rise-in" style={{ animationDelay: "200ms" }}>
                     <SectionLink id="things-i-have-shipped" className="text-base text-neutral-600 font-medium">
