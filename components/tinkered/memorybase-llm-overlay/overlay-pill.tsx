@@ -2,7 +2,7 @@
 
 import { TextMorph } from "torph/react"
 import { cn } from "@/lib/utils"
-import { MORPH_MS, focusRing, pressable, trim } from "./constants"
+import { MORPH_MS, focusRing, morphBaseline, pressable, trim } from "./constants"
 import { useOverlayState } from "./hooks/use-overlay"
 import { LogoIcon } from "./icons"
 import { StatusDot } from "./status-dot"
@@ -41,7 +41,7 @@ export function OverlayPill() {
       </span>
       <span className={cn("text-mmb-xs font-medium text-mmb-content select-none", trim)}>
         Memory is{" "}
-        <TextMorph duration={ms(MORPH_MS)} disabled={!morph}>
+        <TextMorph className={morphBaseline} duration={ms(MORPH_MS)} disabled={!morph}>
           {word}
         </TextMorph>
       </span>

@@ -2,7 +2,7 @@
 
 import { TextMorph } from "torph/react"
 import { cn } from "@/lib/utils"
-import { MORPH_MS, panel, scroller, trim } from "./constants"
+import { MORPH_MS, morphBaseline, panel, scroller, trim } from "./constants"
 import { useOverlayState } from "./hooks/use-overlay"
 import { FolderEmptyIcon } from "./icons"
 import { MemoryRow } from "./memory-row"
@@ -19,7 +19,7 @@ function Group({
     <section className="flex flex-col gap-3">
       <p className={cn("pt-2.5 pl-4 text-mmb-2xs", trim, className)}>
         {label} (
-        <TextMorph duration={ms(MORPH_MS)} disabled={!morph}>
+        <TextMorph className={morphBaseline} duration={ms(MORPH_MS)} disabled={!morph}>
           {memories.length}
         </TextMorph>
         )

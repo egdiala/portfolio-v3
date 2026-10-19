@@ -1,4 +1,4 @@
-export const EMAIL = "dialaegwuchukwu@gmail.com"
+export const EMAIL = "stephen@egdiala.dev"
 
 /** Everywhere else to find me: the footer lists these, and the contact chart draws them as ports. */
 export const ELSEWHERE = [

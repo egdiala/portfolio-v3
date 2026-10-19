@@ -99,3 +99,8 @@ export const focusRing =
   "outline-none focus-visible:ring-2 focus-visible:ring-mmb-content focus-visible:ring-offset-2 focus-visible:ring-offset-mmb-background-light"
 export const pressable = "transition-[scale] duration-150 ease-out active:scale-[0.96]"
 export const trim = "[text-box:trim-both_cap_alphabetic]"
+/**
+ * For a TextMorph inside `trim`med text. torph aligns its root to the top of the line, and Safari
+ * measures that line after the trim, so the word drops below the text around it.
+ */
+export const morphBaseline = "align-baseline!"
