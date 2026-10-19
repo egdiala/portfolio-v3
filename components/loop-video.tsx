@@ -74,6 +74,7 @@ export function LoopVideo({
             poster={near ? media(`videos/${name}.jpg`) : undefined}
             aria-label={label}
             className={className}
+            data-track-clip={name}
         >
             {ready || controls ? (
                 <>

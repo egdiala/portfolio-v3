@@ -7,7 +7,7 @@ import { SectionLink } from "../ui/section-link"
 
 export const TinkeredWorks = () => {
     return (
-        <Container as="section" className="overflow-x-clip px-5 py-16 @min-[40rem]/page:py-8">
+        <Container as="section" data-track-section="tinkered" className="overflow-x-clip px-5 py-16 @min-[40rem]/page:py-8">
             <ContainerInner>
                 <InViewEnter className="flex items-center justify-between gap-4">
                     <SectionLink id="tinkered-works" className="text-base text-neutral-600 font-medium">

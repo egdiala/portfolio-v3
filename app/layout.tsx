@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Asimovian, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@/components/analytics";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { EpisodeAnalytics } from "@/components/said-out-loud/episode-analytics";
 import { EpisodeProvider } from "@/components/said-out-loud/episode-provider";
 import { MiniPlayer } from "@/components/said-out-loud/mini-player";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/metadata";
@@ -69,7 +71,9 @@ export default function RootLayout({
           </main>
           <Footer />
           <MiniPlayer />
+          <EpisodeAnalytics />
         </EpisodeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -93,8 +93,8 @@ export function ContactChart({ where }: Readonly<{ where: Where }>) {
   )
 
   const ports = [
-    { key: "e", label: copied ? "Copied" : "Email", onClick: copy },
-    ...ELSEWHERE.map((place) => ({ key: place.key, label: place.label, href: place.href })),
+    { key: "e", name: "email", label: copied ? "Copied" : "Email", onClick: copy },
+    ...ELSEWHERE.map((place) => ({ key: place.key, name: place.label.toLowerCase(), label: place.label, href: place.href })),
   ]
 
   const portProps = (key: string) => ({
@@ -158,12 +158,18 @@ export function ContactChart({ where }: Readonly<{ where: Where }>) {
         {ports.map((port) => (
           <li key={port.key}>
             {"href" in port ? (
-              <a href={port.href} target="_blank" rel="noopener noreferrer" {...portProps(port.key)}>
+              <a href={port.href} target="_blank" rel="noopener noreferrer" data-track-contact={port.name} {...portProps(port.key)}>
                 {portFace(port.label)}
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             ) : (
-              <button type="button" onClick={port.onClick} aria-label={`Copy email address, ${EMAIL}`} {...portProps(port.key)}>
+              <button
+                type="button"
+                onClick={port.onClick}
+                aria-label={`Copy email address, ${EMAIL}`}
+                data-track-contact={port.name}
+                {...portProps(port.key)}
+              >
                 {portFace(port.label)}
               </button>
             )}
