@@ -1,5 +1,5 @@
 import { ELSEWHERE } from "@/lib/contact"
-import { SITE_URL } from "@/lib/metadata"
+import { SITE_DOMAIN } from "@/lib/metadata"
 import { getWhere } from "@/lib/where"
 import { Container, ContainerInner } from "./ui/container"
 import { FooterClock } from "./footer-clock"
@@ -19,7 +19,7 @@ export async function Footer() {
           href="/"
           className="inline-flex min-h-11 items-center rounded-sm transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:justify-self-center font-asimovian"
         >
-          {SITE_URL.host}
+          {SITE_DOMAIN}
         </Link>
         <nav aria-label="Elsewhere" className="flex flex-wrap gap-x-4 sm:justify-self-end">
           {ELSEWHERE.map((item) => (

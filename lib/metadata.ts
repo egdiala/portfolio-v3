@@ -5,7 +5,10 @@ export const SITE_NAME = "stephen diala"
 export const SITE_DESCRIPTION =
   "Frontend engineer at Moniepoint who cares how an interface feels, down to the weight of a hover. A wizard will show you what I've shipped and tinkered with."
 
-export const SITE_URL = new URL("https://egdiala.dev")
+export const SITE_DOMAIN = "egdiala.dev"
+
+// Vercel serves www and redirects the apex to it, so canonicals and the sitemap must name www.
+export const SITE_URL = new URL(`https://www.${SITE_DOMAIN}`)
 
 /**
  * A page's title, description, canonical URL, and Open Graph tags. Pages that

@@ -27,6 +27,8 @@ type Glyph = {
 // "stephen diala" settles on "egdiala". The second e in "stephen" stays,
 // and so does "diala". Everything else blurs shut. "g" is not in the full
 // name, so it opens in the same slot language, unblurring as it arrives.
+// It's drawn by CSS rather than written as text, so crawlers read the h1 as
+// "stephen diala" and not "stephegn diala".
 const GLYPHS: Glyph[] = [
   { char: "s", side: "start" },
   { char: "t", side: "start" },
@@ -97,13 +99,22 @@ function GlyphSlot({
       className={`inline-flex min-w-0 [clip-path:inset(-0.4em_0)] ${ALIGN[glyph.side]}`}
       style={slotStyle}
     >
-      <motion.span
-        ref={measureRef}
-        className="block shrink-0 leading-none whitespace-pre"
-        style={{ filter }}
-      >
-        {glyph.char}
-      </motion.span>
+      {glyph.side === "enter" ? (
+        <motion.span
+          ref={measureRef}
+          data-glyph={glyph.char}
+          className="block shrink-0 leading-none whitespace-pre before:content-[attr(data-glyph)]"
+          style={{ filter }}
+        />
+      ) : (
+        <motion.span
+          ref={measureRef}
+          className="block shrink-0 leading-none whitespace-pre"
+          style={{ filter }}
+        >
+          {glyph.char}
+        </motion.span>
+      )}
     </motion.span>
   )
 }
