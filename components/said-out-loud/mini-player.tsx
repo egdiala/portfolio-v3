@@ -11,7 +11,7 @@ import { PlayPauseIcon } from "./play-pause-icon"
 const ease = [0.23, 1, 0.32, 1] as const
 
 const buttonClass =
-  "grid size-11 shrink-0 cursor-pointer place-items-center rounded-lg text-foreground transition-[scale,background-color] duration-150 ease-out outline-none hover:bg-neutral-200/50 focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-inset active:scale-[0.96]"
+  "grid size-10 shrink-0 cursor-pointer place-items-center rounded-lg text-foreground transition-[scale,background-color] duration-150 ease-out outline-none hover:bg-neutral-200/50 focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-inset active:scale-[0.96]"
 
 /** Keeps the episode in reach on other pages, and once its section scrolls away. */
 export function MiniPlayer() {

@@ -12,7 +12,7 @@ const linkClass =
   "inline-flex min-h-11 items-center rounded-sm text-base underline decoration-neutral-400 underline-offset-2 transition-colors duration-100 ease-out outline-none hover:decoration-current focus-visible:ring-[3px] focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background"
 
 export function EpisodeCard() {
-  const episode = useEpisode()
+  const { inlineButtonRef, ...episode } = useEpisode()
   const seconds = useElapsed()
   const playing = episode.status === "playing" || episode.status === "loading"
 
@@ -37,7 +37,7 @@ export function EpisodeCard() {
 
       <div className="mt-4 flex items-center gap-3">
         <button
-          ref={episode.inlineButtonRef}
+          ref={inlineButtonRef}
           type="button"
           aria-label={playing ? "Pause episode" : "Play episode"}
           onClick={episode.toggle}
