@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "motion/react"
+import { useRef, type PointerEvent } from "react"
+import { motion, useReducedMotion } from "motion/react"
 import { EMAIL } from "@/lib/contact"
 import { Button } from "./ui/button"
 import { PaperPlaneIcon } from "./icons/paper-plane"
@@ -80,6 +81,51 @@ function NavbarBlur() {
   )
 }
 
+// On hover the plane flies off along its heading and glides back in from behind.
+const FLIGHT_MS = 900
+const FLIGHT_TRAVEL = 28
+const FLIGHT: Keyframe[] = [
+  { transform: "translate(0, 0)", opacity: 1, easing: "cubic-bezier(0.55, 0, 1, 0.45)" },
+  { transform: `translate(${FLIGHT_TRAVEL}px, ${-FLIGHT_TRAVEL}px)`, opacity: 0, offset: 0.4 },
+  {
+    transform: `translate(${-FLIGHT_TRAVEL}px, ${FLIGHT_TRAVEL}px)`,
+    opacity: 0,
+    offset: 0.4,
+    easing: "cubic-bezier(0.32, 0.72, 0, 1)",
+  },
+  { transform: "translate(0, 0)", opacity: 1 },
+]
+
+function RavenButton() {
+  const plane = useRef<HTMLSpanElement>(null)
+  const flight = useRef<Animation | null>(null)
+  const reduceMotion = useReducedMotion()
+
+  // One flight per hover, mouse only: entering again mid-flight doesn't restart it, and leaving doesn't cut it short.
+  const takeOff = (event: PointerEvent) => {
+    if (reduceMotion || event.pointerType !== "mouse" || !plane.current) return
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return
+    if (flight.current?.playState === "running") return
+    flight.current = plane.current.animate(FLIGHT, FLIGHT_MS)
+  }
+
+  // px-4 by hand: the icon is no longer a direct child, so the button's has-[>svg]:px-4 doesn't apply.
+  return (
+    <Button size="lg" asChild className="relative px-4 after:absolute after:inset-x-0 after:-inset-y-0.5">
+      <a href={`mailto:${EMAIL}`} onPointerEnter={takeOff}>
+        Send a Raven
+        {/* Holds the icon's place. The plane flies in a layer clipped to the pill, so the ::after hit area isn't clipped with it. */}
+        <span className="size-4 shrink-0" />
+        <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+          <span ref={plane} className="absolute top-1/2 right-4 -mt-2 flex size-4">
+            <PaperPlaneIcon />
+          </span>
+        </span>
+      </a>
+    </Button>
+  )
+}
+
 export const Navbar = () => {
   return (
     <Container as="header" className="sticky top-0 z-50 px-5 pt-[calc(1rem+env(safe-area-inset-top))]">
@@ -91,11 +137,7 @@ export const Navbar = () => {
           className="ml-auto"
           transition={{ type: "spring", duration: 0.3, bounce: 0 }}
         >
-          <Button size="lg" asChild className="relative after:absolute after:inset-x-0 after:-inset-y-0.5">
-            <a href={`mailto:${EMAIL}`}>
-              Send a Raven <PaperPlaneIcon aria-hidden="true" />
-            </a>
-          </Button>
+          <RavenButton />
         </motion.div>
       </ContainerInner>
     </Container>

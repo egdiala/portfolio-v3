@@ -27,7 +27,7 @@ const EXPERIENCE: Array<{ company: string; partner?: string; role: string; dates
     {
         company: "Enyata",
         role: "Senior Frontend Engineer",
-        dates: "Feb 2023 — Nov 2024",
+        dates: "Feb 2023 — Sep 2024",
     },
 ]
 
