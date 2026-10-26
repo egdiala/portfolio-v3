@@ -67,6 +67,15 @@ export const TINKERED_WORKS: TinkeredWork[] = [
       "Melun's business switcher, designed by @seektheinyamah and built by me on shadcn and Motion. It's in the showcase on Motion's website. Open the menu and open the list.",
     writeup: true,
   },
+  {
+    slug: "file-picker",
+    title: "File Picker",
+    summary:
+      "The row under Melun's upload dropzone that shows a file uploading, done or failed, and sweeps red while you hold to delete it.",
+    description:
+      "Melun's file picker, designed by @seektheinyamah and built by me in React and Motion. Watch a file upload, make it fail, and hold the trash to remove it.",
+    writeup: true,
+  },
 ]
 
 export const HOME_TINKERED_COUNT = 6

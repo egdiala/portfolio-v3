@@ -1,0 +1,130 @@
+import { FilePickerPlayground } from "@/components/tinkered/file-picker/playground"
+
+<FilePickerPlayground />
+
+Melun is an app for organisations, and we're building it in stealth. During onboarding, a business uploads its Certificate of Incorporation, and once you pick the file, this row sits under the dropzone and tells you how the upload is going: uploading, completed, or failed. It's part of Melun's design system.
+
+The design is by [@seektheinyamah](https://x.com/seektheinyamah), my cofounder at Melun, and I built it with Motion. The playground above is the component lifted out of the app. Its upload is pretend: it takes 3 to 5 seconds, and nothing leaves your browser.
+
+## One row, three states
+
+After the file name comes the status. When the state changes, the old status blurs out before the new one blurs in. They swap inside an `AnimatePresence` in `wait` mode, keyed by the state.
+
+```tsx
+<AnimatePresence mode="wait">
+  <motion.div
+    key={state}
+    initial={{ opacity: 0, filter: "blur(2px)" }}
+    animate={{ opacity: 1, filter: "blur(0px)" }}
+    exit={{ opacity: 0, filter: "blur(2px)" }}
+    transition={{ type: "keyframes", ease: [0.23, 1, 0.32, 1], duration: 0.15 }}
+  >
+    {content}
+  </motion.div>
+</AnimatePresence>
+```
+
+Each half takes 150ms on a strong ease-out curve, so the whole swap stays under 300ms. The blur is only 2px, enough to soften the change without making the text hard to read.
+
+Set **Upload result** to Fails, set **Speed** to 0.1×, and press Try again to watch Failed leave before Uploading arrives.
+
+## A bar that fills, then leaves
+
+While the file uploads, a progress bar sits under its name. It rises 6px into place as it fades in, on a spring with a little bounce, and drops back out when the upload ends, quicker and without the bounce.
+
+```tsx
+<AnimatePresence mode="popLayout">
+  {state === "uploading" && (
+    <motion.div
+      key="progress"
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 6, transition: { type: "spring", bounce: 0, duration: 0.25 } }}
+      transition={{ type: "spring", bounce: 0.1, duration: 0.4 }}
+    >
+      <Progress value={progress} />
+    </motion.div>
+  )}
+</AnimatePresence>
+```
+
+`popLayout` takes the bar out of the layout as soon as it starts to leave, so the row doesn't wait for it. The line with the name has `layout`, so when the space under it closes, the name slides down to the middle of the row instead of jumping there.
+
+The bar itself moves with plain CSS. The green fill is as wide as the track and slides in from the left with `translateX`, with a 500ms linear transition on `transform` alone.
+
+```tsx
+<div
+  className="transition-transform duration-500 ease-linear"
+  style={{ transform: `translateX(-${100 - value}%)` }}
+/>
+```
+
+Uploads report their progress in uneven jumps, and the transition turns each jump into a glide. The playground's upload reports 7 to 11 jumps of random sizes at random gaps, so no two runs fill the same way. It also waits for the bar to reach the end before it says Completed. Press the reset button in the corner of the playground to run another.
+
+## The X becomes a trash
+
+The button at the end of the row cancels while the file uploads, and removes the file after. It swaps the same way as the status, and also grows from 80%.
+
+```tsx
+<AnimatePresence mode="wait">
+  <motion.div
+    key={state === "uploading" ? "icon-x" : "icon-trash"}
+    initial={{ opacity: 0, filter: "blur(2px)", scale: 0.8 }}
+    animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+    exit={{ opacity: 0, filter: "blur(2px)", scale: 0.8 }}
+    transition={{ type: "keyframes", ease: [0.23, 1, 0.32, 1], duration: 0.15 }}
+  >
+    {iconContent}
+  </motion.div>
+</AnimatePresence>
+```
+
+Completed and Failed both end in the trash, and both use the same key, so the icon only swaps when an upload starts or ends.
+
+## Hold to delete
+
+A finished upload doesn't go with a single tap. Press and hold the trash, and a red outline sweeps across the row from the left. Let go before it reaches the end, and it snaps back. A tap on its own shows "Hold to remove" for a moment, since nothing else would tell you.
+
+The red outline is a second copy of the row, with the same icon and name and a red ring instead of a grey one, laid over the first. A `clip-path` hides it, and a motion value drives the clip's right edge from 100% to 0%.
+
+```tsx
+const path = useMotionValue(100)
+const clipPath = useMotionTemplate`inset(0px ${path}% 0px 0px)`
+
+// Held: a steady two seconds
+animate(path, 0, { duration: 2, ease: "linear", onComplete: onRemove })
+
+// Let go: back in 200ms
+animate(path, 100, { duration: 0.2, ease: [0.23, 1, 0.32, 1] })
+
+<motion.div
+  style={{ clipPath }}
+  className="absolute inset-0 rounded-full inset-ring-1 inset-ring-red-500"
+>
+  <PDF36 />
+  <span>{item.name}</span>
+</motion.div>
+```
+
+Holding is slow and steady on purpose. The sweep moves at one speed, so how far it has got is how much longer you have to hold. Letting go is fast, because by then you've decided. Each `animate` starts from wherever the value is, so letting go halfway turns the sweep around without a jump. When the sweep reaches the end, the file goes. Space and Enter hold it from the keyboard too.
+
+In Melun, one `useSpring` with a `visualDuration` of 2 runs the sweep both ways. A spring starts fast and settles slowly, so it covered most of the row in the first second and crawled through the rest, and letting go took about as long as holding. The playground splits the two.
+
+## A spinner that doesn't spin
+
+Uploading... starts with Lucide's loader, eight spokes in a circle. Nothing rotates. Each spoke fades out in eight steps over half a second, and each starts 60ms after the one before it, so the brightest spoke travels around the circle.
+
+```css
+.lucide-loader path {
+  animation: fade-in-out 0.5s steps(8) infinite;
+  opacity: 0.125;
+}
+
+.lucide-loader path:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+/* …and so on, 0.06s more for each spoke, up to the eighth */
+```
+
+`steps(8)` dims each spoke in eight notches instead of a smooth fade. Set **Speed** to 0.1× to watch the light go round.

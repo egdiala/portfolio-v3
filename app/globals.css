@@ -112,13 +112,23 @@
   --color-melun-popover: var(--melun-popover);
   --color-melun-popover-foreground: var(--melun-popover-foreground);
   --color-melun-ring: var(--melun-ring);
+  --color-melun-muted-foreground: var(--melun-muted-foreground);
+  --color-melun-neutral-50: var(--melun-neutral-50);
   --color-melun-neutral-100: var(--melun-neutral-100);
   --color-melun-neutral-200: var(--melun-neutral-200);
   --color-melun-neutral-300: var(--melun-neutral-300);
+  --color-melun-neutral-500: var(--melun-neutral-500);
+  --color-melun-neutral-700: var(--melun-neutral-700);
   --color-melun-neutral-800: var(--melun-neutral-800);
   --color-melun-neutral-950: var(--melun-neutral-950);
+  --color-melun-neutral-999: var(--melun-neutral-999);
   --color-melun-lemon-999: var(--melun-lemon-999);
   --color-melun-teal-950: var(--melun-teal-950);
+  --color-melun-red-50: var(--melun-red-50);
+  --color-melun-red-400: var(--melun-red-400);
+  --color-melun-red-500: var(--melun-red-500);
+  --color-melun-red-600: var(--melun-red-600);
+  --color-melun-green-500: var(--melun-green-500);
 }
 
 :root {
@@ -197,13 +207,23 @@
   --melun-popover: oklch(1 0 0);
   --melun-popover-foreground: oklch(0.145 0 0);
   --melun-ring: oklch(0.708 0 0);
+  --melun-muted-foreground: oklch(0.556 0 0);
+  --melun-neutral-50: #fcfcfd;
   --melun-neutral-100: #f9f9fb;
   --melun-neutral-200: #eff0f3;
   --melun-neutral-300: #e7e8ec;
+  --melun-neutral-500: #d8d9e0;
+  --melun-neutral-700: #b9bbc6;
   --melun-neutral-800: #8b8d98;
   --melun-neutral-950: #62636c;
+  --melun-neutral-999: #1e1f24;
   --melun-lemon-999: #2e4122;
   --melun-teal-950: #13322b;
+  --melun-red-50: #fef2f2;
+  --melun-red-400: #ff6467;
+  --melun-red-500: #fb2c36;
+  --melun-red-600: #e7000b;
+  --melun-green-500: #00c951;
 
   --sh-identifier: oklch(0.29 0 0);
   --sh-keyword: oklch(0.5 0.17 15);
@@ -483,6 +503,43 @@
   }
   50% {
     transform: translateY(0) scaleX(1.1) scaleY(0.9);
+  }
+}
+
+/* Melun's loader: Lucide's eight spokes fade one after another, so the light goes round without anything rotating. */
+.melun-loader path {
+  animation: melun-loader-fade var(--melun-loader-ms, 500ms) steps(8) infinite;
+  opacity: 0.125;
+}
+
+.melun-loader path:nth-child(2) {
+  animation-delay: calc(var(--melun-loader-ms, 500ms) * 0.12);
+}
+.melun-loader path:nth-child(3) {
+  animation-delay: calc(var(--melun-loader-ms, 500ms) * 0.24);
+}
+.melun-loader path:nth-child(4) {
+  animation-delay: calc(var(--melun-loader-ms, 500ms) * 0.36);
+}
+.melun-loader path:nth-child(5) {
+  animation-delay: calc(var(--melun-loader-ms, 500ms) * 0.48);
+}
+.melun-loader path:nth-child(6) {
+  animation-delay: calc(var(--melun-loader-ms, 500ms) * 0.6);
+}
+.melun-loader path:nth-child(7) {
+  animation-delay: calc(var(--melun-loader-ms, 500ms) * 0.72);
+}
+.melun-loader path:nth-child(8) {
+  animation-delay: calc(var(--melun-loader-ms, 500ms) * 0.84);
+}
+
+@keyframes melun-loader-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
