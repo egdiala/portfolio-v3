@@ -2,7 +2,8 @@
 # Turns one Screen Studio export into the three files the site needs.
 # Usage:   ./scripts/encode.sh <input-video> <name>
 # Example: ./scripts/encode.sh ~/Desktop/area-recording.mp4 area-dashboard
-# Output goes to public/videos by default. Override with OUT=some/folder.
+# Output goes to public/media/videos by default (gitignored; upload the files to the blob store's videos/).
+# Override with OUT=some/folder.
 set -euo pipefail
 
 if [ $# -lt 2 ]; then
@@ -12,7 +13,7 @@ fi
 
 input="$1"
 name="$2"
-out="${OUT:-public/videos}"
+out="${OUT:-public/media/videos}"
 filters="scale=1600:-2,fps=60"
 mkdir -p "$out"
 

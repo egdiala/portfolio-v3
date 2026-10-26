@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local copies of the blob store, served before the /media rewrite in dev
+/public/media/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
