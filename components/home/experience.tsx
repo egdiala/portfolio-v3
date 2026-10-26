@@ -1,35 +1,7 @@
+import { EXPERIENCE } from "@/lib/experience"
 import { InViewEnter } from "./in-view-enter"
 import { Container, ContainerInner } from "../ui/container"
 import { SectionLink } from "../ui/section-link"
-
-const EXPERIENCE: Array<{ company: string; partner?: string; role: string; dates: string }> = [
-    {
-        company: "Moniepoint",
-        role: "Frontend Engineer",
-        dates: "2026 — Now",
-    },
-    {
-        company: "Melun Technologies",
-        role: "Co-founder",
-        dates: "2025 — Now",
-    },
-    {
-        company: "EigenExplorer",
-        partner: "Bless",
-        role: "Frontend Engineer",
-        dates: "Mar 2025 — 2026",
-    },
-    {
-        company: "Zeno",
-        role: "Senior Frontend Engineer",
-        dates: "Jun 2024 — May 2025",
-    },
-    {
-        company: "Enyata",
-        role: "Senior Frontend Engineer",
-        dates: "Feb 2023 — Sep 2024",
-    },
-]
 
 export const Experience = () => {
     return (
