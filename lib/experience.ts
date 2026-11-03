@@ -3,7 +3,7 @@ export const EXPERIENCE: Array<{ company: string; partner?: string; role: string
   {
     company: "Moniepoint",
     role: "Frontend Engineer",
-    dates: "2026 — Now",
+    dates: "Mar 2026 — Nov 2026",
   },
   {
     company: "Melun Technologies",

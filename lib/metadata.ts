@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const SITE_NAME = "stephen diala"
 
 export const SITE_DESCRIPTION =
-  "Frontend engineer at Moniepoint who cares how an interface feels, down to the weight of a hover. A wizard will show you what I've shipped and tinkered with."
+  "Frontend engineer, open to work. I care how an interface feels, down to the weight of a hover. A wizard will show you what I've shipped and tinkered with."
 
 export const SITE_DOMAIN = "egdiala.dev"
 

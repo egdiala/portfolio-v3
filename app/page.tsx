@@ -18,7 +18,6 @@ const person = {
   alternateName: "egdiala",
   url: SITE_URL.href,
   jobTitle: "Frontend Engineer",
-  worksFor: { "@type": "Organization", name: "Moniepoint", url: "https://moniepoint.com" },
   sameAs: ELSEWHERE.map((place) => place.href),
 };
 

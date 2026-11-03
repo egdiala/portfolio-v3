@@ -47,7 +47,7 @@ const CITATIONS: Record<CitationId, Citation> = {
         emoji: "🦄",
         ...stint("Moniepoint"),
         summary: "A digital banking and payments ecosystem for African businesses and individuals, with over 20 million accounts.",
-        className: "text-moniepoint decoration-current",
+        className: "text-zinc-700 decoration-neutral-400 hover:decoration-current",
     },
     bless: {
         label: "Bless",
